@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/gelcoin_bg.qm</file>
+        <file alias="de">locale/gelcoin_de.qm</file>
+        <file alias="en">locale/gelcoin_en.qm</file>
+        <file alias="es">locale/gelcoin_es.qm</file>
+        <file alias="fi">locale/gelcoin_fi.qm</file>
+        <file alias="fr">locale/gelcoin_fr.qm</file>
+        <file alias="it">locale/gelcoin_it.qm</file>
+        <file alias="ja">locale/gelcoin_ja.qm</file>
+        <file alias="pl">locale/gelcoin_pl.qm</file>
+        <file alias="pt">locale/gelcoin_pt.qm</file>
+        <file alias="ru">locale/gelcoin_ru.qm</file>
+        <file alias="sk">locale/gelcoin_sk.qm</file>
+        <file alias="sv">locale/gelcoin_sv.qm</file>
+        <file alias="vi">locale/gelcoin_vi.qm</file>
+        <file alias="zh_CN">locale/gelcoin_zh_CN.qm</file>
+        <file alias="zh_TW">locale/gelcoin_zh_TW.qm</file>
+    </qresource>
+</RCC>

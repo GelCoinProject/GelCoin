@@ -1,11 +1,11 @@
 Sample configuration files for:
 
-SystemD: dashd.service
-Upstart: dashd.conf
-OpenRC:  dashd.openrc
-         dashd.openrcconf
-CentOS:  dashd.init
-OS X:    org.dash.dashd.plist
+SystemD: gelcoind.service
+Upstart: gelcoind.conf
+OpenRC:  gelcoind.openrc
+         gelcoind.openrcconf
+CentOS:  gelcoind.init
+OS X:    org.gelcoin.gelcoind.plist
 
 have been made available to assist packagers in creating node packages here.
 

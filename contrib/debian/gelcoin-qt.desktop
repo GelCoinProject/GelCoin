@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GelCoin
+Comment=GelCoin P2P Cryptocurrency
+Comment[fr]=GelCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=GelCoin, eşten eşe kriptografik sanal para birimi
+Exec=gelcoin-qt %u
+Terminal=false
+Type=Application
+Icon=gelcoin128
+MimeType=x-scheme-handler/gelcoin;
+Categories=Office;Finance;

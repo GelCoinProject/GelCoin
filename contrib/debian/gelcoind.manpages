@@ -1,0 +1,3 @@
+debian/manpages/gelcoind.1
+debian/manpages/gelcoin.conf.5
+debian/manpages/gelcoin-cli.1

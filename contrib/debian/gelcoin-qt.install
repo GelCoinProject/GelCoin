@@ -1,0 +1,6 @@
+usr/local/bin/gelcoin-qt usr/bin
+share/pixmaps/gelcoin32.xpm usr/share/pixmaps
+share/pixmaps/gelcoin16.xpm usr/share/pixmaps
+share/pixmaps/gelcoin128.png usr/share/pixmaps
+debian/gelcoin-qt.desktop usr/share/applications
+debian/gelcoin-qt.protocol usr/share/kde4/services/

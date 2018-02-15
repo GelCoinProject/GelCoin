@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2012-2014 The Bitcoin developers               -*- c++ -*-
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,11 +31,15 @@ protected:
     size_type nMaxSize;
 
 public:
+<<<<<<< HEAD
     limitedmap(size_type nMaxSizeIn)
     {
         assert(nMaxSizeIn > 0);
         nMaxSize = nMaxSizeIn;
     }
+=======
+    limitedmap(size_type nMaxSizeIn = 0) { nMaxSize = nMaxSizeIn; }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     const_iterator begin() const { return map.begin(); }
     const_iterator end() const { return map.end(); }
     size_type size() const { return map.size(); }
@@ -42,12 +50,20 @@ public:
     {
         std::pair<iterator, bool> ret = map.insert(x);
         if (ret.second) {
+<<<<<<< HEAD
             if (map.size() > nMaxSize) {
+=======
+            if (nMaxSize && map.size() == nMaxSize) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 map.erase(rmap.begin()->second);
                 rmap.erase(rmap.begin());
             }
             rmap.insert(make_pair(x.second, ret.first));
         }
+<<<<<<< HEAD
+=======
+        return;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     void erase(const key_type& k)
     {
@@ -84,11 +100,19 @@ public:
     size_type max_size() const { return nMaxSize; }
     size_type max_size(size_type s)
     {
+<<<<<<< HEAD
         assert(s > 0);
         while (map.size() > s) {
             map.erase(rmap.begin()->second);
             rmap.erase(rmap.begin());
         }
+=======
+        if (s)
+            while (map.size() > s) {
+                map.erase(rmap.begin()->second);
+                rmap.erase(rmap.begin());
+            }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         nMaxSize = s;
         return nMaxSize;
     }

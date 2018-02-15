@@ -10,6 +10,7 @@
 #include "scalar.h"
 #include "group.h"
 
+<<<<<<< HEAD
 typedef struct {
     /* For accelerating the computation of a*G:
      * To harden against timing attacks, use the following mechanism:
@@ -39,5 +40,12 @@ static int secp256k1_ecmult_gen_context_is_built(const secp256k1_ecmult_gen_cont
 static void secp256k1_ecmult_gen(const secp256k1_ecmult_gen_context* ctx, secp256k1_gej *r, const secp256k1_scalar *a);
 
 static void secp256k1_ecmult_gen_blind(secp256k1_ecmult_gen_context *ctx, const unsigned char *seed32);
+=======
+static void secp256k1_ecmult_gen_start(void);
+static void secp256k1_ecmult_gen_stop(void);
+
+/** Multiply with the generator: R = a*G */
+static void secp256k1_ecmult_gen(secp256k1_gej_t *r, const secp256k1_scalar_t *a);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #endif

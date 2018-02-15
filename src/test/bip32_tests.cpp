@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <boost/test/unit_test.hpp>
@@ -8,8 +13,11 @@
 #include "key.h"
 #include "uint256.h"
 #include "util.h"
+<<<<<<< HEAD
 #include "utilstrencodings.h"
 #include "test/test_gelcoin.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <string>
 #include <vector>
@@ -88,6 +96,7 @@ void RunTest(const TestVector &test) {
         unsigned char data[74];
         key.Encode(data);
         pubkey.Encode(data);
+<<<<<<< HEAD
 
         // Test private key
         CBitcoinExtKey b58key; b58key.SetKey(key);
@@ -105,6 +114,14 @@ void RunTest(const TestVector &test) {
         CExtPubKey checkPubKey = b58PubkeyDecodeCheck.GetKey();
         assert(checkPubKey == pubkey); //ensure a base58 decoded pubkey also matches
 
+=======
+        // Test private key
+        CBitcoinExtKey b58key; b58key.SetKey(key);
+        BOOST_CHECK(b58key.ToString() == derive.prv);
+        // Test public key
+        CBitcoinExtPubKey b58pubkey; b58pubkey.SetKey(pubkey);
+        BOOST_CHECK(b58pubkey.ToString() == derive.pub);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         // Derive new keys
         CExtKey keyNew;
         BOOST_CHECK(key.Derive(keyNew, derive.nChild));
@@ -117,6 +134,7 @@ void RunTest(const TestVector &test) {
         }
         key = keyNew;
         pubkey = pubkeyNew;
+<<<<<<< HEAD
 
         CDataStream ssPub(SER_DISK, CLIENT_VERSION);
         ssPub << pubkeyNew;
@@ -137,6 +155,12 @@ void RunTest(const TestVector &test) {
 }
 
 BOOST_FIXTURE_TEST_SUITE(bip32_tests, BasicTestingSetup)
+=======
+    }
+}
+
+BOOST_AUTO_TEST_SUITE(bip32_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(bip32_test1) {
     RunTest(test1);

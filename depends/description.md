@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 This is a system of building and caching dependencies necessary for building Bitcoin. 
+=======
+This is a system of building and caching dependencies necessary for building Lux.
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 There are several features that make it different from most similar systems:
 
 ### It is designed to be builder and host agnostic

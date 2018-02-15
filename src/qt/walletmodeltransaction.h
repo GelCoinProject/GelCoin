@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2013 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_WALLETMODELTRANSACTION_H
@@ -19,12 +24,20 @@ class CWalletTx;
 class WalletModelTransaction
 {
 public:
+<<<<<<< HEAD
     explicit WalletModelTransaction(const QList<SendCoinsRecipient> &recipients);
+=======
+    explicit WalletModelTransaction(const QList<SendCoinsRecipient>& recipients);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ~WalletModelTransaction();
 
     QList<SendCoinsRecipient> getRecipients();
 
+<<<<<<< HEAD
     CWalletTx *getTransaction();
+=======
+    CWalletTx* getTransaction();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     unsigned int getTransactionSize();
 
     void setTransactionFee(const CAmount& newFee);
@@ -32,6 +45,7 @@ public:
 
     CAmount getTotalTransactionAmount();
 
+<<<<<<< HEAD
     void newPossibleKeyChange(CWallet *wallet);
     CReserveKey *getPossibleKeyChange();
 
@@ -41,6 +55,15 @@ private:
     QList<SendCoinsRecipient> recipients;
     CWalletTx *walletTransaction;
     CReserveKey *keyChange;
+=======
+    void newPossibleKeyChange(CWallet* wallet);
+    CReserveKey* getPossibleKeyChange();
+
+private:
+    const QList<SendCoinsRecipient> recipients;
+    CWalletTx* walletTransaction;
+    CReserveKey* keyChange;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     CAmount fee;
 };
 

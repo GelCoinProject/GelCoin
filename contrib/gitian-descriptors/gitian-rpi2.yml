@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 name: "gelcoin-raspberry-0.12"
 enable_cache: true
 suites:
@@ -6,6 +7,16 @@ suites:
 architectures:
 - "amd64"
 packages:
+=======
+name: "lux-rpi2-2.1.7"
+enable_cache: true
+suites:
+- "trusty"
+architectures:
+- "amd64"
+packages:
+- "curl"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 - "g++-multilib"
 - "git-core"
 - "pkg-config"
@@ -15,10 +26,19 @@ packages:
 - "faketime"
 - "bsdmainutils"
 - "binutils-gold"
+<<<<<<< HEAD
 reference_datetime: "2017-01-01 00:00:00"
 remotes:
 - "url": "https://github.com/gelcoinpay/gelcoin.git"
   "dir": "gelcoin"
+=======
+- "ca-certificates"
+- "python"
+reference_datetime: "2015-06-01 00:00:00"
+remotes:
+- "url": "https://github.com/lux-project/lux.git"
+  "dir": "lux"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 files:
 - "raspberrypi-tools.tar.gz"
 script: |
@@ -67,7 +87,11 @@ script: |
   done
   export PATH=${WRAP_DIR}:${PATH}
 
+<<<<<<< HEAD
   cd gelcoin
+=======
+  cd lux
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -78,13 +102,21 @@ script: |
   ./autogen.sh
   ./configure --prefix=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`
   make NO_QT=1 dist
+<<<<<<< HEAD
   SOURCEDIST=`echo gelcoincore-*.tar.gz`
+=======
+  SOURCEDIST=`echo lux-*.tar.gz`
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
+<<<<<<< HEAD
   find gelcoincore-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+=======
+  find lux-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   popd
 
   ORIGPATH="$PATH"
@@ -98,8 +130,13 @@ script: |
     tar --strip-components=1 -xf ../$SOURCEDIST
 
     ./configure --prefix=${BASEPREFIX}/${i} --bindir=${INSTALLPATH}/bin --includedir=${INSTALLPATH}/include --libdir=${INSTALLPATH}/lib --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS}
+<<<<<<< HEAD
     make ${MAKEOPTS} NO_QT=1
     make NO_QT=1 install-strip
+=======
+    make ${MAKEOPTS}
+    make install-strip
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     cd installed
     find . -name "lib*.la" -delete
     find . -name "lib*.a" -delete

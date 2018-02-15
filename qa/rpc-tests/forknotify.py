@@ -1,5 +1,9 @@
 #!/usr/bin/env python2
+<<<<<<< HEAD
 # Copyright (c) 2014-2015 The Bitcoin Core developers
+=======
+# Copyright (c) 2014 The Bitcoin Core developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,8 +11,16 @@
 # Test -alertnotify 
 #
 
+<<<<<<< HEAD
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
+=======
+from test_framework import BitcoinTestFramework
+from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+from util import *
+import os
+import shutil
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 class ForkNotifyTest(BitcoinTestFramework):
 
@@ -31,12 +43,20 @@ class ForkNotifyTest(BitcoinTestFramework):
 
     def run_test(self):
         # Mine 51 up-version blocks
+<<<<<<< HEAD
         self.nodes[1].generate(51)
+=======
+        self.nodes[1].setgenerate(True, 51)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         self.sync_all()
         # -alertnotify should trigger on the 51'st,
         # but mine and sync another to give
         # -alertnotify time to write
+<<<<<<< HEAD
         self.nodes[1].generate(1)
+=======
+        self.nodes[1].setgenerate(True, 1)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         self.sync_all()
 
         with open(self.alert_filename, 'r') as f:
@@ -46,9 +66,15 @@ class ForkNotifyTest(BitcoinTestFramework):
             raise AssertionError("-alertnotify did not warn of up-version blocks")
 
         # Mine more up-version blocks, should not get more alerts:
+<<<<<<< HEAD
         self.nodes[1].generate(1)
         self.sync_all()
         self.nodes[1].generate(1)
+=======
+        self.nodes[1].setgenerate(True, 1)
+        self.sync_all()
+        self.nodes[1].setgenerate(True, 1)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         self.sync_all()
 
         with open(self.alert_filename, 'r') as f:

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 bin_PROGRAMS += qt/test/test_gelcoin-qt
 TESTS += qt/test/test_gelcoin-qt
 
@@ -5,12 +6,21 @@ TEST_QT_MOC_CPP = \
   qt/test/moc_compattests.cpp \
   qt/test/moc_trafficgraphdatatests.cpp \
   qt/test/moc_uritests.cpp 
+=======
+# -*- makefile-gmake -*-
+
+bin_PROGRAMS += qt/test/test_lux-qt
+TESTS += qt/test/test_lux-qt
+
+TEST_QT_MOC_CPP = qt/test/moc_uritests.cpp
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 if ENABLE_WALLET
 TEST_QT_MOC_CPP += qt/test/moc_paymentservertests.cpp
 endif
 
 TEST_QT_H = \
+<<<<<<< HEAD
   qt/test/compattests.h \
   qt/test/uritests.h \
   qt/test/paymentrequestdata.h \
@@ -46,11 +56,40 @@ qt_test_test_gelcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBIT
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_test_test_gelcoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 qt_test_test_gelcoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+=======
+  qt/test/uritests.h \
+  qt/test/paymentrequestdata.h \
+  qt/test/paymentservertests.h
+
+qt_test_test_lux_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_TEST_INCLUDES) $(PROTOBUF_CFLAGS)
+
+qt_test_test_lux_qt_SOURCES = \
+  qt/test/test_main.cpp \
+  qt/test/uritests.cpp \
+  $(TEST_QT_H)
+if ENABLE_WALLET
+qt_test_test_lux_qt_SOURCES += \
+  qt/test/paymentservertests.cpp
+endif
+
+nodist_qt_test_test_lux_qt_SOURCES = $(TEST_QT_MOC_CPP)
+
+qt_test_test_lux_qt_LDADD = $(LIBBITCOINQT) $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_test_test_lux_qt_LDADD += $(LIBBITCOIN_WALLET)
+endif
+qt_test_test_lux_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) \
+  $(LIBMEMENV) $(BOOST_LIBS) $(QT_DBUS_LIBS) $(QT_TEST_LIBS) $(QT_LIBS) \
+  $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1)
+qt_test_test_lux_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
 
 CLEANFILES += $(CLEAN_BITCOIN_QT_TEST)
 
+<<<<<<< HEAD
 test_gelcoin_qt : qt/test/test_gelcoin-qt$(EXEEXT)
 
 test_gelcoin_qt_check : qt/test/test_gelcoin-qt$(EXEEXT) FORCE
@@ -58,3 +97,12 @@ test_gelcoin_qt_check : qt/test/test_gelcoin-qt$(EXEEXT) FORCE
 
 test_gelcoin_qt_clean: FORCE
 	rm -f $(CLEAN_BITCOIN_QT_TEST) $(qt_test_test_gelcoin_qt_OBJECTS)
+=======
+test_lux_qt : qt/test/test_lux-qt$(EXEEXT)
+
+test_lux_qt_check : qt/test/test_lux-qt$(EXEEXT) FORCE
+	$(MAKE) check-TESTS TESTS=$^
+
+test_lux_qt_clean: FORCE
+	rm -f $(CLEAN_BITCOIN_QT_TEST) $(qt_test_test_lux_qt_OBJECTS)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,10 +51,13 @@ const char* ScriptErrorString(const ScriptError serror)
             return "OP_RETURN was encountered";
         case SCRIPT_ERR_UNBALANCED_CONDITIONAL:
             return "Invalid OP_IF construction";
+<<<<<<< HEAD
         case SCRIPT_ERR_NEGATIVE_LOCKTIME:
             return "Negative locktime";
         case SCRIPT_ERR_UNSATISFIED_LOCKTIME:
             return "Locktime requirement not satisfied";
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case SCRIPT_ERR_SIG_HASHTYPE:
             return "Signature hash type missing or not understood";
         case SCRIPT_ERR_SIG_DER:

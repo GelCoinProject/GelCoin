@@ -12,9 +12,15 @@ For example:
 
     make HOST=x86_64-w64-mingw32 -j4
 
+<<<<<<< HEAD
 A prefix will be generated that's suitable for plugging into GelCoin's
 configure. In the above example, a dir named x86_64-w64-mingw32 will be
 created. To use it for GelCoin:
+=======
+A prefix will be generated that's suitable for plugging into lux's
+configure. In the above example, a dir named x86_64-w64-mingw32 will be
+created. To use it for lux:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ./configure --prefix=`pwd`/depends/x86_64-w64-mingw32
 
@@ -38,9 +44,17 @@ The following can be set when running make: make FOO=bar
     NO_WALLET: Don't download/build/cache libs needed to enable the wallet
     NO_UPNP: Don't download/build/cache packages needed for enabling upnp
     DEBUG: disable some optimizations and enable more runtime checking
+<<<<<<< HEAD
 
 If some packages are not built, for example `make NO_WALLET=1`, the appropriate
 options will be passed to GelCoin's configure. In this case, `--disable-wallet`.
+=======
+    HOST_ID_SALT: Optional salt to use when generating host package ids
+    BUILD_ID_SALT: Optional salt to use when generating build package ids
+
+If some packages are not built, for example `make NO_WALLET=1`, the appropriate
+options will be passed to lux's configure. In this case, `--disable-wallet`.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Additional targets:
 

@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 ### Gavin's notes on getting gitian builds up and running using KVM
 
 These instructions distilled from
 [https://help.ubuntu.com/community/KVM/Installation](https://help.ubuntu.com/community/KVM/Installation).
+=======
+### Gavin's notes on getting gitian builds up and running using KVM:###
+
+These instructions distilled from:
+[  https://help.ubuntu.com/community/KVM/Installation](  https://help.ubuntu.com/community/KVM/Installation)
+... see there for complete details.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 You need the right hardware: you need a 64-bit-capable CPU with hardware virtualization support (Intel VT-x or AMD-V). Not all modern CPUs support hardware virtualization.
 
@@ -19,7 +27,11 @@ Sanity checks:
 
 Once you've got the right hardware and software:
 
+<<<<<<< HEAD
     git clone git://github.com/gelcoinpay/gelcoin.git
+=======
+    git clone git://github.com/lux-project/lux.git
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     git clone git://github.com/devrandom/gitian-builder.git
     mkdir gitian-builder/inputs
     cd gitian-builder/inputs
@@ -32,14 +44,23 @@ Once you've got the right hardware and software:
     # Get inputs (see doc/release-process.md for exact inputs needed and where to get them)
     ...
 
+<<<<<<< HEAD
     # For further build instructions see doc/release-process.md
+=======
+    # For further build instructions see doc/release-notes.md
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ...
 
 ---------------------
 
 `gitian-builder` now also supports building using LXC. See
+<<<<<<< HEAD
 [help.ubuntu.com](https://help.ubuntu.com/14.04/serverguide/lxc.html)
 for how to get LXC up and running under Ubuntu.
+=======
+[  https://help.ubuntu.com/12.04/serverguide/lxc.html](  https://help.ubuntu.com/12.04/serverguide/lxc.html)
+... for how to get LXC up and running under Ubuntu.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 If your main machine is a 64-bit Mac or PC with a few gigabytes of memory
 and at least 10 gigabytes of free disk space, you can `gitian-build` using
@@ -61,5 +82,9 @@ Here's a description of Gavin's setup on OSX 10.6:
 5. Still inside Ubuntu, tell gitian-builder to use LXC, then follow the "Once you've got the right hardware and software" instructions above:
 
 	export USE_LXC=1
+<<<<<<< HEAD
 	git clone git://github.com/gelcoinpay/gelcoin.git
+=======
+	git clone git://github.com/lux-project/lux.git
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	... etc

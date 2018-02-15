@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,6 +11,19 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
+<<<<<<< HEAD
+=======
+namespace {
+inline std::string ValueString(const std::vector<unsigned char>& vch)
+{
+    if (vch.size() <= 4)
+        return strprintf("%d", CScriptNum(vch, false).getint());
+    else
+        return HexStr(vch);
+}
+} // anon namespace
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 using namespace std;
 
 const char* GetOpName(opcodetype opcode)
@@ -130,8 +147,13 @@ const char* GetOpName(opcodetype opcode)
 
     // expanson
     case OP_NOP1                   : return "OP_NOP1";
+<<<<<<< HEAD
     case OP_CHECKLOCKTIMEVERIFY    : return "OP_CHECKLOCKTIMEVERIFY";
     case OP_CHECKSEQUENCEVERIFY    : return "OP_CHECKSEQUENCEVERIFY";
+=======
+    case OP_NOP2                   : return "OP_NOP2";
+    case OP_NOP3                   : return "OP_NOP3";
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     case OP_NOP4                   : return "OP_NOP4";
     case OP_NOP5                   : return "OP_NOP5";
     case OP_NOP6                   : return "OP_NOP6";
@@ -143,7 +165,11 @@ const char* GetOpName(opcodetype opcode)
     case OP_INVALIDOPCODE          : return "OP_INVALIDOPCODE";
 
     // Note:
+<<<<<<< HEAD
     //  The template matching params OP_SMALLINTEGER/etc are defined in opcodetype enum
+=======
+    //  The template matching params OP_SMALLDATA/etc are defined in opcodetype enum
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     //  as kind of implementation hack, they are *NOT* real opcodes.  If found in real
     //  Script, just let the default: case deal with them.
 
@@ -169,7 +195,11 @@ unsigned int CScript::GetSigOpCount(bool fAccurate) const
             if (fAccurate && lastOpcode >= OP_1 && lastOpcode <= OP_16)
                 n += DecodeOP_N(lastOpcode);
             else
+<<<<<<< HEAD
                 n += MAX_PUBKEYS_PER_MULTISIG;
+=======
+                n += 20;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         }
         lastOpcode = opcode;
     }
@@ -200,6 +230,7 @@ unsigned int CScript::GetSigOpCount(const CScript& scriptSig) const
     return subscript.GetSigOpCount(true);
 }
 
+<<<<<<< HEAD
 bool CScript::IsPayToPublicKeyHash() const
 {
     // Extra-fast test for pay-to-pubkey-hash CScripts:
@@ -209,12 +240,37 @@ bool CScript::IsPayToPublicKeyHash() const
             (*this)[2] == 0x14 &&
             (*this)[23] == OP_EQUALVERIFY &&
             (*this)[24] == OP_CHECKSIG);
+=======
+bool CScript::IsNormalPaymentScript() const
+{
+    if(this->size() != 25) return false;
+
+    std::string str;
+    opcodetype opcode;
+    const_iterator pc = begin();
+    int i = 0;
+    while (pc < end())
+    {
+        GetOp(pc, opcode);
+
+        if(     i == 0 && opcode != OP_DUP) return false;
+        else if(i == 1 && opcode != OP_HASH160) return false;
+        else if(i == 3 && opcode != OP_EQUALVERIFY) return false;
+        else if(i == 4 && opcode != OP_CHECKSIG) return false;
+        else if(i == 5) return false;
+
+        i++;
+    }
+
+    return true;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 bool CScript::IsPayToScriptHash() const
 {
     // Extra-fast test for pay-to-script-hash CScripts:
     return (this->size() == 23 &&
+<<<<<<< HEAD
             (*this)[0] == OP_HASH160 &&
             (*this)[1] == 0x14 &&
             (*this)[22] == OP_EQUAL);
@@ -222,6 +278,16 @@ bool CScript::IsPayToScriptHash() const
 
 bool CScript::IsPushOnly(const_iterator pc) const
 {
+=======
+            this->at(0) == OP_HASH160 &&
+            this->at(1) == 0x14 &&
+            this->at(22) == OP_EQUAL);
+}
+
+bool CScript::IsPushOnly() const
+{
+    const_iterator pc = begin();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     while (pc < end())
     {
         opcodetype opcode;
@@ -237,7 +303,31 @@ bool CScript::IsPushOnly(const_iterator pc) const
     return true;
 }
 
+<<<<<<< HEAD
 bool CScript::IsPushOnly() const
 {
     return this->IsPushOnly(begin());
+=======
+std::string CScript::ToString() const
+{
+    std::string str;
+    opcodetype opcode;
+    std::vector<unsigned char> vch;
+    const_iterator pc = begin();
+    while (pc < end())
+    {
+        if (!str.empty())
+            str += " ";
+        if (!GetOp(pc, opcode, vch))
+        {
+            str += "[error]";
+            return str;
+        }
+        if (0 <= opcode && opcode <= OP_PUSHDATA4)
+            str += ValueString(vch);
+        else
+            str += GetOpName(opcode);
+    }
+    return str;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }

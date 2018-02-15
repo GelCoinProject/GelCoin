@@ -1,8 +1,14 @@
 #! /bin/sh
 # Configuration validation subroutine script.
+<<<<<<< HEAD
 #   Copyright 1992-2015 Free Software Foundation, Inc.
 
 timestamp='2015-11-22'
+=======
+#   Copyright 1992-2017 Free Software Foundation, Inc.
+
+timestamp='2018-01-28'
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -33,7 +39,11 @@ timestamp='2015-11-22'
 # Otherwise, we print the canonical config type on stdout and succeed.
 
 # You can get the latest version of this script from:
+<<<<<<< HEAD
 # http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD
+=======
+# http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # This file is supposed to be the same for all GNU packages
 # and recognize all the CPU types, system types and aliases
@@ -67,7 +77,11 @@ Report bugs and patches to <config-patches@gnu.org>."
 version="\
 GNU config.sub ($timestamp)
 
+<<<<<<< HEAD
 Copyright 1992-2015 Free Software Foundation, Inc.
+=======
+Copyright 1992-2017 Free Software Foundation, Inc.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
@@ -117,7 +131,11 @@ case $maybe_os in
   nto-qnx* | linux-gnu* | linux-android* | linux-dietlibc | linux-newlib* | \
   linux-musl* | linux-uclibc* | uclinux-uclibc* | uclinux-gnu* | kfreebsd*-gnu* | \
   knetbsd*-gnu* | netbsd*-gnu* | netbsd*-eabi* | \
+<<<<<<< HEAD
   kopensolaris*-gnu* | \
+=======
+  kopensolaris*-gnu* | cloudabi*-eabi* | \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   storm-chaos* | os2-emx* | rtmk-nova*)
     os=-$maybe_os
     basic_machine=`echo $1 | sed 's/^\(.*\)-\([^-]*-[^-]*\)$/\1/'`
@@ -263,7 +281,11 @@ case $basic_machine in
 	| fido | fr30 | frv | ft32 \
 	| h8300 | h8500 | hppa | hppa1.[01] | hppa2.0 | hppa2.0[nw] | hppa64 \
 	| hexagon \
+<<<<<<< HEAD
 	| i370 | i860 | i960 | ia64 \
+=======
+	| i370 | i860 | i960 | ia16 | ia64 \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| ip2k | iq2000 \
 	| k1om \
 	| le32 | le64 \
@@ -301,6 +323,10 @@ case $basic_machine in
 	| open8 | or1k | or1knd | or32 \
 	| pdp10 | pdp11 | pj | pjl \
 	| powerpc | powerpc64 | powerpc64le | powerpcle \
+<<<<<<< HEAD
+=======
+	| pru \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| pyramid \
 	| riscv32 | riscv64 \
 	| rl78 | rx \
@@ -314,6 +340,10 @@ case $basic_machine in
 	| ubicom32 \
 	| v850 | v850e | v850e1 | v850e2 | v850es | v850e2v3 \
 	| visium \
+<<<<<<< HEAD
+=======
+	| wasm32 \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| we32k \
 	| x86 | xc16x | xstormy16 | xtensa \
 	| z8k | z80)
@@ -387,7 +417,11 @@ case $basic_machine in
 	| h8300-* | h8500-* \
 	| hppa-* | hppa1.[01]-* | hppa2.0-* | hppa2.0[nw]-* | hppa64-* \
 	| hexagon-* \
+<<<<<<< HEAD
 	| i*86-* | i860-* | i960-* | ia64-* \
+=======
+	| i*86-* | i860-* | i960-* | ia16-* | ia64-* \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| ip2k-* | iq2000-* \
 	| k1om-* \
 	| le32-* | le64-* \
@@ -428,6 +462,10 @@ case $basic_machine in
 	| orion-* \
 	| pdp10-* | pdp11-* | pj-* | pjl-* | pn-* | power-* \
 	| powerpc-* | powerpc64-* | powerpc64le-* | powerpcle-* \
+<<<<<<< HEAD
+=======
+	| pru-* \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| pyramid-* \
 	| riscv32-* | riscv64-* \
 	| rl78-* | romp-* | rs6000-* | rx-* \
@@ -444,6 +482,10 @@ case $basic_machine in
 	| v850-* | v850e-* | v850e1-* | v850es-* | v850e2-* | v850e2v3-* \
 	| vax-* \
 	| visium-* \
+<<<<<<< HEAD
+=======
+	| wasm32-* \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	| we32k-* \
 	| x86-* | x86_64-* | xc16x-* | xps100-* \
 	| xstormy16-* | xtensa*-* \
@@ -520,7 +562,11 @@ case $basic_machine in
 		basic_machine=i386-pc
 		os=-aros
 		;;
+<<<<<<< HEAD
         asmjs)
+=======
+	asmjs)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 		basic_machine=asmjs-unknown
 		;;
 	aux)
@@ -643,6 +689,17 @@ case $basic_machine in
 		basic_machine=m68k-bull
 		os=-sysv3
 		;;
+<<<<<<< HEAD
+=======
+	e500v[12])
+		basic_machine=powerpc-unknown
+		os=$os"spe"
+		;;
+	e500v[12]-*)
+		basic_machine=powerpc-`echo $basic_machine | sed 's/^[^-]*-//'`
+		os=$os"spe"
+		;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	ebmon29k)
 		basic_machine=a29k-amd
 		os=-ebmon
@@ -938,6 +995,12 @@ case $basic_machine in
 	nsr-tandem)
 		basic_machine=nsr-tandem
 		;;
+<<<<<<< HEAD
+=======
+	nsx-tandem)
+		basic_machine=nsx-tandem
+		;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	op50n-* | op60c-*)
 		basic_machine=hppa1.1-oki
 		os=-proelf
@@ -1022,7 +1085,11 @@ case $basic_machine in
 	ppc-* | ppcbe-*)
 		basic_machine=powerpc-`echo $basic_machine | sed 's/^[^-]*-//'`
 		;;
+<<<<<<< HEAD
 	ppcle | powerpclittle | ppc-le | powerpc-little)
+=======
+	ppcle | powerpclittle)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 		basic_machine=powerpcle-unknown
 		;;
 	ppcle-* | powerpclittle-*)
@@ -1032,7 +1099,11 @@ case $basic_machine in
 		;;
 	ppc64-*) basic_machine=powerpc64-`echo $basic_machine | sed 's/^[^-]*-//'`
 		;;
+<<<<<<< HEAD
 	ppc64le | powerpc64little | ppc64-le | powerpc64-little)
+=======
+	ppc64le | powerpc64little)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 		basic_machine=powerpc64le-unknown
 		;;
 	ppc64le-* | powerpc64little-*)
@@ -1233,6 +1304,12 @@ case $basic_machine in
 		basic_machine=a29k-wrs
 		os=-vxworks
 		;;
+<<<<<<< HEAD
+=======
+	wasm32)
+		basic_machine=wasm32-unknown
+		;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	w65*)
 		basic_machine=w65-wdc
 		os=-none
@@ -1382,14 +1459,24 @@ case $os in
 	      | -nindy* | -vxsim* | -vxworks* | -ebmon* | -hms* | -mvs* \
 	      | -clix* | -riscos* | -uniplus* | -iris* | -rtu* | -xenix* \
 	      | -hiux* | -386bsd* | -knetbsd* | -mirbsd* | -netbsd* \
+<<<<<<< HEAD
 	      | -bitrig* | -openbsd* | -solidbsd* \
+=======
+	      | -bitrig* | -openbsd* | -solidbsd* | -libertybsd* \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	      | -ekkobsd* | -kfreebsd* | -freebsd* | -riscix* | -lynxos* \
 	      | -bosx* | -nextstep* | -cxux* | -aout* | -elf* | -oabi* \
 	      | -ptx* | -coff* | -ecoff* | -winnt* | -domain* | -vsta* \
 	      | -udi* | -eabi* | -lites* | -ieee* | -go32* | -aux* \
+<<<<<<< HEAD
 	      | -chorusos* | -chorusrdb* | -cegcc* \
 	      | -cygwin* | -msys* | -pe* | -psos* | -moss* | -proelf* | -rtems* \
 	      | -mingw32* | -mingw64* | -linux-gnu* | -linux-android* \
+=======
+	      | -chorusos* | -chorusrdb* | -cegcc* | -glidix* \
+	      | -cygwin* | -msys* | -pe* | -psos* | -moss* | -proelf* | -rtems* \
+	      | -midipix* | -mingw32* | -mingw64* | -linux-gnu* | -linux-android* \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	      | -linux-newlib* | -linux-musl* | -linux-uclibc* \
 	      | -uxpv* | -beos* | -mpeix* | -udk* | -moxiebox* \
 	      | -interix* | -uwin* | -mks* | -rhapsody* | -darwin* | -opened* \
@@ -1399,7 +1486,11 @@ case $os in
 	      | -morphos* | -superux* | -rtmk* | -rtmk-nova* | -windiss* \
 	      | -powermax* | -dnix* | -nx6 | -nx7 | -sei* | -dragonfly* \
 	      | -skyos* | -haiku* | -rdos* | -toppers* | -drops* | -es* \
+<<<<<<< HEAD
 	      | -onefs* | -tirtos*)
+=======
+	      | -onefs* | -tirtos* | -phoenix* | -fuchsia* | -redox*)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	# Remember, each alternative MUST END IN *, to match a version number.
 		;;
 	-qnx*)
@@ -1531,6 +1622,11 @@ case $os in
 		;;
 	-nacl*)
 		;;
+<<<<<<< HEAD
+=======
+	-ios)
+		;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	-none)
 		;;
 	*)
@@ -1626,6 +1722,12 @@ case $basic_machine in
 	sparc-* | *-sun)
 		os=-sunos4.1.1
 		;;
+<<<<<<< HEAD
+=======
+	pru-*)
+		os=-elf
+		;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	*-be)
 		os=-beos
 		;;

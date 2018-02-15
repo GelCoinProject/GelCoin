@@ -22,7 +22,11 @@
 			<integer>370</integer>
 			<integer>156</integer>
 		</array>
+<<<<<<< HEAD
 		<key>GelCoin-Qt.app</key>
+=======
+		<key>Lux-Qt.app</key>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 		<array>
 			<integer>128</integer>
 			<integer>156</integer>

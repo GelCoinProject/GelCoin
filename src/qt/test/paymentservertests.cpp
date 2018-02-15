@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,10 +11,14 @@
 #include "optionsmodel.h"
 #include "paymentrequestdata.h"
 
+<<<<<<< HEAD
 #include "amount.h"
 #include "random.h"
 #include "script/script.h"
 #include "script/standard.h"
+=======
+#include "random.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "util.h"
 #include "utilstrencodings.h"
 
@@ -68,11 +76,16 @@ void PaymentServerTests::paymentServerTests()
     OptionsModel optionsModel;
     PaymentServer* server = new PaymentServer(NULL, false);
     X509_STORE* caStore = X509_STORE_new();
+<<<<<<< HEAD
     X509_STORE_add_cert(caStore, parse_b64der_cert(caCert1_BASE64));
+=======
+    X509_STORE_add_cert(caStore, parse_b64der_cert(caCert_BASE64));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     PaymentServer::LoadRootCAs(caStore);
     server->setOptionsModel(&optionsModel);
     server->uiReady();
 
+<<<<<<< HEAD
     std::vector<unsigned char> data;
     SendCoinsRecipient r;
     QString merchant;
@@ -88,24 +101,48 @@ void PaymentServerTests::paymentServerTests()
 
     // Signed, but expired, merchant cert in the request:
     data = DecodeBase64(paymentrequest2_cert1_BASE64);
+=======
+    // Now feed PaymentRequests to server, and observe signals it produces:
+    std::vector<unsigned char> data = DecodeBase64(paymentrequest1_BASE64);
+    SendCoinsRecipient r = handleRequest(server, data);
+    QString merchant;
+    r.paymentRequest.getMerchant(caStore, merchant);
+    QCOMPARE(merchant, QString("testmerchant.org"));
+
+    // Version of the above, with an expired certificate:
+    data = DecodeBase64(paymentrequest2_BASE64);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     r = handleRequest(server, data);
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString(""));
 
+<<<<<<< HEAD
     // 10-long certificate chain, all intermediates valid:
     data = DecodeBase64(paymentrequest3_cert1_BASE64);
+=======
+    // Long certificate chain:
+    data = DecodeBase64(paymentrequest3_BASE64);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     r = handleRequest(server, data);
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString("testmerchant8.org"));
 
     // Long certificate chain, with an expired certificate in the middle:
+<<<<<<< HEAD
     data = DecodeBase64(paymentrequest4_cert1_BASE64);
+=======
+    data = DecodeBase64(paymentrequest4_BASE64);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     r = handleRequest(server, data);
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString(""));
 
     // Validly signed, but by a CA not in our root CA list:
+<<<<<<< HEAD
     data = DecodeBase64(paymentrequest5_cert1_BASE64);
+=======
+    data = DecodeBase64(paymentrequest5_BASE64);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     r = handleRequest(server, data);
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString(""));
@@ -113,11 +150,16 @@ void PaymentServerTests::paymentServerTests()
     // Try again with no root CA's, verifiedMerchant should be empty:
     caStore = X509_STORE_new();
     PaymentServer::LoadRootCAs(caStore);
+<<<<<<< HEAD
     data = DecodeBase64(paymentrequest1_cert1_BASE64);
+=======
+    data = DecodeBase64(paymentrequest1_BASE64);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     r = handleRequest(server, data);
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString(""));
 
+<<<<<<< HEAD
     // Load second root certificate
     caStore = X509_STORE_new();
     X509_STORE_add_cert(caStore, parse_b64der_cert(caCert2_BASE64));
@@ -178,6 +220,9 @@ void PaymentServerTests::paymentServerTests()
     QCOMPARE(PaymentServer::verifyExpired(r.paymentRequest.getDetails()), true);
 
     // Test BIP70 DoS protection:
+=======
+    // Just get some random data big enough to trigger BIP70 DoS protection
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     unsigned char randData[BIP70_MAX_PAYMENTREQUEST_SIZE + 1];
     GetRandBytes(randData, sizeof(randData));
     // Write data to a temp file:
@@ -185,6 +230,7 @@ void PaymentServerTests::paymentServerTests()
     tempFile.open();
     tempFile.write((const char*)randData, sizeof(randData));
     tempFile.close();
+<<<<<<< HEAD
     // compares 50001 <= BIP70_MAX_PAYMENTREQUEST_SIZE == false
     QCOMPARE(PaymentServer::verifySize(tempFile.size()), false);
 
@@ -201,6 +247,10 @@ void PaymentServerTests::paymentServerTests()
         if (ExtractDestination(sendingTo.first, dest))
             QCOMPARE(PaymentServer::verifyAmount(sendingTo.second), false);
     }
+=======
+    // Trigger BIP70 DoS protection
+    QCOMPARE(PaymentServer::readPaymentRequestFromFile(tempFile.fileName(), r.paymentRequest), false);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     delete server;
 }

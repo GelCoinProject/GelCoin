@@ -1,5 +1,6 @@
 dnl require autoconf 2.60 (AS_ECHO/AS_ECHO_N)
 AC_PREREQ([2.60])
+<<<<<<< HEAD
 define(_CLIENT_VERSION_MAJOR, 0)
 define(_CLIENT_VERSION_MINOR, 12)
 define(_CLIENT_VERSION_REVISION, 2)
@@ -17,6 +18,36 @@ AC_CANONICAL_HOST
 AH_TOP([#ifndef GEL_CONFIG_H])
 AH_TOP([#define GEL_CONFIG_H])
 AH_BOTTOM([#endif //GEL_CONFIG_H])
+=======
+define(_CLIENT_VERSION_MAJOR, 4)
+define(_CLIENT_VERSION_MINOR, 0)
+define(_CLIENT_VERSION_REVISION, 0)
+define(_CLIENT_VERSION_BUILD, 0)
+define(_CLIENT_VERSION_IS_RELEASE, true)
+define(_COPYRIGHT_YEAR, 2018)
+AC_INIT([Lux Core],[_CLIENT_VERSION_MAJOR._CLIENT_VERSION_MINOR._CLIENT_VERSION_REVISION],[www.luxcore.io],[lux])
+AC_CONFIG_SRCDIR([src/main.cpp])
+AC_CONFIG_HEADERS([src/config/lux-config.h])
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([build-aux/m4])
+
+BITCOIN_DAEMON_NAME=luxd
+BITCOIN_GUI_NAME=lux-qt
+BITCOIN_CLI_NAME=lux-cli
+BITCOIN_TX_NAME=lux-tx
+
+dnl Unless the user specified ARFLAGS, force it to be cr
+AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
+if test "x${ARFLAGS+set}" != "xset"; then
+  ARFLAGS="cr"
+fi
+
+AC_CANONICAL_HOST
+
+AH_TOP([#ifndef LUX_CONFIG_H])
+AH_TOP([#define LUX_CONFIG_H])
+AH_BOTTOM([#endif //LUX_CONFIG_H])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -38,6 +69,10 @@ else
   CXXFLAGS_overridden=no
 fi
 AC_PROG_CXX
+<<<<<<< HEAD
+=======
+dnl ifdef([AC_PROG_OBJCXX],[AC_PROG_OBJCXX])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl By default, libtool for mingw refuses to link static libs into a dll for
 dnl fear of mixing pic/non-pic objects, and import/export complications. Since
@@ -48,7 +83,11 @@ case $host in
   ;;
 esac
 dnl Require C++11 compiler (no GNU extensions)
+<<<<<<< HEAD
 AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory], [nodefault])
+=======
+AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl Unless the user specified OBJCXX, force it to be the same as CXX. This ensures
 dnl that we get the same -std flags for both.
@@ -58,7 +97,10 @@ if test "x${OBJCXX+set}" = "x"; then
 fi
 AC_PROG_OBJCXX
 ])
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 dnl Libtool init checks.
 LT_INIT([pic-only])
 
@@ -69,7 +111,11 @@ AC_PATH_TOOL(STRIP, strip)
 AC_PATH_TOOL(GCOV, gcov)
 AC_PATH_PROG(LCOV, lcov)
 AC_PATH_PROG(JAVA, java)
+<<<<<<< HEAD
 AC_PATH_PROG(PYTHON, python)
+=======
+AC_PATH_PROGS([PYTHON], [python3 python2.7 python2 python])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_PATH_PROG(GENHTML, genhtml)
 AC_PATH_PROG([GIT], [git])
 AC_PATH_PROG(CCACHE,ccache)
@@ -77,14 +123,32 @@ AC_PATH_PROG(XGETTEXT,xgettext)
 AC_PATH_PROG(HEXDUMP,hexdump)
 AC_PATH_TOOL(READELF, readelf)
 AC_PATH_TOOL(CPPFILT, c++filt)
+<<<<<<< HEAD
+=======
+AC_PATH_TOOL(OBJCOPY, objcopy)
+
+AC_ARG_VAR(PYTHONPATH, Augments the default search path for python module files)
+
+# This m4 will only be used if a system copy cannot be found. This is helpful
+# on systems where autotools are installed but the pkg-config macros are not in
+# a default location. It is currently used for building on OSX where autotools
+# are preinstalled but pkg-config comes from macports or homebrew. It should
+# probably be removed when building on <= 10.6 is no longer supported.
+m4_include([pkg.m4])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl pkg-config check.
 PKG_PROG_PKG_CONFIG
 
 # Enable wallet
 AC_ARG_ENABLE([wallet],
+<<<<<<< HEAD
   [AS_HELP_STRING([--disable-wallet],
   [disable wallet (enabled by default)])],
+=======
+  [AS_HELP_STRING([--enable-wallet],
+  [enable wallet (default is yes)])],
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   [enable_wallet=$enableval],
   [enable_wallet=yes])
 
@@ -101,6 +165,7 @@ AC_ARG_ENABLE([upnp-default],
   [use_upnp_default=no])
 
 AC_ARG_ENABLE(tests,
+<<<<<<< HEAD
     AS_HELP_STRING([--disable-tests],[do not compile tests (default is to compile)]),
     [use_tests=$enableval],
     [use_tests=yes])
@@ -115,6 +180,12 @@ AC_ARG_ENABLE(bench,
     [use_bench=$enableval],
     [use_bench=yes])
 
+=======
+    AS_HELP_STRING([--enable-tests],[compile tests (default is yes)]),
+    [use_tests=$enableval],
+    [use_tests=yes])
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_ARG_WITH([comparison-tool],
     AS_HELP_STRING([--with-comparison-tool],[path to java comparison tool (requires --enable-tests)]),
     [use_comparison_tool=$withval],
@@ -125,11 +196,14 @@ AC_ARG_ENABLE([comparison-tool-reorg-tests],
     [use_comparison_tool_reorg_tests=$enableval],
     [use_comparison_tool_reorg_tests=no])
 
+<<<<<<< HEAD
 AC_ARG_ENABLE([extended-rpc-tests],
     AS_HELP_STRING([--enable-extended-rpc-tests],[enable expensive RPC tests when using lcov (default no)]),
     [use_extended_rpc_tests=$enableval],
     [use_extended_rpc_tests=no])
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_ARG_WITH([qrencode],
   [AS_HELP_STRING([--with-qrencode],
   [enable QR code support (default is yes if qt is enabled and libqrencode is found)])],
@@ -137,13 +211,19 @@ AC_ARG_WITH([qrencode],
   [use_qr=auto])
 
 AC_ARG_ENABLE([hardening],
+<<<<<<< HEAD
   [AS_HELP_STRING([--disable-hardening],
   [do not attempt to harden the resulting executables (default is to harden)])],
+=======
+  [AS_HELP_STRING([--enable-hardening],
+  [attempt to harden the resulting executables (default is yes)])],
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   [use_hardening=$enableval],
   [use_hardening=yes])
 
 AC_ARG_ENABLE([reduce-exports],
   [AS_HELP_STRING([--enable-reduce-exports],
+<<<<<<< HEAD
   [attempt to reduce exported symbols in the resulting executables (default is no)])],
   [use_reduce_exports=$enableval],
   [use_reduce_exports=no])
@@ -151,6 +231,15 @@ AC_ARG_ENABLE([reduce-exports],
 AC_ARG_ENABLE([ccache],
   [AS_HELP_STRING([--disable-ccache],
   [do not use ccache for building (default is to use if found)])],
+=======
+  [attempt to reduce exported symbols in the resulting executables (default is yes)])],
+  [use_reduce_exports=$enableval],
+  [use_reduce_exports=auto])
+
+AC_ARG_ENABLE([ccache],
+  [AS_HELP_STRING([--enable-ccache],
+  [use ccache for building (default is yes if ccache is found)])],
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   [use_ccache=$enableval],
   [use_ccache=auto])
 
@@ -162,6 +251,7 @@ AC_ARG_ENABLE([lcov],
 
 AC_ARG_ENABLE([glibc-back-compat],
   [AS_HELP_STRING([--enable-glibc-back-compat],
+<<<<<<< HEAD
   [enable backwards compatibility with glibc])],
   [use_glibc_compat=$enableval],
   [use_glibc_compat=no])
@@ -178,6 +268,12 @@ AC_ARG_ENABLE([zmq],
   [use_zmq=$enableval],
   [use_zmq=yes])
 
+=======
+  [enable backwards compatibility with glibc and libstdc++])],
+  [use_glibc_compat=$enableval],
+  [use_glibc_compat=no])
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_ARG_WITH([protoc-bindir],[AS_HELP_STRING([--with-protoc-bindir=BIN_DIR],[specify protoc bin path])], [protoc_bin_path=$withval], [])
 
 # Enable debug
@@ -187,6 +283,7 @@ AC_ARG_ENABLE([debug],
     [enable_debug=$enableval],
     [enable_debug=no])
 
+<<<<<<< HEAD
 AC_LANG_PUSH([C++])
 AX_CHECK_COMPILE_FLAG([-Werror],[CXXFLAG_WERROR="-Werror"],[CXXFLAG_WERROR=""])
 
@@ -221,6 +318,44 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
   [build gelcoin-cli gelcoin-tx (default=yes)])],
+=======
+if test "x$enable_debug" = xyes; then
+    if test "x$GCC" = xyes; then
+        CFLAGS="-g3 -O0 -DDEBUG"
+    fi
+
+    if test "x$GXX" = xyes; then
+        CXXFLAGS="-g3 -O0 -DDEBUG"
+    fi
+fi
+
+# Enable dump extra debug info
+AC_ARG_ENABLE([debug-xdump],
+    [AS_HELP_STRING([--enable-xdebug],
+                    [dump extra debug info on stderr (or stdout) (default is no)])],
+    [enable_debug_xdump=$enableval],
+    [enable_debug_xdump=no])
+if test "x$enable_debug_xdump" = xyes; then
+    if test "x$GCC" = xyes; then
+        CFLAGS="-DDEBUG_DUMP_STAKING_INFO"
+    fi
+    if test "x$GXX" = xyes; then
+        CXXFLAGS="-DDEBUG_DUMP_STAKING_INFO"
+    fi
+fi
+
+## TODO: Remove these hard-coded paths and flags. They are here for the sake of
+##       compatibility with the legacy buildsystem.
+##
+if test "x$CXXFLAGS_overridden" = "xno"; then
+  CXXFLAGS="$CXXFLAGS -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter"
+fi
+CPPFLAGS="$CPPFLAGS -DBOOST_SPIRIT_THREADSAFE -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
+
+AC_ARG_WITH([utils],
+  [AS_HELP_STRING([--with-utils],
+  [build lux-cli lux-tx (default=yes)])],
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -232,10 +367,19 @@ AC_ARG_WITH([libs],
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
+<<<<<<< HEAD
   [build gelcoind daemon (default=yes)])],
   [build_bitcoind=$withval],
   [build_bitcoind=yes])
 
+=======
+  [build luxd daemon (default=yes)])],
+  [build_bitcoind=$withval],
+  [build_bitcoind=yes])
+
+AC_LANG_PUSH([C++])
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 use_pkgconfig=yes
 case $host in
   *mingw*)
@@ -279,7 +423,11 @@ case $host in
      fi
 
      CPPFLAGS="$CPPFLAGS -D_MT -DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB"
+<<<<<<< HEAD
      LEVELDB_TARGET_FLAGS="-DOS_WINDOWS"
+=======
+     LEVELDB_TARGET_FLAGS="TARGET_OS=OS_WINDOWS_CROSSCOMPILE"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      if test "x$CXXFLAGS_overridden" = "xno"; then
        CXXFLAGS="$CXXFLAGS -w"
      fi
@@ -301,7 +449,11 @@ case $host in
      ;;
   *darwin*)
      TARGET_OS=darwin
+<<<<<<< HEAD
      LEVELDB_TARGET_FLAGS="-DOS_MACOSX"
+=======
+     LEVELDB_TARGET_FLAGS="TARGET_OS=Darwin"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      if  test x$cross_compiling != xyes; then
        BUILD_OS=darwin
        AC_CHECK_PROG([PORT],port, port)
@@ -315,6 +467,10 @@ case $host in
          fi
        fi
 
+<<<<<<< HEAD
+=======
+       AC_PATH_PROGS([RSVG_CONVERT], [rsvg-convert rsvg],rsvg-convert)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        AC_CHECK_PROG([BREW],brew, brew)
        if test x$BREW = xbrew; then
          dnl These Homebrew packages may be keg-only, meaning that they won't be found
@@ -348,6 +504,12 @@ case $host in
            AC_PATH_TOOL([INSTALLNAMETOOL], [install_name_tool], install_name_tool)
            AC_PATH_TOOL([OTOOL], [otool], otool)
            AC_PATH_PROGS([GENISOIMAGE], [genisoimage mkisofs],genisoimage)
+<<<<<<< HEAD
+=======
+           AC_PATH_PROGS([RSVG_CONVERT], [rsvg-convert rsvg],rsvg-convert)
+           AC_PATH_PROGS([IMAGEMAGICK_CONVERT], [convert],convert)
+           AC_PATH_PROGS([TIFFCP], [tiffcp],tiffcp)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
            dnl libtool will try to strip the static lib, which is a problem for
            dnl cross-builds because strip attempts to call a hard-coded ld,
@@ -360,6 +522,7 @@ case $host in
 
      AX_CHECK_LINK_FLAG([[-Wl,-headerpad_max_install_names]], [LDFLAGS="$LDFLAGS -Wl,-headerpad_max_install_names"])
      CPPFLAGS="$CPPFLAGS -DMAC_OSX"
+<<<<<<< HEAD
      OBJCXXFLAGS="$CXXFLAGS"
      ;;
    *linux*)
@@ -369,6 +532,13 @@ case $host in
    *)
      OTHER_OS=`echo ${host_os} | awk '{print toupper($0)}'`
      LEVELDB_TARGET_FLAGS="-DOS_${OTHER_OS}"
+=======
+     ;;
+   *linux*)
+     TARGET_OS=linux
+     ;;
+   *)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      ;;
 esac
 
@@ -385,10 +555,13 @@ else
   AC_SUBST(COMPARISON_TOOL_REORG_TESTS, 0)
 fi
 
+<<<<<<< HEAD
 if test x$use_extended_rpc_tests != xno; then
   AC_SUBST(EXTENDED_RPC_TESTS, -extended)
 fi
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 if test x$use_lcov = xyes; then
   if test x$LCOV = x; then
     AC_MSG_ERROR("lcov testing requested but lcov not found")
@@ -399,9 +572,12 @@ if test x$use_lcov = xyes; then
   if test x$JAVA = x; then
     AC_MSG_ERROR("lcov testing requested but java not found")
   fi
+<<<<<<< HEAD
   if test x$PYTHON = x; then
     AC_MSG_ERROR("lcov testing requested but python not found")
   fi
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   if test x$GENHTML = x; then
     AC_MSG_ERROR("lcov testing requested but genhtml not found")
   fi
@@ -413,13 +589,22 @@ if test x$use_lcov = xyes; then
     [AC_MSG_ERROR("lcov testing requested but --coverage flag does not work")])
 fi
 
+<<<<<<< HEAD
 dnl Check for endianness
 AC_C_BIGENDIAN
+=======
+dnl Require little endian
+AC_C_BIGENDIAN([AC_MSG_ERROR("Big Endian not supported")])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
+<<<<<<< HEAD
 # The following macro will add the necessary defines to gelcoin-config.h, but
+=======
+# The following macro will add the necessary defines to lux-config.h, but
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # they also need to be passed down to any subprojects. Pull the results out of
 # the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -446,10 +631,13 @@ AX_GCC_FUNC_ATTRIBUTE([dllimport])
 
 if test x$use_glibc_compat != xno; then
 
+<<<<<<< HEAD
   #glibc absorbed clock_gettime in 2.17. librt (its previous location) is safe to link
   #in anyway for back-compat.
   AC_CHECK_LIB([rt],[clock_gettime],, AC_MSG_ERROR(lib missing))
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   #__fdelt_chk's params and return type have changed from long unsigned int to long int.
   # See which one is present here.
   AC_MSG_CHECKING(__fdelt_chk type)
@@ -463,6 +651,7 @@ if test x$use_glibc_compat != xno; then
     [ fdelt_type="long int"])
   AC_MSG_RESULT($fdelt_type)
   AC_DEFINE_UNQUOTED(FDELT_TYPE, $fdelt_type,[parameter and return value type for __fdelt_chk])
+<<<<<<< HEAD
 else
   AC_SEARCH_LIBS([clock_gettime],[rt])
 fi
@@ -470,6 +659,9 @@ fi
 if test x$TARGET_OS != xwindows; then
   # All windows code is PIC, forcing it on just adds useless compile warnings
   AX_CHECK_COMPILE_FLAG([-fPIC],[PIC_FLAGS="-fPIC"])
+=======
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 fi
 
 if test x$use_hardening != xno; then
@@ -489,8 +681,14 @@ if test x$use_hardening != xno; then
   AX_CHECK_LINK_FLAG([[-Wl,-z,now]], [HARDENED_LDFLAGS="$HARDENED_LDFLAGS -Wl,-z,now"])
 
   if test x$TARGET_OS != xwindows; then
+<<<<<<< HEAD
     AX_CHECK_COMPILE_FLAG([-fPIE],[PIE_FLAGS="-fPIE"])
     AX_CHECK_LINK_FLAG([[-pie]], [HARDENED_LDFLAGS="$HARDENED_LDFLAGS -pie"])
+=======
+    # All windows code is PIC, forcing it on just adds useless compile warnings
+    AX_CHECK_COMPILE_FLAG([-fPIC],[HARDENED_CXXFLAGS="$HARDENED_CXXFLAGS -fPIC"])
+    AX_CHECK_LINK_FLAG([[-pic]], [HARDENED_LDFLAGS="$HARDENED_LDFLAGS -pic"])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   fi
 
   case $host in
@@ -498,6 +696,14 @@ if test x$use_hardening != xno; then
        AC_CHECK_LIB([ssp],      [main],, AC_MSG_ERROR(lib missing))
     ;;
   esac
+<<<<<<< HEAD
+=======
+
+  CXXFLAGS="$CXXFLAGS $HARDENED_CXXFLAGS"
+  CPPFLAGS="$CPPFLAGS $HARDENED_CPPFLAGS"
+  LDFLAGS="$LDFLAGS $HARDENED_LDFLAGS"
+  OBJCXXFLAGS="$CXXFLAGS"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 fi
 
 dnl this flag screws up non-darwin gcc even when the check fails. special-case it.
@@ -505,12 +711,17 @@ if test x$TARGET_OS = xdarwin; then
   AX_CHECK_LINK_FLAG([[-Wl,-dead_strip]], [LDFLAGS="$LDFLAGS -Wl,-dead_strip"])
 fi
 
+<<<<<<< HEAD
 AC_CHECK_HEADERS([endian.h sys/endian.h byteswap.h stdio.h stdlib.h unistd.h strings.h sys/types.h sys/stat.h sys/select.h sys/prctl.h])
+=======
+AC_CHECK_HEADERS([endian.h stdio.h stdlib.h unistd.h strings.h sys/types.h sys/stat.h sys/select.h sys/prctl.h])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_SEARCH_LIBS([getaddrinfo_a], [anl], [AC_DEFINE(HAVE_GETADDRINFO_A, 1, [Define this symbol if you have getaddrinfo_a])])
 AC_SEARCH_LIBS([inet_pton], [nsl resolv], [AC_DEFINE(HAVE_INET_PTON, 1, [Define this symbol if you have inet_pton])])
 
 AC_CHECK_DECLS([strnlen])
 
+<<<<<<< HEAD
 AC_CHECK_DECLS([le16toh, le32toh, le64toh, htole16, htole32, htole64, be16toh, be32toh, be64toh, htobe16, htobe32, htobe64],,,
 		[#if HAVE_ENDIAN_H
                  #include <endian.h>
@@ -521,6 +732,11 @@ AC_CHECK_DECLS([le16toh, le32toh, le64toh, htole16, htole32, htole64, be16toh, b
 AC_CHECK_DECLS([bswap_16, bswap_32, bswap_64],,,
 		[#if HAVE_BYTESWAP_H
                  #include <byteswap.h>
+=======
+AC_CHECK_DECLS([le32toh, le64toh, htole32, htole64, be32toh, be64toh, htobe32, htobe64],,,
+		[#if HAVE_ENDIAN_H
+                 #include <endian.h>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                  #endif])
 
 dnl Check for MSG_NOSIGNAL
@@ -531,6 +747,11 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <sys/socket.h>]],
  [ AC_MSG_RESULT(no)]
 )
 
+<<<<<<< HEAD
+=======
+AC_SEARCH_LIBS([clock_gettime],[rt])
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_MSG_CHECKING([for visibility attribute])
 AC_LINK_IFELSE([AC_LANG_SOURCE([
   int foo_def( void ) __attribute__((visibility("default")));
@@ -543,6 +764,7 @@ AC_LINK_IFELSE([AC_LANG_SOURCE([
   [
     AC_MSG_RESULT(no)
     if test x$use_reduce_exports = xyes; then
+<<<<<<< HEAD
       AC_MSG_ERROR([Cannot find a working visibility attribute. Use --disable-reduce-exports.])
     fi
   ]
@@ -565,6 +787,26 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 )
 CXXFLAGS="$TEMP_CXXFLAGS"
 
+=======
+      AC_MSG_ERROR([Cannot find a working visibility attribute. Use --disable-reduced-exports.])
+    fi
+      AC_MSG_WARN([Cannot find a working visibility attribute. Disabling reduced exports.])
+      use_reduce_exports=no
+  ]
+)
+
+if test x$use_reduce_exports != xno; then
+  AX_CHECK_COMPILE_FLAG([-fvisibility=hidden],[RE_CXXFLAGS="-fvisibility=hidden"],
+  [
+    if test x$use_reduce_exports = xyes; then
+      AC_MSG_ERROR([Cannot set default symbol visibility. Use --disable-reduced-exports.])
+    fi
+    AC_MSG_WARN([Cannot set default symbol visibility. Disabling reduced exports.])
+    use_reduce_exports=no
+  ])
+fi
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 LEVELDB_CPPFLAGS=
 LIBLEVELDB=
 LIBMEMENV=
@@ -598,6 +840,21 @@ else
     use_boost=yes
 fi
 
+<<<<<<< HEAD
+=======
+if test x$bitcoin_enable_qt = xyes; then
+dnl enable tradingdialog
+  AC_MSG_CHECKING([if the trading dialog should be enabled])
+    if test x$bitcoin_qt_got_major_vers = x5; then
+      AC_MSG_RESULT(yes)
+      AC_DEFINE_UNQUOTED([HAVE_QT5],[1],[Define to 1 to enable trading dialog])
+
+    else
+      AC_MSG_RESULT(no)
+    fi
+fi
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 if test x$use_boost = xyes; then
 
 dnl Check for boost libs
@@ -609,7 +866,11 @@ AX_BOOST_THREAD
 AX_BOOST_CHRONO
 
 
+<<<<<<< HEAD
 if test x$use_reduce_exports = xyes; then
+=======
+if test x$use_reduce_exports != xno; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   AC_MSG_CHECKING([for working boost reduced exports])
   TEMP_CPPFLAGS="$CPPFLAGS"
   CPPFLAGS="$BOOST_CPPFLAGS $CPPFLAGS"
@@ -623,6 +884,7 @@ if test x$use_reduce_exports = xyes; then
       #endif
     ]])],[
       AC_MSG_RESULT(yes)
+<<<<<<< HEAD
     ],[
     AC_MSG_ERROR([boost versions < 1.49 are known to be broken with reduced exports. Use --disable-reduce-exports.])
   ])
@@ -631,6 +893,27 @@ fi
 fi
 
 if test x$use_reduce_exports = xyes; then
+=======
+    ],[:
+    if test x$use_reduce_exports = xauto; then
+      use_reduce_exports=no
+    else
+      if test x$use_reduce_exports = xyes; then
+        AC_MSG_ERROR([boost versions < 1.49 are known to be broken with reduced exports. Use --disable-reduced-exports.])
+      fi
+    fi
+    AC_MSG_RESULT(no)
+    AC_MSG_WARN([boost versions < 1.49 are known to have symbol visibility issues. Disabling reduced exports.])
+  ])
+  CPPFLAGS="$TEMP_CPPFLAGS"
+fi
+
+elif test x$use_reduce_exports = xauto; then
+    use_reduce_exports=yes
+fi
+
+if test x$use_reduce_exports != xno; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     CXXFLAGS="$CXXFLAGS $RE_CXXFLAGS"
     AX_CHECK_LINK_FLAG([[-Wl,--exclude-libs,ALL]], [RELDFLAGS="-Wl,--exclude-libs,ALL"])
 fi
@@ -669,6 +952,7 @@ fi
 
 if test x$use_boost = xyes; then
 
+<<<<<<< HEAD
 BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB $BOOST_THREAD_LIB $BOOST_CHRONO_LIB"
 
 
@@ -706,14 +990,24 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([[
   [AC_MSG_RESULT(mismatched); BOOST_CPPFLAGS="$BOOST_CPPFLAGS -DBOOST_NO_SCOPED_ENUMS -DBOOST_NO_CXX11_SCOPED_ENUMS"], [AC_MSG_RESULT(ok)])
 LIBS="$TEMP_LIBS"
 CPPFLAGS="$TEMP_CPPFLAGS"
+=======
+BOOST_LIBS="$BOOST_LDFLAGS $BOOST_SYSTEM_LIB $BOOST_FILESYSTEM_LIB $BOOST_PROGRAM_OPTIONS_LIB $BOOST_THREAD_LIB"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl Boost >= 1.50 uses sleep_for rather than the now-deprecated sleep, however
 dnl it was broken from 1.50 to 1.52 when backed by nanosleep. Use sleep_for if
 dnl a working version is available, else fall back to sleep. sleep was removed
 dnl after 1.56.
 dnl If neither is available, abort.
+<<<<<<< HEAD
 TEMP_LIBS="$LIBS"
 LIBS="$BOOST_LIBS $LIBS"
+=======
+dnl If sleep_for is used, boost_chrono becomes a requirement.
+if test x$ax_cv_boost_chrono = xyes; then
+TEMP_LIBS="$LIBS"
+LIBS="$BOOST_LIBS $BOOST_CHRONO_LIB $LIBS"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 TEMP_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
 AC_LINK_IFELSE([AC_LANG_PROGRAM([[
@@ -726,11 +1020,19 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([[
    choke me
   #endif
   ]])],
+<<<<<<< HEAD
   [boost_sleep=yes;
+=======
+  [boost_sleep=yes; BOOST_LIBS="$BOOST_LIBS $BOOST_CHRONO_LIB";
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      AC_DEFINE(HAVE_WORKING_BOOST_SLEEP_FOR, 1, [Define this symbol if boost sleep_for works])],
   [boost_sleep=no])
 LIBS="$TEMP_LIBS"
 CPPFLAGS="$TEMP_CPPFLAGS"
+<<<<<<< HEAD
+=======
+fi
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 if test x$boost_sleep != xyes; then
 TEMP_LIBS="$LIBS"
@@ -776,6 +1078,7 @@ if test x$use_pkgconfig = xyes; then
       if test x$use_qr != xno; then
         BITCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
+<<<<<<< HEAD
       if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests != xnononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
         if test x$TARGET_OS != xwindows; then
@@ -792,6 +1095,8 @@ if test x$use_pkgconfig = xyes; then
       else
           AC_DEFINE_UNQUOTED([ENABLE_ZMQ],[0],[Define to 1 to enable ZMQ functions])
       fi
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ]
   )
 else
@@ -801,6 +1106,7 @@ else
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
 
+<<<<<<< HEAD
   if test x$build_bitcoin_utils$build_bitcoind$bitcoin_enable_qt$use_tests != xnononono; then
     AC_CHECK_HEADER([event2/event.h],, AC_MSG_ERROR(libevent headers missing),)
     AC_CHECK_LIB([event],[main],EVENT_LIBS=-levent,AC_MSG_ERROR(libevent missing))
@@ -823,6 +1129,8 @@ else
     AC_DEFINE_UNQUOTED([ENABLE_ZMQ],[0],[Define to 1 to enable ZMQ functions])
   fi
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   BITCOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], BITCOIN_QT_FAIL(libprotobuf not found)))
   if test x$use_qr != xno; then
     BITCOIN_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
@@ -830,6 +1138,7 @@ else
   fi
 fi
 
+<<<<<<< HEAD
 dnl univalue check
 
 if test x$system_univalue != xno ; then
@@ -874,15 +1183,39 @@ CXXFLAGS="$CXXFLAGS $SSL_CFLAGS $CRYPTO_CFLAGS"
 LIBS="$LIBS $SSL_LIBS $CRYPTO_LIBS"
 AC_CHECK_HEADER([openssl/ec.h],, AC_MSG_ERROR(OpenSSL ec header missing),)
 CXXFLAGS="$CXXFLAGS_TEMP"
+=======
+AC_CHECK_LIB([crypto],[RAND_egd],[],[
+  AC_ARG_WITH([libressl],
+    [AS_HELP_STRING([--with-libressl],[Build with system LibreSSL (default is no; DANGEROUS; NOT SUPPORTED)])],
+    [AC_MSG_WARN([Detected LibreSSL: This is NOT supported, and may break consensus compatibility!])],
+    [AC_MSG_ERROR([Detected LibreSSL: This is NOT supported, and may break consensus compatibility!])]
+  )
+])
+
+CFLAGS_TEMP="$CFLAGS"
+LIBS_TEMP="$LIBS"
+CFLAGS="$CFLAGS $SSL_CFLAGS $CRYPTO_CFLAGS"
+LIBS="$LIBS $SSL_LIBS $CRYPTO_LIBS"
+AC_CHECK_HEADER([openssl/ec.h],, AC_MSG_ERROR(OpenSSL ec header missing),)
+CFLAGS="$CFLAGS_TEMP"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 LIBS="$LIBS_TEMP"
 
 BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 
+<<<<<<< HEAD
 AC_MSG_CHECKING([whether to build gelcoind])
 AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
 AC_MSG_RESULT($build_bitcoind)
 
 AC_MSG_CHECKING([whether to build utils (gelcoin-cli gelcoin-tx)])
+=======
+AC_MSG_CHECKING([whether to build luxd])
+AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
+AC_MSG_RESULT($build_bitcoind)
+
+AC_MSG_CHECKING([whether to build utils (lux-cli lux-tx)])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AM_CONDITIONAL([BUILD_BITCOIN_UTILS], [test x$build_bitcoin_utils = xyes])
 AC_MSG_RESULT($build_bitcoin_utils)
 
@@ -890,7 +1223,10 @@ AC_MSG_CHECKING([whether to build libraries])
 AM_CONDITIONAL([BUILD_BITCOIN_LIBS], [test x$build_bitcoin_libs = xyes])
 if test x$build_bitcoin_libs = xyes; then
   AC_DEFINE(HAVE_CONSENSUS_LIB, 1, [Define this symbol if the consensus lib has been built])
+<<<<<<< HEAD
   AC_CONFIG_FILES([libgelcoinconsensus.pc:libgelcoinconsensus.pc.in])
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 fi
 AC_MSG_RESULT($build_bitcoin_libs)
 
@@ -953,8 +1289,13 @@ else
 fi
 
 dnl these are only used when qt is enabled
+<<<<<<< HEAD
 BUILD_TEST_QT=""
 if test x$bitcoin_enable_qt != xno; then
+=======
+if test x$bitcoin_enable_qt != xno; then
+  BUILD_QT=qt
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
   if test x$bitcoin_enable_qt_dbus != xno; then
@@ -983,8 +1324,13 @@ if test x$bitcoin_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
+<<<<<<< HEAD
   AC_MSG_CHECKING([whether to build test_gelcoin-qt])
   if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
+=======
+  AC_MSG_CHECKING([whether to build test_lux-qt])
+  if test x$use_tests$bitcoin_enable_qt_test = xyesyes; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -992,6 +1338,7 @@ if test x$bitcoin_enable_qt != xno; then
   fi
 fi
 
+<<<<<<< HEAD
 AM_CONDITIONAL([ENABLE_ZMQ], [test "x$use_zmq" = "xyes"])
 
 AC_MSG_CHECKING([whether to build test_gelcoin])
@@ -1005,6 +1352,18 @@ fi
 
 AC_MSG_CHECKING([whether to reduce exports])
 if test x$use_reduce_exports = xyes; then
+=======
+AC_MSG_CHECKING([whether to build test_lux])
+if test x$use_tests = xyes; then
+  AC_MSG_RESULT([yes])
+  BUILD_TEST="test"
+else
+  AC_MSG_RESULT([no])
+fi
+
+AC_MSG_CHECKING([whether to reduce exports])
+if test x$use_reduce_exports != xno; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   AC_MSG_RESULT([yes])
 else
   AC_MSG_RESULT([no])
@@ -1018,16 +1377,27 @@ AM_CONDITIONAL([TARGET_DARWIN], [test x$TARGET_OS = xdarwin])
 AM_CONDITIONAL([BUILD_DARWIN], [test x$BUILD_OS = xdarwin])
 AM_CONDITIONAL([TARGET_WINDOWS], [test x$TARGET_OS = xwindows])
 AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
+<<<<<<< HEAD
 AM_CONDITIONAL([ENABLE_TESTS],[test x$BUILD_TEST = xyes])
 AM_CONDITIONAL([ENABLE_QT],[test x$bitcoin_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
+=======
+AM_CONDITIONAL([ENABLE_TESTS],[test x$use_tests = xyes])
+AM_CONDITIONAL([ENABLE_QT],[test x$bitcoin_enable_qt = xyes])
+AM_CONDITIONAL([HAVE_QT5], [test x$bitcoin_qt_got_major_vers = x5])
+AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$use_tests$bitcoin_enable_qt_test = xyesyes])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
 AM_CONDITIONAL([USE_LCOV],[test x$use_lcov = xyes])
 AM_CONDITIONAL([USE_COMPARISON_TOOL],[test x$use_comparison_tool != xno])
 AM_CONDITIONAL([USE_COMPARISON_TOOL_REORG_TESTS],[test x$use_comparison_tool_reorg_test != xno])
 AM_CONDITIONAL([GLIBC_BACK_COMPAT],[test x$use_glibc_compat = xyes])
+<<<<<<< HEAD
 AM_CONDITIONAL([HARDEN],[test x$use_hardening = xyes])
+=======
+AM_CONDITIONAL([USE_LIBSECP256K1],[test x$use_libsecp256k1 = xyes])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 AC_DEFINE(CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MAJOR, [Major version])
 AC_DEFINE(CLIENT_VERSION_MINOR, _CLIENT_VERSION_MINOR, [Minor version])
@@ -1043,17 +1413,21 @@ AC_SUBST(CLIENT_VERSION_IS_RELEASE, _CLIENT_VERSION_IS_RELEASE)
 AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 
 AC_SUBST(RELDFLAGS)
+<<<<<<< HEAD
 AC_SUBST(HARDENED_CXXFLAGS)
 AC_SUBST(HARDENED_CPPFLAGS)
 AC_SUBST(HARDENED_LDFLAGS)
 AC_SUBST(PIC_FLAGS)
 AC_SUBST(PIE_FLAGS)
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
 AC_SUBST(USE_UPNP)
 AC_SUBST(USE_QRCODE)
 AC_SUBST(BOOST_LIBS)
 AC_SUBST(TESTDEFS)
 AC_SUBST(LEVELDB_TARGET_FLAGS)
+<<<<<<< HEAD
 AC_SUBST(MINIUPNPC_CPPFLAGS)
 AC_SUBST(MINIUPNPC_LIBS)
 AC_SUBST(LEVELDB_ATOMIC_CPPFLAGS)
@@ -1061,6 +1435,17 @@ AC_SUBST(LEVELDB_ATOMIC_CXXFLAGS)
 AC_CONFIG_FILES([Makefile src/Makefile share/setup.nsi share/qt/Info.plist src/test/buildenv.py])
 AC_CONFIG_FILES([qa/pull-tester/run-bitcoind-for-test.sh],[chmod +x qa/pull-tester/run-bitcoind-for-test.sh])
 AC_CONFIG_FILES([qa/pull-tester/tests_config.py],[chmod +x qa/pull-tester/tests_config.py])
+=======
+AC_SUBST(BUILD_TEST)
+AC_SUBST(BUILD_QT)
+AC_SUBST(BUILD_TEST_QT)
+AC_SUBST(MINIUPNPC_CPPFLAGS)
+AC_SUBST(MINIUPNPC_LIBS)
+AC_CONFIG_FILES([Makefile src/Makefile share/setup.nsi share/qt/Info.plist src/test/buildenv.py])
+AC_CONFIG_FILES([qa/pull-tester/run-bitcoind-for-test.sh],[chmod +x qa/pull-tester/run-bitcoind-for-test.sh])
+AC_CONFIG_FILES([qa/pull-tester/tests-config.sh],[chmod +x qa/pull-tester/tests-config.sh])
+AC_CONFIG_FILES([contrib/devtools/split-debug.sh],[chmod +x contrib/devtools/split-debug.sh])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
 dnl result, they leak into secp256k1's configure and crazy things happen.
@@ -1085,11 +1470,15 @@ PKGCONFIG_LIBDIR_TEMP="$PKG_CONFIG_LIBDIR"
 unset PKG_CONFIG_LIBDIR
 PKG_CONFIG_LIBDIR="$PKGCONFIG_LIBDIR_TEMP"
 
+<<<<<<< HEAD
 if test x$system_univalue = xno; then
   AC_CONFIG_SUBDIRS([src/univalue])
 fi
 
 ac_configure_args="${ac_configure_args} --disable-shared --with-pic --with-bignum=no --enable-module-recovery"
+=======
+ac_configure_args="${ac_configure_args} --disable-shared --with-pic"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AC_CONFIG_SUBDIRS([src/secp256k1])
 
 AC_OUTPUT
@@ -1112,3 +1501,33 @@ case ${OS} in
      mv qa/pull-tester/tests_config-2.py qa/pull-tester/tests_config.py
    ;;
 esac
+<<<<<<< HEAD
+=======
+
+echo 
+echo "Options used to compile and link:"
+echo "  with wallet   = $enable_wallet"
+echo "  with gui / qt = $bitcoin_enable_qt"
+if test x$bitcoin_enable_qt != xno; then
+    echo "    qt version  = $bitcoin_qt_got_major_vers"
+    echo "    with qr     = $use_qr"
+fi
+echo "  with zmq      = $use_zmq"
+echo "  with test     = $use_tests"
+echo "  with bench    = $use_bench"
+echo "  with upnp     = $use_upnp"
+echo "  debug enabled = $enable_debug"
+echo "  werror        = $enable_werror"
+echo 
+echo "  target os     = $TARGET_OS"
+echo "  build os      = $BUILD_OS"
+echo
+echo "  CC            = $CC"
+echo "  CFLAGS        = $CFLAGS"
+echo "  CPPFLAGS      = $CPPFLAGS"
+echo "  CXX           = $CXX"
+echo "  CXXFLAGS      = $CXXFLAGS"
+echo "  LDFLAGS       = $LDFLAGS"
+echo "  ARFLAGS       = $ARFLAGS"
+echo 
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

@@ -6,6 +6,7 @@ reset-files.bash
 *.tar.gz
 
 *.exe
+<<<<<<< HEAD
 src/gelcoin
 src/gelcoind
 src/gelcoin-cli
@@ -13,6 +14,14 @@ src/gelcoin-tx
 src/test/test_gelcoin
 src/qt/test/test_gelcoin-qt
 src/bench/bench_gelcoin
+=======
+src/lux
+src/luxd
+src/lux-cli
+src/lux-tx
+src/test/test_lux
+src/qt/test/test_lux-qt
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # autoreconf
 Makefile.in
@@ -35,8 +44,13 @@ config.log
 config.status
 configure
 libtool
+<<<<<<< HEAD
 src/config/gelcoin-config.h
 src/config/gelcoin-config.h.in
+=======
+src/config/lux-config.h
+src/config/lux-config.h.in
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -48,7 +62,10 @@ src/qt/moc_*.cpp
 src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
+<<<<<<< HEAD
 libconftest.dylib*
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 .deps
 .dirstamp
@@ -61,8 +78,12 @@ libconftest.dylib*
 *.pyc
 *.o
 *.o-*
+<<<<<<< HEAD
 *.patch
 .gelcoin
+=======
+.lux
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 *.a
 *.pb.cc
 *.pb.h
@@ -81,26 +102,46 @@ libconftest.dylib*
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
+<<<<<<< HEAD
 gelcoin-qt
 GelCoin-Qt.app
 
 # Unit-tests
 Makefile.test
 gelcoin-qt_test
+=======
+lux-qt
+LUX-Qt.app
+
+# Unit-tests
+Makefile.test
+lux-qt_test
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 src/test/buildenv.py
 
 # Resources cpp
 qrc_*.cpp
 
+<<<<<<< HEAD
+=======
+# Qt creator
+*.pro.user
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # Mac specific
 .DS_Store
 build
 
 #lcov
 *.gcno
+<<<<<<< HEAD
 *.gcda
 /*.info
 test_gelcoin.coverage/
+=======
+/*.info
+test_lux.coverage/
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 total.coverage/
 coverage_percent.txt
 
@@ -109,17 +150,24 @@ linux-coverage-build
 linux-build
 win32-build
 qa/pull-tester/run-bitcoind-for-test.sh
+<<<<<<< HEAD
 qa/pull-tester/tests_config.py
 qa/pull-tester/cache/*
 qa/pull-tester/test.*/*
 qa/tmp
 cache/
 share/BitcoindComparisonTool.jar
+=======
+qa/pull-tester/tests-config.sh
+qa/pull-tester/cache/*
+qa/pull-tester/test.*/*
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 !src/leveldb*/Makefile
 
 .cproject
 .project
+<<<<<<< HEAD
 .autotools
 /doc/doxygen/
 
@@ -132,3 +180,13 @@ gelcoin-cli
 gelcoind
 gelcoin-qt
 make
+=======
+/doc/doxygen/
+/nbproject/
+
+.idea
+
+contrib/devtools/split-debug.sh
+
+/src/DEBUG_DUMP_STAKING_INFO.hpp
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

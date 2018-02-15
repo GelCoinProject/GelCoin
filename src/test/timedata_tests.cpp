@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
 #include "timedata.h"
 #include "test/test_gelcoin.h"
+=======
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+//
+#include "timedata.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <boost/test/unit_test.hpp>
 
 using namespace std;
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(timedata_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(timedata_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(util_MedianFilter)
 {

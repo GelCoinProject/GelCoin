@@ -1,5 +1,9 @@
 // Copyright (c) 2011-2013 The Bitcoin Core developers
+<<<<<<< HEAD
 // Distributed under the MIT software license, see the accompanying
+=======
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "macdockiconhandler.h"
@@ -130,5 +134,9 @@ void MacDockIconHandler::handleDockIconClickEvent()
         this->mainWindow->show();
     }
 
+<<<<<<< HEAD
     Q_EMIT this->dockIconClicked();
+=======
+    emit this->dockIconClicked();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }

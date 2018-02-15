@@ -17,6 +17,7 @@ function clean_up {
 WORKINGDIR="/tmp/bitcoin"
 TMPFILE="hashes.tmp"
 
+<<<<<<< HEAD
 SIGNATUREFILENAME="SHA256SUMS.asc"
 RCSUBDIR="test/"
 BASEDIR="https://bitcoin.org/bin/"
@@ -26,6 +27,17 @@ RCVERSIONSTRING="rc"
 #this URL is used if a version number is not specified as an argument to the script
 SIGNATUREFILE="$BASEDIR""$VERSIONPREFIX""0.10.4/""$RCSUBDIR""$SIGNATUREFILENAME"
 
+=======
+#this URL is used if a version number is not specified as an argument to the script
+SIGNATUREFILE="https://bitcoin.org/bin/0.9.2.1/SHA256SUMS.asc"
+
+SIGNATUREFILENAME="SHA256SUMS.asc"
+RCSUBDIR="test/"
+BASEDIR="https://bitcoin.org/bin/"
+VERSIONPREFIX="bitcoin-"
+RCVERSIONSTRING="rc"
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 if [ ! -d "$WORKINGDIR" ]; then
    mkdir "$WORKINGDIR"
 fi
@@ -62,7 +74,11 @@ WGETOUT=$(wget -N "$BASEDIR$SIGNATUREFILENAME" 2>&1)
 #and then see if wget completed successfully
 if [ $? -ne 0 ]; then
    echo "Error: couldn't fetch signature file. Have you specified the version number in the following format?"
+<<<<<<< HEAD
    echo "[$VERSIONPREFIX]<version>-[$RCVERSIONSTRING[0-9]] (example: "$VERSIONPREFIX"0.10.4-"$RCVERSIONSTRING"1)"
+=======
+   echo "[bitcoin-]<version>-[rc[0-9]] (example: bitcoin-0.9.2-rc1)"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    echo "wget output:"
    echo "$WGETOUT"|sed 's/^/\t/g'
    exit 2
@@ -82,7 +98,11 @@ if [ $RET -ne 0 ]; then
       echo "Bad signature."
    elif [ $RET -eq 2 ]; then
       #or if a gpg error has occurred
+<<<<<<< HEAD
       echo "gpg error. Do you have the Bitcoin Core binary release signing key installed?"
+=======
+      echo "gpg error. Do you have Gavin's code signing key installed?"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    fi
 
    echo "gpg output:"
@@ -116,6 +136,9 @@ fi
 #everything matches! clean up the mess
 clean_up $FILES $SIGNATUREFILENAME $TMPFILE
 
+<<<<<<< HEAD
 echo -e "Verified hashes of \n$FILES"
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 exit 0

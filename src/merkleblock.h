@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_MERKLEBLOCK_H
 #define BITCOIN_MERKLEBLOCK_H
 
+<<<<<<< HEAD
 #include "serialize.h"
 #include "uint256.h"
 #include "primitives/block.h"
 #include "bloom.h"
+=======
+#include "bloom.h"
+#include "primitives/block.h"
+#include "serialize.h"
+#include "uint256.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <vector>
 
@@ -63,6 +75,7 @@ protected:
     bool fBad;
 
     /** helper function to efficiently calculate the number of nodes at given height in the merkle tree */
+<<<<<<< HEAD
     unsigned int CalcTreeWidth(int height) {
         return (nTransactions+(1 << height)-1) >> height;
     }
@@ -72,40 +85,76 @@ protected:
 
     /** recursive function that traverses tree nodes, storing the data as bits and hashes */
     void TraverseAndBuild(int height, unsigned int pos, const std::vector<uint256> &vTxid, const std::vector<bool> &vMatch);
+=======
+    unsigned int CalcTreeWidth(int height)
+    {
+        return (nTransactions + (1 << height) - 1) >> height;
+    }
+
+    /** calculate the hash of a node in the merkle tree (at leaf level: the txid's themselves) */
+    uint256 CalcHash(int height, unsigned int pos, const std::vector<uint256>& vTxid);
+
+    /** recursive function that traverses tree nodes, storing the data as bits and hashes */
+    void TraverseAndBuild(int height, unsigned int pos, const std::vector<uint256>& vTxid, const std::vector<bool>& vMatch);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     /**
      * recursive function that traverses tree nodes, consuming the bits and hashes produced by TraverseAndBuild.
      * it returns the hash of the respective node.
      */
+<<<<<<< HEAD
     uint256 TraverseAndExtract(int height, unsigned int pos, unsigned int &nBitsUsed, unsigned int &nHashUsed, std::vector<uint256> &vMatch);
 
 public:
 
+=======
+    uint256 TraverseAndExtract(int height, unsigned int pos, unsigned int& nBitsUsed, unsigned int& nHashUsed, std::vector<uint256>& vMatch);
+
+public:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     /** serialization implementation */
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
+<<<<<<< HEAD
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+=======
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(nTransactions);
         READWRITE(vHash);
         std::vector<unsigned char> vBytes;
         if (ser_action.ForRead()) {
             READWRITE(vBytes);
+<<<<<<< HEAD
             CPartialMerkleTree &us = *(const_cast<CPartialMerkleTree*>(this));
+=======
+            CPartialMerkleTree& us = *(const_cast<CPartialMerkleTree*>(this));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             us.vBits.resize(vBytes.size() * 8);
             for (unsigned int p = 0; p < us.vBits.size(); p++)
                 us.vBits[p] = (vBytes[p / 8] & (1 << (p % 8))) != 0;
             us.fBad = false;
         } else {
+<<<<<<< HEAD
             vBytes.resize((vBits.size()+7)/8);
+=======
+            vBytes.resize((vBits.size() + 7) / 8);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             for (unsigned int p = 0; p < vBits.size(); p++)
                 vBytes[p / 8] |= vBits[p] << (p % 8);
             READWRITE(vBytes);
         }
     }
 
+<<<<<<< HEAD
     /** Construct a partial merkle tree from a list of transaction ids, and a mask that selects a subset of them */
     CPartialMerkleTree(const std::vector<uint256> &vTxid, const std::vector<bool> &vMatch);
+=======
+    /** Construct a partial merkle tree from a list of transaction id's, and a mask that selects a subset of them */
+    CPartialMerkleTree(const std::vector<uint256>& vTxid, const std::vector<bool>& vMatch);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     CPartialMerkleTree();
 
@@ -113,7 +162,11 @@ public:
      * extract the matching txid's represented by this partial merkle tree.
      * returns the merkle root, or 0 in case of failure
      */
+<<<<<<< HEAD
     uint256 ExtractMatches(std::vector<uint256> &vMatch);
+=======
+    uint256 ExtractMatches(std::vector<uint256>& vMatch);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 
@@ -139,6 +192,7 @@ public:
      */
     CMerkleBlock(const CBlock& block, CBloomFilter& filter);
 
+<<<<<<< HEAD
     // Create from a CBlock, matching the txids in the set
     CMerkleBlock(const CBlock& block, const std::set<uint256>& txids);
 
@@ -148,6 +202,13 @@ public:
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+=======
+    ADD_SERIALIZE_METHODS;
+
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(header);
         READWRITE(txn);
     }

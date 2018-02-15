@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The GelCoin developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The LUX developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "utilitydialog.h"
@@ -9,20 +16,27 @@
 
 #include "bitcoingui.h"
 #include "clientmodel.h"
+<<<<<<< HEAD
 #include "guiconstants.h"
 #include "intro.h"
 #include "paymentrequestplus.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "guiutil.h"
 
 #include "clientversion.h"
 #include "init.h"
+<<<<<<< HEAD
 #include "util.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <stdio.h>
 
 #include <QCloseEvent>
 #include <QLabel>
 #include <QRegExp>
+<<<<<<< HEAD
 #include <QTextTable>
 #include <QTextCursor>
 #include <QVBoxLayout>
@@ -36,10 +50,24 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
 
     QString version = tr("GelCoin") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
     /* On x86 add a bit specifier to the version so that users can distinguish between
+=======
+#include <QVBoxLayout>
+
+/** "Help message" or "About" dialog box */
+HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(parent),
+                                                                    ui(new Ui::HelpMessageDialog)
+{
+    ui->setupUi(this);
+    GUIUtil::restoreWindowGeometry("nHelpMessageDialogWindow", this->size(), this);
+
+    QString version = tr("LUX Core") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
+/* On x86 add a bit specifier to the version so that users can distinguish between
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambigious.
      */
 #if defined(__x86_64__)
     version += " " + tr("(%1-bit)").arg(64);
+<<<<<<< HEAD
 #elif defined(__i386__ )
     version += " " + tr("(%1-bit)").arg(32);
 #endif
@@ -47,6 +75,14 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
     if (helpMode == about)
     {
         setWindowTitle(tr("About GelCoin"));
+=======
+#elif defined(__i386__)
+    version += " " + tr("(%1-bit)").arg(32);
+#endif
+
+    if (about) {
+        setWindowTitle(tr("About LUX Core"));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
         /// HTML-format the license message from the core
         QString licenseInfo = QString::fromStdString(LicenseInfo());
@@ -59,6 +95,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
         // Replace newlines with HTML breaks
         licenseInfoHTML.replace("\n\n", "<br><br>");
 
+<<<<<<< HEAD
         ui->aboutMessage->setTextFormat(Qt::RichText);
         ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         text = version + "\n" + licenseInfo;
@@ -167,10 +204,39 @@ For more info see <a href=\"https://gelcoinpay.atlassian.net/wiki/display/DOC/Pr
     QString helpMessageGfx = ":/images/" + GUIUtil::getThemeName() + "/about";
     QPixmap pixmap = QPixmap(helpMessageGfx);
     ui->aboutLogo->setPixmap(pixmap);
+=======
+        ui->helpMessageLabel->setTextFormat(Qt::RichText);
+        ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        text = version + "\n" + licenseInfo;
+        ui->helpMessageLabel->setText(version + "<br><br>" + licenseInfoHTML);
+        ui->helpMessageLabel->setWordWrap(true);
+    } else {
+        setWindowTitle(tr("Command-line options"));
+        QString header = tr("Usage:") + "\n" +
+                         "  lux-qt [" + tr("command-line options") + "]                     " + "\n";
+
+        QString coreOptions = QString::fromStdString(HelpMessage(HMM_BITCOIN_QT));
+
+        QString uiOptions = tr("UI options") + ":\n" +
+                            "  -choosedatadir            " + tr("Choose data directory on startup (default: 0)") + "\n" +
+                            "  -lang=<lang>              " + tr("Set language, for example \"de_DE\" (default: system locale)") + "\n" +
+                            "  -min                      " + tr("Start minimized") + "\n" +
+                            "  -rootcertificates=<file>  " + tr("Set SSL root certificates for payment request (default: -system-)") + "\n" +
+                            "  -splash                   " + tr("Show splash screen on startup (default: 1)");
+
+        ui->helpMessageLabel->setFont(GUIUtil::bitcoinAddressFont());
+        text = version + "\n" + header + "\n" + coreOptions + "\n" + uiOptions;
+        ui->helpMessageLabel->setText(text);
+    }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 HelpMessageDialog::~HelpMessageDialog()
 {
+<<<<<<< HEAD
+=======
+    GUIUtil::saveWindowGeometry("nHelpMessageDialogWindow", this);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     delete ui;
 }
 
@@ -198,16 +264,25 @@ void HelpMessageDialog::on_okButton_accepted()
 
 
 /** "Shutdown" window */
+<<<<<<< HEAD
 ShutdownWindow::ShutdownWindow(QWidget *parent, Qt::WindowFlags f):
     QWidget(parent, f)
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(new QLabel(
         tr("GelCoin is shutting down...") + "<br /><br />" +
+=======
+ShutdownWindow::ShutdownWindow(QWidget* parent, Qt::WindowFlags f) : QWidget(parent, f)
+{
+    QVBoxLayout* layout = new QVBoxLayout();
+    layout->addWidget(new QLabel(
+        tr("LUX Core is shutting down...") + "<br /><br />" +
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         tr("Do not shut down the computer until this window disappears.")));
     setLayout(layout);
 }
 
+<<<<<<< HEAD
 QWidget *ShutdownWindow::showShutdownWindow(BitcoinGUI *window)
 {
     if (!window)
@@ -215,16 +290,34 @@ QWidget *ShutdownWindow::showShutdownWindow(BitcoinGUI *window)
 
     // Show a simple window indicating shutdown status
     QWidget *shutdownWindow = new ShutdownWindow();
+=======
+void ShutdownWindow::showShutdownWindow(BitcoinGUI* window)
+{
+    if (!window)
+        return;
+
+    // Show a simple window indicating shutdown status
+    QWidget* shutdownWindow = new ShutdownWindow();
+    // We don't hold a direct pointer to the shutdown window after creation, so use
+    // Qt::WA_DeleteOnClose to make sure that the window will be deleted eventually.
+    shutdownWindow->setAttribute(Qt::WA_DeleteOnClose);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     shutdownWindow->setWindowTitle(window->windowTitle());
 
     // Center shutdown window at where main window was
     const QPoint global = window->mapToGlobal(window->rect().center());
     shutdownWindow->move(global.x() - shutdownWindow->width() / 2, global.y() - shutdownWindow->height() / 2);
     shutdownWindow->show();
+<<<<<<< HEAD
     return shutdownWindow;
 }
 
 void ShutdownWindow::closeEvent(QCloseEvent *event)
+=======
+}
+
+void ShutdownWindow::closeEvent(QCloseEvent* event)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     event->ignore();
 }

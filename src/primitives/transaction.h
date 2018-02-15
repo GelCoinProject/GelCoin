@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,6 +16,11 @@
 #include "serialize.h"
 #include "uint256.h"
 
+<<<<<<< HEAD
+=======
+class CTransaction;
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 /** An outpoint - a combination of a transaction hash and an index n into its vout */
 class COutPoint
 {
@@ -25,12 +35,21 @@ public:
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+<<<<<<< HEAD
         READWRITE(hash);
         READWRITE(n);
     }
 
     void SetNull() { hash.SetNull(); n = (uint32_t) -1; }
     bool IsNull() const { return (hash.IsNull() && n == (uint32_t) -1); }
+=======
+        READWRITE(FLATDATA(*this));
+    }
+
+    void SetNull() { hash = 0; n = (uint32_t) -1; }
+    bool IsNull() const { return (hash == 0 && n == (uint32_t) -1); }
+    bool IsMasternodeReward(const CTransaction* tx) const;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     friend bool operator<(const COutPoint& a, const COutPoint& b)
     {
@@ -49,6 +68,12 @@ public:
 
     std::string ToString() const;
     std::string ToStringShort() const;
+<<<<<<< HEAD
+=======
+
+    uint256 GetHash();
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 /** An input of a transaction.  It contains the location of the previous
@@ -61,6 +86,7 @@ public:
     COutPoint prevout;
     CScript scriptSig;
     uint32_t nSequence;
+<<<<<<< HEAD
 
     /* Setting nSequence to this value for every input in a transaction
      * disables nLockTime. */
@@ -96,16 +122,39 @@ public:
 
     explicit CTxIn(COutPoint prevoutIn, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=SEQUENCE_FINAL);
     CTxIn(uint256 hashPrevTx, uint32_t nOut, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=SEQUENCE_FINAL);
+=======
+    CScript prevPubKey;
+
+    CTxIn()
+    {
+        nSequence = std::numeric_limits<unsigned int>::max();
+    }
+
+    explicit CTxIn(COutPoint prevoutIn, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<unsigned int>::max());
+    CTxIn(uint256 hashPrevTx, uint32_t nOut, CScript scriptSigIn=CScript(), uint32_t nSequenceIn=std::numeric_limits<uint32_t>::max());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(prevout);
+<<<<<<< HEAD
         READWRITE(*(CScriptBase*)(&scriptSig));
         READWRITE(nSequence);
     }
 
+=======
+        READWRITE(scriptSig);
+        READWRITE(nSequence);
+    }
+
+    bool IsFinal() const
+    {
+        return (nSequence == std::numeric_limits<uint32_t>::max());
+    }
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     friend bool operator==(const CTxIn& a, const CTxIn& b)
     {
         return (a.prevout   == b.prevout &&
@@ -118,11 +167,14 @@ public:
         return !(a == b);
     }
 
+<<<<<<< HEAD
     friend bool operator<(const CTxIn& a, const CTxIn& b)
     {
         return a.prevout<b.prevout;
     }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     std::string ToString() const;
 };
 
@@ -148,7 +200,11 @@ public:
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(nValue);
+<<<<<<< HEAD
         READWRITE(*(CScriptBase*)(&scriptPubKey));
+=======
+        READWRITE(scriptPubKey);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     void SetNull()
@@ -163,6 +219,7 @@ public:
         return (nValue == -1);
     }
 
+<<<<<<< HEAD
     uint256 GetHash() const;
 
     CAmount GetDustThreshold(const CFeeRate &minRelayTxFee) const
@@ -184,6 +241,32 @@ public:
     bool IsDust(const CFeeRate &minRelayTxFee) const
     {
         return (nValue < GetDustThreshold(minRelayTxFee));
+=======
+    void SetEmpty()
+    {
+        nValue = 0;
+        scriptPubKey.clear();
+    }
+
+    bool IsEmpty() const
+    {
+        return (nValue == 0 && scriptPubKey.empty());
+    }
+
+    uint256 GetHash() const;
+
+    bool IsDust(CFeeRate minRelayTxFee) const
+    {
+        // "Dust" is defined in terms of CTransaction::minRelayTxFee, which has units duffs-per-kilobyte.
+        // If you'd pay more than 1/3 in fees to spend something, then we consider it dust.
+        // A typical txout is 34 bytes big, and will need a CTxIn of at least 148 bytes to spend
+        // i.e. total is 148 + 32 = 182 bytes. Default -minrelaytxfee is 10000 duffs per kB
+        // and that means that fee per txout is 182 * 10000 / 1000 = 1820 duffs.
+        // So dust is a txout less than 1820 *3 = 5460 duffs
+        // with default -minrelaytxfee = minRelayTxFee = 10000 duffs per kB.
+        size_t nSize = GetSerializeSize(SER_DISK,0)+148u;
+        return (nValue < 3*minRelayTxFee.GetFee(nSize));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     friend bool operator==(const CTxOut& a, const CTxOut& b)
@@ -214,6 +297,7 @@ private:
     void UpdateHash() const;
 
 public:
+<<<<<<< HEAD
     // Default transaction version.
     static const int32_t CURRENT_VERSION=1;
 
@@ -223,15 +307,27 @@ public:
     // MAX_STANDARD_VERSION will be equal.
     static const int32_t MAX_STANDARD_VERSION=2;
 
+=======
+    static const int32_t CURRENT_VERSION=1;
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // The local variables are made const to prevent unintended modification
     // without updating the cached hash value. However, CTransaction is not
     // actually immutable; deserialization and assignment are implemented,
     // and bypass the constness. This is safe, as they update the entire
     // structure, including the hash.
     const int32_t nVersion;
+<<<<<<< HEAD
     const std::vector<CTxIn> vin;
     const std::vector<CTxOut> vout;
     const uint32_t nLockTime;
+=======
+    const uint32_t nTime;
+    std::vector<CTxIn> vin;
+    std::vector<CTxOut> vout;
+    const uint32_t nLockTime;
+    //const unsigned int nTime;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     /** Construct a CTransaction that qualifies as IsNull() */
     CTransaction();
@@ -247,6 +343,10 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*const_cast<int32_t*>(&this->nVersion));
         nVersion = this->nVersion;
+<<<<<<< HEAD
+=======
+        READWRITE(*const_cast<uint32_t*>(&nTime));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(*const_cast<std::vector<CTxIn>*>(&vin));
         READWRITE(*const_cast<std::vector<CTxOut>*>(&vout));
         READWRITE(*const_cast<uint32_t*>(&nLockTime));
@@ -272,6 +372,7 @@ public:
 
     // Compute modified tx size for priority calculation (optionally given tx size)
     unsigned int CalculateModifiedSize(unsigned int nTxSize=0) const;
+<<<<<<< HEAD
     
     /**
      * Get the total transaction size in bytes, including witness data.
@@ -279,12 +380,23 @@ public:
      * @return Total transaction size in bytes
      */
     unsigned int GetTotalSize() const;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     bool IsCoinBase() const
     {
         return (vin.size() == 1 && vin[0].prevout.IsNull());
     }
 
+<<<<<<< HEAD
+=======
+    bool IsCoinStake() const
+    {
+        // ppcoin: the coin stake transaction is marked with the first output empty
+        return (vin.size() > 0 && (!vin[0].prevout.IsNull()) && vout.size() >= 2 && vout[0].IsEmpty());
+    }
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     friend bool operator==(const CTransaction& a, const CTransaction& b)
     {
         return a.hash == b.hash;
@@ -296,12 +408,21 @@ public:
     }
 
     std::string ToString() const;
+<<<<<<< HEAD
+=======
+
+    bool GetCoinAge(uint64_t& nCoinAge) const;  // ppcoin: get transaction coin age
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 /** A mutable version of CTransaction. */
 struct CMutableTransaction
 {
     int32_t nVersion;
+<<<<<<< HEAD
+=======
+    uint32_t nTime;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     std::vector<CTxIn> vin;
     std::vector<CTxOut> vout;
     uint32_t nLockTime;
@@ -315,6 +436,10 @@ struct CMutableTransaction
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
+<<<<<<< HEAD
+=======
+        READWRITE(nTime);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
@@ -339,6 +464,7 @@ struct CMutableTransaction
 
 };
 
+<<<<<<< HEAD
 /** Implementation of BIP69
  * https://github.com/bitcoin/bips/blob/master/bip-0069.mediawiki
  */
@@ -367,4 +493,6 @@ struct CompareOutputBIP69
     }
 };
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif // BITCOIN_PRIMITIVES_TRANSACTION_H

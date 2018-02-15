@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,16 +10,27 @@
 // Data for paymentservertests.cpp
 //
 
+<<<<<<< HEAD
 // Base64/DER-encoded fake certificate authority certificates.
 // Convert pem to base64/der with:
 // openssl x509 -in cert.pem -inform PEM -outform DER | openssl enc -base64
 
+=======
+// Base64/DER-encoded fake certificate authority certificate.
+// Convert pem to base64/der with:
+// cat file.pem | openssl x509 -inform PEM -outform DER | openssl enc -base64
+//
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Serial Number: 10302349811211485352 (0x8ef94c91b112c0a8)
 // Issuer: CN=PaymentRequest Test CA
 // Subject: CN=PaymentRequest Test CA
 // Not Valid After : Dec  8 16:37:24 2022 GMT
 //
+<<<<<<< HEAD
 const char* caCert1_BASE64 =
+=======
+const char* caCert_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 MIIB0DCCATmgAwIBAgIJAI75TJGxEsCoMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNV\
 BAMTFlBheW1lbnRSZXF1ZXN0IFRlc3QgQ0EwHhcNMTIxMjEwMTYzNzI0WhcNMjIx\
@@ -29,6 +44,7 @@ RtQcf0AJ9olzUMY4syehxbzUJP6aeXhZEYiMvdvcv9D55clq6+WLLlNT3jBgAaVn\
 p3waRjPD4bUX3nv+ojz5s4puw7Qq5QUZlhGsMzPvwDGCmZkL\
 ";
 
+<<<<<<< HEAD
 // Serial Number: f0:da:97:e4:38:d7:64:16
 // Issuer: CN=PaymentRequest Test CA
 // Subject: CN=PaymentRequest Test CA
@@ -59,6 +75,13 @@ z2k/tMuALCDXGeZBRPTsGHu1y4cj84swAeoDK5QSQcI+Ub7GKc+zkoj02sdDLiMo\
 // caCert1 certificate authority.
 //
 const char* paymentrequest1_cert1_BASE64 =
+=======
+//
+// This payment request validates directly against the
+// above certificate authority.
+//
+const char* paymentrequest1_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 Egt4NTA5K3NoYTI1NhrxAwruAzCCAeowggFToAMCAQICAQEwDQYJKoZIhvcNAQEL\
 BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMjEyMTAx\
@@ -80,7 +103,11 @@ SiWVbw0tX/68iSQEGGfh9n6ee/8Myb3ICdw=\
 //
 // Signed, but expired, merchant cert in the request
 //
+<<<<<<< HEAD
 const char* paymentrequest2_cert1_BASE64 =
+=======
+const char* paymentrequest2_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 Egt4NTA5K3NoYTI1NhrsAwrpAzCCAeUwggFOoAMCAQICAQMwDQYJKoZIhvcNAQEL\
 BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMzAyMjMy\
@@ -100,9 +127,15 @@ tejrSPOBNSJ3Mi/q5u2Yl4gJZY2b\
 ";
 
 //
+<<<<<<< HEAD
 // 10-long certificate chain, all intermediates valid
 //
 const char* paymentrequest3_cert1_BASE64 =
+=======
+// 10-long chain, all intermediates valid
+//
+const char* paymentrequest3_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 Egt4NTA5K3NoYTI1Nhq8JAr/AzCCAfswggFkoAMCAQICAQEwDQYJKoZIhvcNAQEL\
 BQAwPzEUMBIGA1UEAwwLdGVzdGNhOC5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVx\
@@ -209,9 +242,15 @@ chhR/aHOuEMTxmc12K4rNlgYtHCsxLP9zd+6u0cva3TucZ6EzS8PKEib/+r12/52\
 ";
 
 //
+<<<<<<< HEAD
 // Long certificate chain, with an expired certificate in the middle
 //
 const char* paymentrequest4_cert1_BASE64 =
+=======
+// Long chain, with an invalid (expired) cert in the middle
+//
+const char* paymentrequest4_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 Egt4NTA5K3NoYTI1NhqeJAr/AzCCAfswggFkoAMCAQICAQEwDQYJKoZIhvcNAQEL\
 BQAwPzEUMBIGA1UEAwwLdGVzdGNhOC5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVx\
@@ -316,10 +355,14 @@ HXQjsfdR58qZQS9CS5DAtRUf0R8+43/wijO/hb49VNaNXmY+/cPHMkahP2aV3tZi\
 FAyZblLik9A7ZvF+UsjeFQiHB5wzWQvbqk5wQ4yabHIXoYv/E0q+eQ==\
 ";
 
+<<<<<<< HEAD
 //
 // Validly signed, but by a CA not in our root CA list
 //
 const char* paymentrequest5_cert1_BASE64 =
+=======
+const char* paymentrequest5_BASE64 =
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 "\
 Egt4NTA5K3NoYTI1NhrxAwruAzCCAeowggFToAMCAQICAQEwDQYJKoZIhvcNAQEL\
 BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMzA0MTkx\
@@ -337,6 +380,7 @@ ssymvca1S/1KeM3n8Ydi2fi1JUzAAr59xPvNJRUeqCLP9upHn5z7br3P12Oz9A20\
 5/4wL4ClPRPVnOHgij0bEg+y0tGESqmF1rfOfXDszlo2U92wCxS07kq79YAZJ1Zo\
 XYh860/Q4wvc7lfiTe+dXBzPKAKhMy91yETY\
 ";
+<<<<<<< HEAD
 
 //
 // Contains a testnet paytoaddress, so payment request network doesn't match client network
@@ -458,3 +502,5 @@ iEBFUrBDJZU+UEezGwr7/zoECjo5ZY3PmtZcM2sILNjyweJF6XVzGqTxUw6pN6sW\
 XR2T3Gy2LzRvhVA25QgGqpz0/juS2BtmNbsZPkN9gMMwKimgzc+PuCzmEKwPK9cQ\
 YQ==\
 ";
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

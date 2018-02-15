@@ -5,14 +5,23 @@ Various coding styles have been used during the history of the codebase,
 and the result is not very consistent. However, we're now trying to converge to
 a single style, so please use it in new code. Old code will be converted
 gradually.
+<<<<<<< HEAD
 - Basic rules specified in src/.clang-format. Use a recent clang-format-3.5 to format automatically.
+=======
+- Basic rules specified in [src/.clang-format](/src/.clang-format).
+  Use a recent clang-format to format automatically using one of the [dev scripts]
+  (/contrib/devtools/README.md#clang-formatpy).
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   - Braces on new lines for namespaces, classes, functions, methods.
   - Braces on the same line for everything else.
   - 4 space indentation (no tabs) for every block except namespaces.
   - No indentation for public/protected/private or for namespaces.
   - No extra spaces inside parenthesis; don't do ( this )
   - No space after function names; one space after if, for and while.
+<<<<<<< HEAD
   - Align pointers and references to the left i.e. use `type& var` and not `type &var`.
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Block style example:
 ```c++
@@ -20,7 +29,11 @@ namespace foo
 {
 class Class
 {
+<<<<<<< HEAD
     bool Function(char* psz, int n, const string& s)
+=======
+    bool Function(char* psz, int n)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         // Comment summarising what this section of code does
         for (int i = 0; i < n; i++) {
@@ -72,6 +85,15 @@ To describe a member or variable use:
 int var; //!< Detailed description after the member
 ```
 
+<<<<<<< HEAD
+=======
+or
+```cpp
+//! Description before the member
+int var;
+```
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 Also OK:
 ```c++
 ///
@@ -109,6 +131,7 @@ on all categories (and give you a very large debug.log file).
 The Qt code routes qDebug() output to debug.log under category "qt": run with -debug=qt
 to see it.
 
+<<<<<<< HEAD
 **testnet and regtest modes**
 
 Run with the -testnet option to run with "play coins" on the test network, if you
@@ -121,6 +144,16 @@ that run in -regtest mode.
 **DEBUG_LOCKORDER**
 
 GelCoin is a multithreaded application, and deadlocks or other multithreading bugs
+=======
+**testnet mode**
+
+Run with the -testnet option to run with "play LUXs (tLUX)" on the test network, if you
+are testing multi-machine code that needs to operate across the internet.
+
+**DEBUG_LOCKORDER**
+
+LUX Core is a multithreaded application, and deadlocks or other multithreading bugs
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 can be very difficult to track down. Compiling with -DDEBUG_LOCKORDER (configure
 CXXFLAGS="-DDEBUG_LOCKORDER -g") inserts run-time checks to keep track of which locks
 are held, and adds warnings to the debug.log file if inconsistencies are detected.
@@ -155,7 +188,11 @@ Threads
 
 - ThreadMapPort : Universal plug-and-play startup/shutdown
 
+<<<<<<< HEAD
 - ThreadSocketHandler : Sends/Receives data from peers on port 9599.
+=======
+- ThreadSocketHandler : Sends/Receives data from peers on port 8333.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 - ThreadOpenAddedConnections : Opens network connections to added nodes.
 
@@ -167,11 +204,17 @@ Threads
 
 - ThreadFlushWalletDB : Close the wallet.dat file if it hasn't been used in 500ms.
 
+<<<<<<< HEAD
 - ThreadRPCServer : Remote procedure call handler, listens on port 9598 for connections and services them.
 
 - BitcoinMiner : Generates coins (if wallet is enabled).
 
 - ThreadCheckDarkSendPool : Runs masternode list and sync data update loops
+=======
+- ThreadRPCServer : Remote procedure call handler, listens on port 8332 for connections and services them.
+
+- BitcoinMiner : Generates bitcoins (if wallet is enabled).
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 - Shutdown : Does an orderly shutdown of everything.
 
@@ -181,7 +224,11 @@ Ignoring IDE/editor files
 In closed-source environments in which everyone uses the same IDE it is common
 to add temporary files it produces to the project-wide `.gitignore` file.
 
+<<<<<<< HEAD
 However, in open source software such as GelCoin, where everyone uses
+=======
+However, in open source software such as LUX Core, where everyone uses
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 their own editors/IDE/tools, it is less common. Only you know what files your
 editor produces and this may change from version to version. The canonical way
 to do this is thus to create your local gitignore. Add this to `~/.gitconfig`:
@@ -211,9 +258,15 @@ Development guidelines
 ============================
 
 A few non-style-related recommendations for developers, as well as points to
+<<<<<<< HEAD
 pay attention to for reviewers of GelCoin code.
 
 General GelCoin
+=======
+pay attention to for reviewers of LUX Core code.
+
+General LUX Core
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 ----------------------
 
 - New features should be exposed on RPC first, then can be made available in the GUI
@@ -226,9 +279,15 @@ General GelCoin
   - *Rationale*: Makes sure that they pass thorough testing, and that the tester will keep passing
      on the master branch. Otherwise all new pull requests will start failing the tests, resulting in
      confusion and mayhem
+<<<<<<< HEAD
  
   - *Explanation*: If the test suite is to be updated for a change, this has to
     be done first 
+=======
+
+  - *Explanation*: If the test suite is to be updated for a change, this has to
+    be done first
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Wallet
 -------
@@ -260,7 +319,11 @@ General C++
       the `.h` to the `.cpp` should not result in build errors
 
 - Use the RAII (Resource Acquisition Is Initialization) paradigm where possible. For example by using
+<<<<<<< HEAD
   `scoped_pointer` for allocations in a function.
+=======
+  `unique_ptr` for allocations in a function.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
   - *Rationale*: This avoids memory and resource leaks, and ensures exception safety
 
@@ -279,10 +342,16 @@ C++ data structures
   - *Rationale*: Behavior is undefined. In C++ parlor this means "may reformat
     the universe", in practice this has resulted in at least one hard-to-debug crash bug
 
+<<<<<<< HEAD
 - Watch out for vector out-of-bounds exceptions. `&vch[0]` is illegal for an
   empty vector, `&vch[vch.size()]` is always illegal. Use `begin_ptr(vch)` and
   `end_ptr(vch)` to get the begin and end pointer instead (defined in
   `serialize.h`)
+=======
+- Watch out for out-of-bounds vector access. `&vch[vch.size()]` is illegal,
+  including `&vch[0]` for an empty vector. Use `vch.data()` and `vch.data() +
+  vch.size()` instead.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 - Vector bounds checking is only enabled in debug mode. Do not rely on it
 
@@ -318,13 +387,21 @@ Strings and formatting
     buffer overflows and surprises with `\0` characters. Also some C string manipulations
     tend to act differently depending on platform, or even the user locale
 
+<<<<<<< HEAD
 - Use `ParseInt32`, `ParseInt64`, `ParseDouble` from `utilstrencodings.h` for number parsing
+=======
+- Use `ParseInt32`, `ParseInt64`, `ParseUInt32`, `ParseUInt64`, `ParseDouble` from `utilstrencodings.h` for number parsing
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
   - *Rationale*: These functions do overflow checking, and avoid pesky locale issues
 
 - For `strprintf`, `LogPrint`, `LogPrintf` formatting characters don't need size specifiers
 
+<<<<<<< HEAD
   - *Rationale*: GelCoin uses tinyformat, which is type safe. Leave them out to avoid confusion
+=======
+  - *Rationale*: LUX Core uses tinyformat, which is type safe. Leave them out to avoid confusion
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Threads and synchronization
 ----------------------------
@@ -375,3 +452,54 @@ GUI
   - *Rationale*: Model classes pass through events and data from the core, they
     should not interact with the user. That's where View classes come in. The converse also
     holds: try to not directly access core data structures from Views.
+<<<<<<< HEAD
+=======
+
+Git and github tips
+---------------------
+
+- For resolving merge/rebase conflicts, it can be useful to enable diff3 style using
+  `git config merge.conflictstyle diff3`. Instead of
+
+        <<<
+        yours
+        ===
+        theirs
+        >>>
+
+  you will see
+
+        <<<
+        yours
+        |||
+        original
+        ===
+        theirs
+        >>>
+
+  This may make it much clearer what caused the conflict. In this style, you can often just look
+  at what changed between *original* and *theirs*, and mechanically apply that to *yours* (or the other way around).
+
+- When reviewing patches which change indentation in C++ files, use `git diff -w` and `git show -w`. This makes
+  the diff algorithm ignore whitespace changes. This feature is also available on github.com, by adding `?w=1`
+  at the end of any URL which shows a diff.
+
+- When reviewing patches that change symbol names in many places, use `git diff --word-diff`. This will instead
+  of showing the patch as deleted/added *lines*, show deleted/added *words*.
+
+- When reviewing patches that move code around, try using
+  `git diff --patience commit~:old/file.cpp commit:new/file/name.cpp`, and ignoring everything except the
+  moved body of code which should show up as neither `+` or `-` lines. In case it was not a pure move, this may
+  even work when combined with the `-w` or `--word-diff` options described above.
+
+- When looking at other's pull requests, it may make sense to add the following section to your `.git/config`
+  file:
+
+        [remote "upstream-pull"]
+                fetch = +refs/pull/*:refs/remotes/upstream-pull/*
+                url = git@github.com:LUX-Project/LUX.git
+
+  This will add an `upstream-pull` remote to your git repository, which can be fetched using `git fetch --all`
+  or `git fetch upstream-pull`. Afterwards, you can use `upstream-pull/NUMBER/head` in arguments to `git show`,
+  `git checkout` and anywhere a commit id would be acceptable to see the changes from pull request NUMBER.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
+// Copyright (c) 2009-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef __cplusplus
@@ -10,7 +16,11 @@
 #ifndef BITCOIN_PROTOCOL_H
 #define BITCOIN_PROTOCOL_H
 
+<<<<<<< HEAD
 #include "netaddress.h"
+=======
+#include "netbase.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "serialize.h"
 #include "uint256.h"
 #include "version.h"
@@ -29,6 +39,7 @@
 class CMessageHeader
 {
 public:
+<<<<<<< HEAD
     typedef unsigned char MessageStartChars[MESSAGE_START_SIZE];
 
     CMessageHeader(const MessageStartChars& pchMessageStartIn);
@@ -36,6 +47,13 @@ public:
 
     std::string GetCommand() const;
     bool IsValid(const MessageStartChars& messageStart) const;
+=======
+    CMessageHeader();
+    CMessageHeader(const char* pszCommand, unsigned int nMessageSizeIn);
+
+    std::string GetCommand() const;
+    bool IsValid() const;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ADD_SERIALIZE_METHODS;
 
@@ -45,15 +63,24 @@ public:
         READWRITE(FLATDATA(pchMessageStart));
         READWRITE(FLATDATA(pchCommand));
         READWRITE(nMessageSize);
+<<<<<<< HEAD
         READWRITE(FLATDATA(pchChecksum));
+=======
+        READWRITE(nChecksum);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     // TODO: make private (improves encapsulation)
 public:
     enum {
         COMMAND_SIZE = 12,
+<<<<<<< HEAD
         MESSAGE_SIZE_SIZE = 4,
         CHECKSUM_SIZE = 4,
+=======
+        MESSAGE_SIZE_SIZE = sizeof(int),
+        CHECKSUM_SIZE = sizeof(int),
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
         MESSAGE_SIZE_OFFSET = MESSAGE_START_SIZE + COMMAND_SIZE,
         CHECKSUM_OFFSET = MESSAGE_SIZE_OFFSET + MESSAGE_SIZE_SIZE,
@@ -61,6 +88,7 @@ public:
     };
     char pchMessageStart[MESSAGE_START_SIZE];
     char pchCommand[COMMAND_SIZE];
+<<<<<<< HEAD
     uint32_t nMessageSize;
     uint8_t pchChecksum[CHECKSUM_SIZE];
 };
@@ -264,6 +292,19 @@ enum ServiceFlags : uint64_t {
     // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
     // GelCoin nodes used to support this by default, without advertising this bit,
     // but no longer do as of protocol version 70201 (= NO_BLOOM_VERSION)
+=======
+    unsigned int nMessageSize;
+    unsigned int nChecksum;
+};
+
+/** nServices flags */
+enum {
+    NODE_NETWORK = (1 << 0),
+
+    // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
+    // Bitcoin Core nodes used to support this by default, without advertising this bit,
+    // but no longer do as of protocol version 70011 (= NO_BLOOM_VERSION)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     NODE_BLOOM = (1 << 2),
 
     // Bits 24-31 are reserved for temporary experiments. Just pick a bit that
@@ -280,7 +321,11 @@ class CAddress : public CService
 {
 public:
     CAddress();
+<<<<<<< HEAD
     explicit CAddress(CService ipIn, ServiceFlags nServicesIn);
+=======
+    explicit CAddress(CService ipIn, uint64_t nServicesIn = NODE_NETWORK);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     void Init();
 
@@ -296,18 +341,32 @@ public:
         if ((nType & SER_DISK) ||
             (nVersion >= CADDR_TIME_VERSION && !(nType & SER_GETHASH)))
             READWRITE(nTime);
+<<<<<<< HEAD
         uint64_t nServicesInt = nServices;
         READWRITE(nServicesInt);
         nServices = (ServiceFlags)nServicesInt;
+=======
+        READWRITE(nServices);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(*(CService*)this);
     }
 
     // TODO: make private (improves encapsulation)
 public:
+<<<<<<< HEAD
     ServiceFlags nServices;
 
     // disk and network only
     unsigned int nTime;
+=======
+    uint64_t nServices;
+
+    // disk and network only
+    unsigned int nTime;
+
+    // memory only
+    int64_t nLastTry;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 /** inv message data */
@@ -345,6 +404,7 @@ enum {
     // Nodes may always request a MSG_FILTERED_BLOCK in a getdata, however,
     // MSG_FILTERED_BLOCK should not appear in any invs except as a part of getdata.
     MSG_FILTERED_BLOCK,
+<<<<<<< HEAD
     // GelCoin message types
     // NOTE: declare non-implmented here, we must keep this enum consistent and backwards compatible
     MSG_TXLOCK_REQUEST,
@@ -363,6 +423,12 @@ enum {
     MSG_GOVERNANCE_OBJECT,
     MSG_GOVERNANCE_OBJECT_VOTE,
     MSG_MASTERNODE_VERIFY,
+=======
+    MSG_TXLOCK_REQUEST,
+    MSG_TXLOCK_VOTE,
+    MSG_SPORK,
+    MSG_MASTERNODE_WINNER,
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 #endif // BITCOIN_PROTOCOL_H

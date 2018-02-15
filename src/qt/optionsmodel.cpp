@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The GelCoin developers
 // Distributed under the MIT software license, see the accompanying
@@ -5,6 +6,16 @@
 
 #if defined(HAVE_CONFIG_H)
 #include "config/gelcoin-config.h"
+=======
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2017 The LUX developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#if defined(HAVE_CONFIG_H)
+#include "config/lux-config.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #include "optionsmodel.h"
@@ -14,6 +25,7 @@
 
 #include "amount.h"
 #include "init.h"
+<<<<<<< HEAD
 #include "validation.h" // For DEFAULT_SCRIPTCHECK_THREADS
 #include "net.h"
 #include "netbase.h"
@@ -25,12 +37,23 @@
 
 #include "masternodeconfig.h"
 #include "privatesend-client.h"
+=======
+#include "main.h"
+#include "net.h"
+#include "txdb.h" // for -dbcache defaults
+
+#ifdef ENABLE_WALLET
+#include "masternodeconfig.h"
+#include "wallet.h"
+#include "walletdb.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #include <QNetworkProxy>
 #include <QSettings>
 #include <QStringList>
 
+<<<<<<< HEAD
 OptionsModel::OptionsModel(QObject *parent, bool resetSettings) :
     QAbstractListModel(parent)
 {
@@ -38,11 +61,20 @@ OptionsModel::OptionsModel(QObject *parent, bool resetSettings) :
 }
 
 void OptionsModel::addOverriddenOption(const std::string &option)
+=======
+OptionsModel::OptionsModel(QObject* parent) : QAbstractListModel(parent)
+{
+    Init();
+}
+
+void OptionsModel::addOverriddenOption(const std::string& option)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     strOverriddenByCommandLine += QString::fromStdString(option) + "=" + QString::fromStdString(mapArgs[option]) + " ";
 }
 
 // Writes all missing QSettings with their default values
+<<<<<<< HEAD
 void OptionsModel::Init(bool resetSettings)
 {
     if (resetSettings)
@@ -50,6 +82,11 @@ void OptionsModel::Init(bool resetSettings)
 
     this->resetSettings = resetSettings;
 
+=======
+void OptionsModel::Init()
+{
+    resetSettings = false;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     QSettings settings;
 
     // Ensure restart flag is unset on client startup
@@ -58,6 +95,7 @@ void OptionsModel::Init(bool resetSettings)
     // These are Qt-only settings:
 
     // Window
+<<<<<<< HEAD
     if (!settings.contains("fHideTrayIcon"))
         settings.setValue("fHideTrayIcon", false);
     fHideTrayIcon = settings.value("fHideTrayIcon").toBool();
@@ -66,6 +104,11 @@ void OptionsModel::Init(bool resetSettings)
     if (!settings.contains("fMinimizeToTray"))
         settings.setValue("fMinimizeToTray", false);
     fMinimizeToTray = settings.value("fMinimizeToTray").toBool() && !fHideTrayIcon;
+=======
+    if (!settings.contains("fMinimizeToTray"))
+        settings.setValue("fMinimizeToTray", false);
+    fMinimizeToTray = settings.value("fMinimizeToTray").toBool();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     if (!settings.contains("fMinimizeOnClose"))
         settings.setValue("fMinimizeOnClose", false);
@@ -73,21 +116,29 @@ void OptionsModel::Init(bool resetSettings)
 
     // Display
     if (!settings.contains("nDisplayUnit"))
+<<<<<<< HEAD
         settings.setValue("nDisplayUnit", BitcoinUnits::GEL);
+=======
+        settings.setValue("nDisplayUnit", BitcoinUnits::LUX);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     nDisplayUnit = settings.value("nDisplayUnit").toInt();
 
     if (!settings.contains("strThirdPartyTxUrls"))
         settings.setValue("strThirdPartyTxUrls", "");
     strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
 
+<<<<<<< HEAD
     if (!settings.contains("theme"))
         settings.setValue("theme", "");
 
 #ifdef ENABLE_WALLET
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
+<<<<<<< HEAD
     if (!settings.contains("digits"))
         settings.setValue("digits", "2");
 
@@ -101,6 +152,19 @@ void OptionsModel::Init(bool resetSettings)
     if (!settings.contains("fLowKeysWarning"))
         settings.setValue("fLowKeysWarning", true);
 #endif // ENABLE_WALLET
+=======
+    if (!settings.contains("nDarksendRounds"))
+        settings.setValue("nDarksendRounds", 2);
+
+    if (!settings.contains("nAnonymizeLuxAmount"))
+        settings.setValue("nAnonymizeLuxAmount", 1000);
+
+    nDarksendRounds = settings.value("nDarksendRounds").toLongLong();
+    nAnonymizeLuxAmount = settings.value("nAnonymizeLuxAmount").toLongLong();
+
+    if (!settings.contains("fShowMasternodesTab"))
+        settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -121,12 +185,17 @@ void OptionsModel::Init(bool resetSettings)
     if (!SoftSetArg("-par", settings.value("nThreadsScriptVerif").toString().toStdString()))
         addOverriddenOption("-par");
 
+<<<<<<< HEAD
     // Wallet
+=======
+// Wallet
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #ifdef ENABLE_WALLET
     if (!settings.contains("bSpendZeroConfChange"))
         settings.setValue("bSpendZeroConfChange", true);
     if (!SoftSetBoolArg("-spendzeroconfchange", settings.value("bSpendZeroConfChange").toBool()))
         addOverriddenOption("-spendzeroconfchange");
+<<<<<<< HEAD
 
     // PrivateSend
     if (!settings.contains("nPrivateSendRounds"))
@@ -151,6 +220,8 @@ void OptionsModel::Init(bool resetSettings)
     if (!SoftSetBoolArg("-privatesendmultisession", settings.value("fPrivateSendMultiSession").toBool()))
         addOverriddenOption("-privatesendmultisession");
     privateSendClient.fPrivateSendMultiSession = settings.value("fPrivateSendMultiSession").toBool();
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
     // Network
@@ -171,6 +242,7 @@ void OptionsModel::Init(bool resetSettings)
     // Only try to set -proxy, if user has enabled fUseProxy
     if (settings.value("fUseProxy").toBool() && !SoftSetArg("-proxy", settings.value("addrProxy").toString().toStdString()))
         addOverriddenOption("-proxy");
+<<<<<<< HEAD
     else if(!settings.value("fUseProxy").toBool() && !GetArg("-proxy", "").empty())
         addOverriddenOption("-proxy");
 
@@ -185,11 +257,31 @@ void OptionsModel::Init(bool resetSettings)
         addOverriddenOption("-onion");
 
     // Display
+=======
+    else if (!settings.value("fUseProxy").toBool() && !GetArg("-proxy", "").empty())
+        addOverriddenOption("-proxy");
+
+    // Display
+    if (!settings.contains("digits"))
+        settings.setValue("digits", "2");
+    if (!settings.contains("theme"))
+        settings.setValue("theme", "");
+    if (!settings.contains("fCSSexternal"))
+        settings.setValue("fCSSexternal", false);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (!settings.contains("language"))
         settings.setValue("language", "");
     if (!SoftSetArg("-lang", settings.value("language").toString().toStdString()))
         addOverriddenOption("-lang");
 
+<<<<<<< HEAD
+=======
+    if (settings.contains("nDarksendRounds"))
+        SoftSetArg("-obfuscationrounds", settings.value("nDarksendRounds").toString().toStdString());
+    if (settings.contains("nAnonymizeLuxAmount"))
+        SoftSetArg("-anonymizeluxamount", settings.value("nAnonymizeLuxAmount").toString().toStdString());
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     language = settings.value("language").toString();
 }
 
@@ -199,19 +291,28 @@ void OptionsModel::Reset()
 
     // Remove all entries from our QSettings object
     settings.clear();
+<<<<<<< HEAD
     resetSettings = true; // Needed in gelcoin.cpp during shotdown to also remove the window positions
+=======
+    resetSettings = true; // Needed in lux.cpp during shotdown to also remove the window positions
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     // default setting for OptionsModel::StartAtStartup - disabled
     if (GUIUtil::GetStartOnSystemStartup())
         GUIUtil::SetStartOnSystemStartup(false);
 }
 
+<<<<<<< HEAD
 int OptionsModel::rowCount(const QModelIndex & parent) const
+=======
+int OptionsModel::rowCount(const QModelIndex& parent) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     return OptionIDRowCount;
 }
 
 // read QSettings values and return them
+<<<<<<< HEAD
 QVariant OptionsModel::data(const QModelIndex & index, int role) const
 {
     if(role == Qt::EditRole)
@@ -223,6 +324,15 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return GUIUtil::GetStartOnSystemStartup();
         case HideTrayIcon:
             return fHideTrayIcon;
+=======
+QVariant OptionsModel::data(const QModelIndex& index, int role) const
+{
+    if (role == Qt::EditRole) {
+        QSettings settings;
+        switch (index.row()) {
+        case StartAtStartup:
+            return GUIUtil::GetStartOnSystemStartup();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case MinimizeToTray:
             return fMinimizeToTray;
         case MapPortUPnP:
@@ -248,6 +358,7 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return strlIpPort.at(1);
         }
 
+<<<<<<< HEAD
         // separate Tor proxy
         case ProxyUseTor:
             return settings.value("fUseSeparateProxyTor", false);
@@ -262,11 +373,14 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return strlIpPort.at(1);
         }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #ifdef ENABLE_WALLET
         case SpendZeroConfChange:
             return settings.value("bSpendZeroConfChange");
         case ShowMasternodesTab:
             return settings.value("fShowMasternodesTab");
+<<<<<<< HEAD
         case ShowAdvancedPSUI:
             return fShowAdvancedPSUI;
         case LowKeysWarning:
@@ -277,27 +391,46 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value("nPrivateSendAmount");
         case PrivateSendMultiSession:
             return settings.value("fPrivateSendMultiSession");
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
         case DisplayUnit:
             return nDisplayUnit;
         case ThirdPartyTxUrls:
             return strThirdPartyTxUrls;
+<<<<<<< HEAD
 #ifdef ENABLE_WALLET
         case Digits:
             return settings.value("digits");
 #endif // ENABLE_WALLET
+=======
+        case Digits:
+            return settings.value("digits");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case Theme:
             return settings.value("theme");
         case Language:
             return settings.value("language");
+<<<<<<< HEAD
 #ifdef ENABLE_WALLET
         case CoinControlFeatures:
             return fCoinControlFeatures;
 #endif // ENABLE_WALLET
+=======
+        case CoinControlFeatures:
+            return fCoinControlFeatures;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case DatabaseCache:
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
             return settings.value("nThreadsScriptVerif");
+<<<<<<< HEAD
+=======
+        case DarksendRounds:
+            return QVariant(nDarksendRounds);
+        case AnonymizeLuxAmount:
+            return QVariant(nAnonymizeLuxAmount);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case Listen:
             return settings.value("fListen");
         default:
@@ -308,6 +441,7 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
 }
 
 // write QSettings values
+<<<<<<< HEAD
 bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
     bool successful = true; /* set to false on parse error */
@@ -324,6 +458,17 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("fHideTrayIcon", fHideTrayIcon);
     		Q_EMIT hideTrayIconChanged(fHideTrayIcon);
             break;
+=======
+bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+    bool successful = true; /* set to false on parse error */
+    if (role == Qt::EditRole) {
+        QSettings settings;
+        switch (index.row()) {
+        case StartAtStartup:
+            successful = GUIUtil::SetStartOnSystemStartup(value.toBool());
+            break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case MinimizeToTray:
             fMinimizeToTray = value.toBool();
             settings.setValue("fMinimizeToTray", fMinimizeToTray);
@@ -354,8 +499,12 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 settings.setValue("addrProxy", strNewValue);
                 setRestartRequired(true);
             }
+<<<<<<< HEAD
         }
         break;
+=======
+        } break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case ProxyPort: {
             // contains current IP at index 0 and current port at index 1
             QStringList strlIpPort = settings.value("addrProxy").toString().split(":", QString::SkipEmptyParts);
@@ -366,6 +515,7 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 settings.setValue("addrProxy", strNewValue);
                 setRestartRequired(true);
             }
+<<<<<<< HEAD
         }
         break;
 
@@ -401,6 +551,9 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
         }
         break;
 
+=======
+        } break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #ifdef ENABLE_WALLET
         case SpendZeroConfChange:
             if (settings.value("bSpendZeroConfChange") != value) {
@@ -414,6 +567,7 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+<<<<<<< HEAD
         case ShowAdvancedPSUI:
             fShowAdvancedPSUI = value.toBool();
             settings.setValue("fShowAdvancedPSUI", fShowAdvancedPSUI);
@@ -445,6 +599,8 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 settings.setValue("fPrivateSendMultiSession", privateSendClient.fPrivateSendMultiSession);
             }
             break;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
         case DisplayUnit:
             setDisplayUnit(value);
@@ -456,26 +612,38 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+<<<<<<< HEAD
 #ifdef ENABLE_WALLET
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case Digits:
             if (settings.value("digits") != value) {
                 settings.setValue("digits", value);
                 setRestartRequired(true);
             }
+<<<<<<< HEAD
             break;            
 #endif // ENABLE_WALLET
+=======
+            break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case Theme:
             if (settings.value("theme") != value) {
                 settings.setValue("theme", value);
                 setRestartRequired(true);
             }
+<<<<<<< HEAD
             break;            
+=======
+            break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case Language:
             if (settings.value("language") != value) {
                 settings.setValue("language", value);
                 setRestartRequired(true);
             }
             break;
+<<<<<<< HEAD
 #ifdef ENABLE_WALLET
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();
@@ -483,6 +651,23 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             Q_EMIT coinControlFeaturesChanged(fCoinControlFeatures);
             break;
 #endif // ENABLE_WALLET
+=======
+        case DarksendRounds:
+            nDarksendRounds = value.toInt();
+            settings.setValue("nDarksendRounds", nDarksendRounds);
+            emit obfuscationRoundsChanged(nDarksendRounds);
+            break;
+        case AnonymizeLuxAmount:
+            nAnonymizeLuxAmount = value.toInt();
+            settings.setValue("nAnonymizeLuxAmount", nAnonymizeLuxAmount);
+            emit anonymizeLuxAmountChanged(nAnonymizeLuxAmount);
+            break;
+        case CoinControlFeatures:
+            fCoinControlFeatures = value.toBool();
+            settings.setValue("fCoinControlFeatures", fCoinControlFeatures);
+            emit coinControlFeaturesChanged(fCoinControlFeatures);
+            break;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         case DatabaseCache:
             if (settings.value("nDatabaseCache") != value) {
                 settings.setValue("nDatabaseCache", value);
@@ -506,12 +691,17 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
         }
     }
 
+<<<<<<< HEAD
     Q_EMIT dataChanged(index, index);
+=======
+    emit dataChanged(index, index);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     return successful;
 }
 
 /** Updates current unit in memory, settings and emits displayUnitChanged(newUnit) signal */
+<<<<<<< HEAD
 void OptionsModel::setDisplayUnit(const QVariant &value)
 {
     if (!value.isNull())
@@ -520,6 +710,15 @@ void OptionsModel::setDisplayUnit(const QVariant &value)
         nDisplayUnit = value.toInt();
         settings.setValue("nDisplayUnit", nDisplayUnit);
         Q_EMIT displayUnitChanged(nDisplayUnit);
+=======
+void OptionsModel::setDisplayUnit(const QVariant& value)
+{
+    if (!value.isNull()) {
+        QSettings settings;
+        nDisplayUnit = value.toInt();
+        settings.setValue("nDisplayUnit", nDisplayUnit);
+        emit displayUnitChanged(nDisplayUnit);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 }
 
@@ -530,12 +729,20 @@ bool OptionsModel::getProxySettings(QNetworkProxy& proxy) const
     proxyType curProxy;
     if (GetProxy(NET_IPV4, curProxy)) {
         proxy.setType(QNetworkProxy::Socks5Proxy);
+<<<<<<< HEAD
         proxy.setHostName(QString::fromStdString(curProxy.proxy.ToStringIP()));
         proxy.setPort(curProxy.proxy.GetPort());
 
         return true;
     }
     else
+=======
+        proxy.setHostName(QString::fromStdString(curProxy.ToStringIP()));
+        proxy.setPort(curProxy.GetPort());
+
+        return true;
+    } else
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         proxy.setType(QNetworkProxy::NoProxy);
 
     return false;

@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 // Copyright (c) 2014-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "timedata.h"
 
+<<<<<<< HEAD
 #include "netaddress.h"
+=======
+#include "netbase.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "sync.h"
 #include "ui_interface.h"
 #include "util.h"
@@ -40,6 +48,7 @@ static int64_t abs64(int64_t n)
     return (n >= 0 ? n : -n);
 }
 
+<<<<<<< HEAD
 #define BITCOIN_TIMEDATA_MAX_SAMPLES 200
 
 void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
@@ -49,13 +58,28 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
     static set<CNetAddr> setKnown;
     if (setKnown.size() == BITCOIN_TIMEDATA_MAX_SAMPLES)
         return;
+=======
+void AddTimeData(const CNetAddr& ip, int64_t nTime)
+{
+    int64_t nOffsetSample = nTime - GetTime();
+
+    LOCK(cs_nTimeOffset);
+    // Ignore duplicates
+    static set<CNetAddr> setKnown;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (!setKnown.insert(ip).second)
         return;
 
     // Add data
+<<<<<<< HEAD
     static CMedianFilter<int64_t> vTimeOffsets(BITCOIN_TIMEDATA_MAX_SAMPLES, 0);
     vTimeOffsets.input(nOffsetSample);
     LogPrint("net","added time data, samples %d, offset %+d (%+d minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample/60);
+=======
+    static CMedianFilter<int64_t> vTimeOffsets(200, 0);
+    vTimeOffsets.input(nOffsetSample);
+    LogPrintf("Added time data, samples %d, offset %+d (%+d minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample / 60);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     // There is a known issue here (see issue #4521):
     //
@@ -74,6 +98,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
     // So we should hold off on fixing this and clean it up as part of
     // a timing cleanup that strengthens it in a number of other ways.
     //
+<<<<<<< HEAD
     if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1)
     {
         int64_t nMedian = vTimeOffsets.median();
@@ -101,15 +126,48 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
                     fDone = true;
                     string strMessage = _("Please check that your computer's date and time are correct! If your clock is wrong GelCoin will not work properly.");
                     strMiscWarning = strMessage;
+=======
+    if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1) {
+        int64_t nMedian = vTimeOffsets.median();
+        std::vector<int64_t> vSorted = vTimeOffsets.sorted();
+        // Only let other nodes change our time by so much
+        if (abs64(nMedian) < 70 * 60) {
+            nTimeOffset = nMedian;
+        } else {
+            nTimeOffset = 0;
+
+            static bool fDone;
+            if (!fDone) {
+                // If nobody has a time different than ours but within 5 minutes of ours, give a warning
+                bool fMatch = false;
+                BOOST_FOREACH (int64_t nOffset, vSorted)
+                    if (nOffset != 0 && abs64(nOffset) < 5 * 60)
+                        fMatch = true;
+
+                if (!fMatch) {
+                    fDone = true;
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong LUX Core will not work properly.");
+                    strMiscWarning = strMessage;
+                    LogPrintf("*** %s\n", strMessage);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                     uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);
                 }
             }
         }
+<<<<<<< HEAD
         
         BOOST_FOREACH(int64_t n, vSorted)
             LogPrint("net", "%+d  ", n);
         LogPrint("net", "|  ");
         
         LogPrint("net", "nTimeOffset = %+d  (%+d minutes)\n", nTimeOffset, nTimeOffset/60);
+=======
+        if (fDebug) {
+            BOOST_FOREACH (int64_t n, vSorted)
+                LogPrintf("%+d  ", n);
+            LogPrintf("|  ");
+        }
+        LogPrintf("nTimeOffset = %+d  (%+d minutes)\n", nTimeOffset, nTimeOffset / 60);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 }

@@ -11,5 +11,9 @@ This script should not be run manually, instead, after building as usual:
 During the process, the disk image window will pop up briefly where the fancy
 settings are applied. This is normal, please do not interfere.
 
+<<<<<<< HEAD
 When finished, it will produce `GelCoin-Core.dmg`.
+=======
+When finished, it will produce `Lux-Qt.dmg`.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 

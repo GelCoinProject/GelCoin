@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "core_io.h"
@@ -10,12 +15,19 @@
 #include "script/standard.h"
 #include "serialize.h"
 #include "streams.h"
+<<<<<<< HEAD
 #include <univalue.h>
+=======
+#include "univalue/univalue.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "util.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
 
+<<<<<<< HEAD
 #include <boost/assign/list_of.hpp>
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include <boost/foreach.hpp>
 
 using namespace std;
@@ -35,7 +47,11 @@ string FormatScript(const CScript& script)
             } else if ((op >= OP_1 && op <= OP_16) || op == OP_1NEGATE) {
                 ret += strprintf("%i ", op - OP_1NEGATE - 1);
                 continue;
+<<<<<<< HEAD
             } else if (op >= OP_NOP && op <= OP_NOP10) {
+=======
+            } else if (op >= OP_NOP && op <= OP_CHECKMULTISIGVERIFY) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 string str(GetOpName(op));
                 if (str.substr(0, 3) == string("OP_")) {
                     ret += str.substr(3, string::npos) + " ";
@@ -45,7 +61,11 @@ string FormatScript(const CScript& script)
             if (vch.size() > 0) {
                 ret += strprintf("0x%x 0x%x ", HexStr(it2, it - vch.size()), HexStr(it - vch.size(), it));
             } else {
+<<<<<<< HEAD
                 ret += strprintf("0x%x ", HexStr(it2, it));
+=======
+                ret += strprintf("0x%x", HexStr(it2, it));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             }
             continue;
         }
@@ -55,6 +75,7 @@ string FormatScript(const CScript& script)
     return ret.substr(0, ret.size() - 1);
 }
 
+<<<<<<< HEAD
 const map<unsigned char, string> mapSigHashTypes =
     boost::assign::map_list_of
     (static_cast<unsigned char>(SIGHASH_ALL), string("ALL"))
@@ -116,6 +137,8 @@ string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDecode)
     return str;
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 string EncodeHexTx(const CTransaction& tx)
 {
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
@@ -124,13 +147,22 @@ string EncodeHexTx(const CTransaction& tx)
 }
 
 void ScriptPubKeyToUniv(const CScript& scriptPubKey,
+<<<<<<< HEAD
                         UniValue& out, bool fIncludeHex)
+=======
+    UniValue& out,
+    bool fIncludeHex)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     txnouttype type;
     vector<CTxDestination> addresses;
     int nRequired;
 
+<<<<<<< HEAD
     out.pushKV("asm", ScriptToAsmStr(scriptPubKey));
+=======
+    out.pushKV("asm", scriptPubKey.ToString());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (fIncludeHex)
         out.pushKV("hex", HexStr(scriptPubKey.begin(), scriptPubKey.end()));
 
@@ -143,7 +175,11 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     out.pushKV("type", GetTxnOutputType(type));
 
     UniValue a(UniValue::VARR);
+<<<<<<< HEAD
     BOOST_FOREACH(const CTxDestination& addr, addresses)
+=======
+    BOOST_FOREACH (const CTxDestination& addr, addresses)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         a.push_back(CBitcoinAddress(addr).ToString());
     out.pushKV("addresses", a);
 }
@@ -155,7 +191,11 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     entry.pushKV("locktime", (int64_t)tx.nLockTime);
 
     UniValue vin(UniValue::VARR);
+<<<<<<< HEAD
     BOOST_FOREACH(const CTxIn& txin, tx.vin) {
+=======
+    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         UniValue in(UniValue::VOBJ);
         if (tx.IsCoinBase())
             in.pushKV("coinbase", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));
@@ -163,7 +203,11 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
             in.pushKV("txid", txin.prevout.hash.GetHex());
             in.pushKV("vout", (int64_t)txin.prevout.n);
             UniValue o(UniValue::VOBJ);
+<<<<<<< HEAD
             o.pushKV("asm", ScriptToAsmStr(txin.scriptSig, true));
+=======
+            o.pushKV("asm", txin.scriptSig.ToString());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             o.pushKV("hex", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));
             in.pushKV("scriptSig", o);
         }
@@ -189,7 +233,11 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     }
     entry.pushKV("vout", vout);
 
+<<<<<<< HEAD
     if (!hashBlock.IsNull())
+=======
+    if (hashBlock != 0)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         entry.pushKV("blockhash", hashBlock.GetHex());
 
     entry.pushKV("hex", EncodeHexTx(tx)); // the hex-encoded transaction. used the name "hex" to be consistent with the verbose output of "getrawtransaction".

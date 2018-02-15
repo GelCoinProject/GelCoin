@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,14 +11,22 @@
 #define BITCOIN_SCRIPT_SIGN_H
 
 #include "script/interpreter.h"
+<<<<<<< HEAD
 
 class CKeyID;
+=======
+#include "key.h"
+#include "keystore.h"
+#include "script/standard.h"
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 class CKeyStore;
 class CScript;
 class CTransaction;
 
 struct CMutableTransaction;
 
+<<<<<<< HEAD
 /** Virtual base class for signature creators. */
 class BaseSignatureCreator {
 protected:
@@ -62,6 +74,16 @@ bool SignSignature(const CKeyStore& keystore, const CTransaction& txFrom, CMutab
 CScript CombineSignatures(const CScript& scriptPubKey, const BaseSignatureChecker& checker, const CScript& scriptSig1, const CScript& scriptSig2);
 
 /** Combine two script signatures on transactions. */
+=======
+bool Sign1(const CKeyID& address, const CKeyStore& keystore, uint256 hash, int nHashType, CScript& scriptSigRet);
+bool SignSignature(const CKeyStore& keystore, const CScript& fromPubKey, CMutableTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);
+bool SignSignature(const CKeyStore& keystore, const CTransaction& txFrom, CMutableTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);
+
+/**
+ * Given two sets of signatures for scriptPubKey, possibly with OP_0 placeholders,
+ * combine them intelligently and return the result.
+ */
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 CScript CombineSignatures(const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn, const CScript& scriptSig1, const CScript& scriptSig2);
 
 #endif // BITCOIN_SCRIPT_SIGN_H

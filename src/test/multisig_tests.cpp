@@ -1,29 +1,54 @@
 // Copyright (c) 2011-2013 The Bitcoin Core developers
+<<<<<<< HEAD
 // Distributed under the MIT software license, see the accompanying
+=======
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "key.h"
 #include "keystore.h"
+<<<<<<< HEAD
 #include "policy/policy.h"
+=======
+#include "main.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "script/script.h"
 #include "script/script_error.h"
 #include "script/interpreter.h"
 #include "script/sign.h"
 #include "uint256.h"
+<<<<<<< HEAD
 #include "test/test_gelcoin.h"
 
 #ifdef ENABLE_WALLET
 #include "wallet/wallet_ismine.h"
 #endif
 
+=======
+
+#ifdef ENABLE_WALLET
+#include "wallet_ismine.h"
+#endif
+
+#include <boost/assign/std/vector.hpp>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
 using namespace std;
+<<<<<<< HEAD
 
 typedef vector<unsigned char> valtype;
 
 BOOST_FIXTURE_TEST_SUITE(multisig_tests, BasicTestingSetup)
+=======
+using namespace boost::assign;
+
+typedef vector<unsigned char> valtype;
+
+BOOST_AUTO_TEST_SUITE(multisig_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 CScript
 sign_multisig(CScript scriptPubKey, vector<CKey> keys, CTransaction transaction, int whichIn)
@@ -80,21 +105,36 @@ BOOST_AUTO_TEST_CASE(multisig_verify)
     CScript s;
 
     // Test a AND b:
+<<<<<<< HEAD
     keys.assign(1,key[0]);
     keys.push_back(key[1]);
+=======
+    keys.clear();
+    keys += key[0],key[1]; // magic operator+= from boost.assign
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     s = sign_multisig(a_and_b, keys, txTo[0], 0);
     BOOST_CHECK(VerifyScript(s, a_and_b, flags, MutableTransactionSignatureChecker(&txTo[0], 0), &err));
     BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
 
     for (int i = 0; i < 4; i++)
     {
+<<<<<<< HEAD
         keys.assign(1,key[i]);
+=======
+        keys.clear();
+        keys += key[i];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         s = sign_multisig(a_and_b, keys, txTo[0], 0);
         BOOST_CHECK_MESSAGE(!VerifyScript(s, a_and_b, flags, MutableTransactionSignatureChecker(&txTo[0], 0), &err), strprintf("a&b 1: %d", i));
         BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_INVALID_STACK_OPERATION, ScriptErrorString(err));
 
+<<<<<<< HEAD
         keys.assign(1,key[1]);
         keys.push_back(key[i]);
+=======
+        keys.clear();
+        keys += key[1],key[i];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         s = sign_multisig(a_and_b, keys, txTo[0], 0);
         BOOST_CHECK_MESSAGE(!VerifyScript(s, a_and_b, flags, MutableTransactionSignatureChecker(&txTo[0], 0), &err), strprintf("a&b 2: %d", i));
         BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_EVAL_FALSE, ScriptErrorString(err));
@@ -103,7 +143,12 @@ BOOST_AUTO_TEST_CASE(multisig_verify)
     // Test a OR b:
     for (int i = 0; i < 4; i++)
     {
+<<<<<<< HEAD
         keys.assign(1,key[i]);
+=======
+        keys.clear();
+        keys += key[i];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         s = sign_multisig(a_or_b, keys, txTo[1], 0);
         if (i == 0 || i == 1)
         {
@@ -125,8 +170,13 @@ BOOST_AUTO_TEST_CASE(multisig_verify)
     for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
         {
+<<<<<<< HEAD
             keys.assign(1,key[i]);
             keys.push_back(key[j]);
+=======
+            keys.clear();
+            keys += key[i],key[j];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             s = sign_multisig(escrow, keys, txTo[2], 0);
             if (i < j && i < 3 && j < 3)
             {

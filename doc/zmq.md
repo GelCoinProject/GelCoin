@@ -5,8 +5,13 @@ connections, inter-process communication, and shared-memory,
 providing various message-oriented semantics such as publish/subscribe,
 request/reply, and push/pull.
 
+<<<<<<< HEAD
 The GelCoin daemon can be configured to act as a trusted "border
 router", implementing the gelcoin wire protocol and relay, making
+=======
+The LUX Core daemon can be configured to act as a trusted "border
+router", implementing the lux wire protocol and relay, making
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 consensus decisions, maintaining the local blockchain database,
 broadcasting locally generated transactions into the network, and
 providing a queryable RPC interface to interact on a polled basis for
@@ -33,7 +38,11 @@ buffering or reassembly.
 
 ## Prerequisites
 
+<<<<<<< HEAD
 The ZeroMQ feature in GelCoin requires ZeroMQ API version 4.x or
+=======
+The ZeroMQ feature in LUX Core requires ZeroMQ API version 4.x or
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 newer. Typically, it is packaged by distributions as something like
 *libzmq3-dev*. The C++ wrapper for ZeroMQ is *not* needed.
 
@@ -45,7 +54,11 @@ operation.
 
 By default, the ZeroMQ feature is automatically compiled in if the
 necessary prerequisites are found.  To disable, use --disable-zmq
+<<<<<<< HEAD
 during the *configure* step of building bitcoind:
+=======
+during the *configure* step of building luxd:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     $ ./configure --disable-zmq (other options)
 
@@ -68,8 +81,13 @@ address. The same address can be used in more than one notification.
 
 For instance:
 
+<<<<<<< HEAD
     $ gelcoind -zmqpubhashtx=tcp://127.0.0.1:28332 \
                -zmqpubrawtx=ipc:///tmp/gelcoind.tx.raw
+=======
+    $ luxd -zmqpubhashtx=tcp://127.0.0.1:28332 \
+               -zmqpubrawtx=ipc:///tmp/luxd.tx.raw
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Each PUB notification has a topic and body, where the header
 corresponds to the notification type. For instance, for the
@@ -77,7 +95,11 @@ notification `-zmqpubhashtx` the topic is `hashtx` (no null
 terminator) and the body is the hexadecimal transaction hash (32
 bytes).
 
+<<<<<<< HEAD
 These options can also be provided in gelcoin.conf.
+=======
+These options can also be provided in lux.conf.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 ZeroMQ endpoint specifiers for TCP (and others) are documented in the
 [ZeroMQ API](http://api.zeromq.org/4-0:_start).
@@ -89,9 +111,15 @@ arriving. Please see `contrib/zmq/zmq_sub.py` for a working example.
 
 ## Remarks
 
+<<<<<<< HEAD
 From the perspective of gelcoind, the ZeroMQ socket is write-only; PUB
 sockets don't even have a read function. Thus, there is no state
 introduced into gelcoind directly. Furthermore, no information is
+=======
+From the perspective of luxd, the ZeroMQ socket is write-only; PUB
+sockets don't even have a read function. Thus, there is no state
+introduced into luxd directly. Furthermore, no information is
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 broadcast that wasn't already received from the public P2P network.
 
 No authentication or authorization is done on connecting clients; it
@@ -104,5 +132,9 @@ retrieve the chain from the last known block to the new tip.
 
 There are several possibilities that ZMQ notification can get lost
 during transmission depending on the communication type your are
+<<<<<<< HEAD
 using. GelCoind appends an up-counting sequence number to each
+=======
+using. LUXd appends an up-counting sequence number to each
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 notification which allows listeners to detect lost notifications.

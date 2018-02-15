@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 The MIT License (MIT)
 
 Copyright (c) 2009-2016 The Bitcoin Core developers
 Copyright (c) 2014-2017 The GelCoin developers
+=======
+Copyright (c) 2009-2015 Bitcoin Developers
+Copyright (c) 2014-2015 Dash Developers
+Copyright (c) 2015-2017 LUX Developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

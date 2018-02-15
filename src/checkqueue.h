@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2012-2014 The Bitcoin developers               -*- c++ -*-
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -54,7 +58,11 @@ private:
 
     /**
      * Number of verifications that haven't completed yet.
+<<<<<<< HEAD
      * This includes elements that are no longer queued, but still in the
+=======
+     * This includes elements that are not anymore in queue, but still in
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      * worker's own batches.
      */
     unsigned int nTodo;
@@ -81,7 +89,11 @@ private:
                     fAllOk &= fOk;
                     nTodo -= nNow;
                     if (nTodo == 0 && !fMaster)
+<<<<<<< HEAD
                         // We processed the last element; inform the master it can exit and return the result
+=======
+                        // We processed the last element; inform the master he can exit and return the result
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                         condMaster.notify_one();
                 } else {
                     // first iteration
@@ -136,7 +148,11 @@ public:
         Loop();
     }
 
+<<<<<<< HEAD
     //! Wait until execution finishes, and return whether all evaluations were successful.
+=======
+    //! Wait until execution finishes, and return whether all evaluations where successful.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     bool Wait()
     {
         return Loop(true);
@@ -166,7 +182,10 @@ public:
         boost::unique_lock<boost::mutex> lock(mutex);
         return (nTotal == nIdle && nTodo == 0 && fAllOk == true);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 /** 

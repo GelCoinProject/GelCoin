@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -35,10 +39,13 @@ typedef enum ScriptError_t
     SCRIPT_ERR_INVALID_ALTSTACK_OPERATION,
     SCRIPT_ERR_UNBALANCED_CONDITIONAL,
 
+<<<<<<< HEAD
     /* CHECKLOCKTIMEVERIFY and CHECKSEQUENCEVERIFY */
     SCRIPT_ERR_NEGATIVE_LOCKTIME,
     SCRIPT_ERR_UNSATISFIED_LOCKTIME,
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     /* BIP62 */
     SCRIPT_ERR_SIG_HASHTYPE,
     SCRIPT_ERR_SIG_DER,
@@ -47,7 +54,10 @@ typedef enum ScriptError_t
     SCRIPT_ERR_SIG_HIGH_S,
     SCRIPT_ERR_SIG_NULLDUMMY,
     SCRIPT_ERR_PUBKEYTYPE,
+<<<<<<< HEAD
     SCRIPT_ERR_CLEANSTACK,
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     /* softfork safeness */
     SCRIPT_ERR_DISCOURAGE_UPGRADABLE_NOPS,

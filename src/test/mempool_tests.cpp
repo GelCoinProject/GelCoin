@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -12,12 +13,29 @@
 #include <vector>
 
 BOOST_FIXTURE_TEST_SUITE(mempool_tests, TestingSetup)
+=======
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include "main.h"
+#include "txmempool.h"
+#include "util.h"
+
+#include <boost/test/unit_test.hpp>
+#include <list>
+
+BOOST_AUTO_TEST_SUITE(mempool_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(MempoolRemoveTest)
 {
     // Test CTxMemPool::remove functionality
 
+<<<<<<< HEAD
     TestMemPoolEntryHelper entry;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // Parent transaction with three children,
     // and three grand-children:
     CMutableTransaction txParent;
@@ -61,17 +79,29 @@ BOOST_AUTO_TEST_CASE(MempoolRemoveTest)
     BOOST_CHECK_EQUAL(removed.size(), 0);
 
     // Just the parent:
+<<<<<<< HEAD
     testPool.addUnchecked(txParent.GetHash(), entry.FromTx(txParent));
+=======
+    testPool.addUnchecked(txParent.GetHash(), CTxMemPoolEntry(txParent, 0, 0, 0.0, 1));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     testPool.remove(txParent, removed, true);
     BOOST_CHECK_EQUAL(removed.size(), 1);
     removed.clear();
     
     // Parent, children, grandchildren:
+<<<<<<< HEAD
     testPool.addUnchecked(txParent.GetHash(), entry.FromTx(txParent));
     for (int i = 0; i < 3; i++)
     {
         testPool.addUnchecked(txChild[i].GetHash(), entry.FromTx(txChild[i]));
         testPool.addUnchecked(txGrandChild[i].GetHash(), entry.FromTx(txGrandChild[i]));
+=======
+    testPool.addUnchecked(txParent.GetHash(), CTxMemPoolEntry(txParent, 0, 0, 0.0, 1));
+    for (int i = 0; i < 3; i++)
+    {
+        testPool.addUnchecked(txChild[i].GetHash(), CTxMemPoolEntry(txChild[i], 0, 0, 0.0, 1));
+        testPool.addUnchecked(txGrandChild[i].GetHash(), CTxMemPoolEntry(txGrandChild[i], 0, 0, 0.0, 1));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     // Remove Child[0], GrandChild[0] should be removed:
     testPool.remove(txChild[0], removed, true);
@@ -91,8 +121,13 @@ BOOST_AUTO_TEST_CASE(MempoolRemoveTest)
     // Add children and grandchildren, but NOT the parent (simulate the parent being in a block)
     for (int i = 0; i < 3; i++)
     {
+<<<<<<< HEAD
         testPool.addUnchecked(txChild[i].GetHash(), entry.FromTx(txChild[i]));
         testPool.addUnchecked(txGrandChild[i].GetHash(), entry.FromTx(txGrandChild[i]));
+=======
+        testPool.addUnchecked(txChild[i].GetHash(), CTxMemPoolEntry(txChild[i], 0, 0, 0.0, 1));
+        testPool.addUnchecked(txGrandChild[i].GetHash(), CTxMemPoolEntry(txGrandChild[i], 0, 0, 0.0, 1));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     // Now remove the parent, as might happen if a block-re-org occurs but the parent cannot be
     // put into the mempool (maybe because it is non-standard):
@@ -102,6 +137,7 @@ BOOST_AUTO_TEST_CASE(MempoolRemoveTest)
     removed.clear();
 }
 
+<<<<<<< HEAD
 template<int index>
 void CheckSort(CTxMemPool &pool, std::vector<std::string> &sortedOrder)
 {
@@ -473,4 +509,6 @@ BOOST_AUTO_TEST_CASE(MempoolSizeLimitTest)
     SetMockTime(0);
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_SUITE_END()

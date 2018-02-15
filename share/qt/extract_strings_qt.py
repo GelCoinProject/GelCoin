@@ -1,15 +1,26 @@
 #!/usr/bin/python
 '''
+<<<<<<< HEAD
 Extract _("...") strings for translation and convert to Qt4 stringdefs so that
 they can be picked up by Qt linguist.
 '''
+=======
+Extract _("...") strings for translation and convert to Qt stringdefs so that
+they can be picked up by Qt linguist.
+'''
+from __future__ import division,print_function,unicode_literals
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 from subprocess import Popen, PIPE
 import glob
 import operator
 import os
 import sys
 
+<<<<<<< HEAD
 OUT_CPP="qt/gelcoinstrings.cpp"
+=======
+OUT_CPP="qt/luxstrings.cpp"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 EMPTY=['""']
 
 def parse_po(text):
@@ -52,10 +63,21 @@ files = sys.argv[1:]
 
 # xgettext -n --keyword=_ $FILES
 XGETTEXT=os.getenv('XGETTEXT', 'xgettext')
+<<<<<<< HEAD
 child = Popen([XGETTEXT,'--output=-','-n','--keyword=_'] + files, stdout=PIPE)
 (out, err) = child.communicate()
 
 messages = parse_po(out)
+=======
+if not XGETTEXT:
+    print('Cannot extract strings: xgettext utility is not installed or not configured.',file=sys.stderr)
+    print('Please install package "gettext" and re-run \'./configure\'.',file=sys.stderr)
+    exit(1)
+child = Popen([XGETTEXT,'--output=-','-n','--keyword=_'] + files, stdout=PIPE)
+(out, err) = child.communicate()
+
+messages = parse_po(out.decode('utf-8'))
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 f = open(OUT_CPP, 'w')
 f.write("""
@@ -69,10 +91,18 @@ f.write("""
 #define UNUSED
 #endif
 """)
+<<<<<<< HEAD
 f.write('static const char UNUSED *gelcoin_strings[] = {\n')
 messages.sort(key=operator.itemgetter(0))
 for (msgid, msgstr) in messages:
     if msgid != EMPTY:
         f.write('QT_TRANSLATE_NOOP("gelcoin-core", %s),\n' % ('\n'.join(msgid)))
+=======
+f.write('static const char UNUSED *lux_strings[] = {\n')
+messages.sort(key=operator.itemgetter(0))
+for (msgid, msgstr) in messages:
+    if msgid != EMPTY:
+        f.write('QT_TRANSLATE_NOOP("lux-core", %s),\n' % ('\n'.join(msgid)))
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 f.write('};\n')
 f.close()

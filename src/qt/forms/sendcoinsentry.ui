@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>729</width>
+<<<<<<< HEAD
     <height>150</height>
+=======
+    <height>156</height>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </rect>
   </property>
   <property name="focusPolicy">
@@ -21,6 +25,7 @@
     <string>This is a normal payment.</string>
    </property>
    <property name="frameShape">
+<<<<<<< HEAD
     <enum>QFrame::NoFrame</enum>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -36,6 +41,17 @@
     <property name="verticalSpacing">
      <number>8</number>
     </property>
+=======
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     <item row="0" column="0">
      <widget class="QLabel" name="payToLabel">
       <property name="text">
@@ -57,7 +73,11 @@
       <item>
        <widget class="QValidatedLineEdit" name="payTo">
         <property name="toolTip">
+<<<<<<< HEAD
          <string>The GelCoin address to send the payment to</string>
+=======
+         <string>The LUX address to send the payment to</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         </property>
        </widget>
       </item>
@@ -69,11 +89,17 @@
         <property name="text">
          <string/>
         </property>
+<<<<<<< HEAD
         <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
+=======
+        <property name="icon">
+         <iconset resource="../lux.qrc">
+          <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         </property>
         <property name="shortcut">
          <string>Alt+A</string>
@@ -88,11 +114,17 @@
         <property name="text">
          <string/>
         </property>
+<<<<<<< HEAD
         <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
+=======
+        <property name="icon">
+         <iconset resource="../lux.qrc">
+          <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         </property>
         <property name="shortcut">
          <string>Alt+P</string>
@@ -107,18 +139,28 @@
         <property name="text">
          <string/>
         </property>
+<<<<<<< HEAD
         <property name="iconSize">
          <size>
           <width>22</width>
           <height>22</height>
          </size>
+=======
+        <property name="icon">
+         <iconset resource="../lux.qrc">
+          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item row="1" column="0">
+<<<<<<< HEAD
      <widget class="QLabel" name="labellLabel">
+=======
+     <widget class="QLabel" name="labelLabel">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       <property name="text">
        <string>&amp;Label:</string>
       </property>
@@ -151,6 +193,7 @@
      </widget>
     </item>
     <item row="2" column="1">
+<<<<<<< HEAD
      <layout class="QHBoxLayout" name="horizontalLayoutAmount" stretch="0,1">
       <item>
        <widget class="BitcoinAmountField" name="payAmount"/>
@@ -166,6 +209,9 @@
        </widget>
       </item>
      </layout>
+=======
+     <widget class="BitcoinAmountField" name="payAmount"/>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="messageLabel">
@@ -180,13 +226,18 @@
     <item row="3" column="1">
      <widget class="QLabel" name="messageTextLabel">
       <property name="toolTip">
+<<<<<<< HEAD
        <string>A message that was attached to the gelcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the GelCoin network.</string>
+=======
+       <string>A message that was attached to the LUX: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the LUX network.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       </property>
       <property name="textFormat">
        <enum>Qt::PlainText</enum>
       </property>
      </widget>
     </item>
+<<<<<<< HEAD
     <item row="4" column="0" colspan="2">
      <widget class="Line" name="line">
       <property name="orientation">
@@ -197,6 +248,11 @@
    </layout>
   </widget>
   <widget class="QFrame" name="SendCoins_UnauthenticatedPaymentRequest">
+=======
+   </layout>
+  </widget>
+  <widget class="QFrame" name="SendCoins_InsecurePaymentRequest">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    <property name="palette">
     <palette>
      <active>
@@ -613,13 +669,24 @@
     </palette>
    </property>
    <property name="toolTip">
+<<<<<<< HEAD
     <string>This is an unauthenticated payment request.</string>
+=======
+    <string>This is an unverified payment request.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
    <property name="frameShape">
+<<<<<<< HEAD
     <enum>QFrame::NoFrame</enum>
+=======
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </property>
    <layout class="QGridLayout" name="gridLayout_is">
     <property name="spacing">
@@ -651,6 +718,13 @@
         <property name="text">
          <string/>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="icon">
+         <iconset resource="../lux.qrc">
+          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+        </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        </widget>
       </item>
      </layout>
@@ -694,7 +768,11 @@
     </item>
    </layout>
   </widget>
+<<<<<<< HEAD
   <widget class="QFrame" name="SendCoins_AuthenticatedPaymentRequest">
+=======
+  <widget class="QFrame" name="SendCoins_SecurePaymentRequest">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    <property name="palette">
     <palette>
      <active>
@@ -1138,13 +1216,24 @@
     </palette>
    </property>
    <property name="toolTip">
+<<<<<<< HEAD
     <string>This is an authenticated payment request.</string>
+=======
+    <string>This is a verified payment request.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
    <property name="frameShape">
+<<<<<<< HEAD
     <enum>QFrame::NoFrame</enum>
+=======
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </property>
    <layout class="QGridLayout" name="gridLayout_s">
     <property name="spacing">
@@ -1180,6 +1269,13 @@
         <property name="text">
          <string/>
         </property>
+<<<<<<< HEAD
+=======
+        <property name="icon">
+         <iconset resource="../lux.qrc">
+          <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+        </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        </widget>
       </item>
      </layout>
@@ -1249,7 +1345,11 @@
   <tabstop>deleteButton_s</tabstop>
  </tabstops>
  <resources>
+<<<<<<< HEAD
   <include location="../gelcoin.qrc"/>
+=======
+  <include location="../lux.qrc"/>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  </resources>
  <connections/>
 </ui>

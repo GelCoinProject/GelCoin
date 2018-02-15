@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,27 +13,40 @@
 #include "pubkey.h"
 #include "script/standard.h"
 
+<<<<<<< HEAD
 bool CScriptCompressor::IsToKeyID(CKeyID &hash) const
 {
     if (script.size() == 25 && script[0] == OP_DUP && script[1] == OP_HASH160
                             && script[2] == 20 && script[23] == OP_EQUALVERIFY
                             && script[24] == OP_CHECKSIG) {
+=======
+bool CScriptCompressor::IsToKeyID(CKeyID& hash) const
+{
+    if (script.size() == 25 && script[0] == OP_DUP && script[1] == OP_HASH160 && script[2] == 20 && script[23] == OP_EQUALVERIFY && script[24] == OP_CHECKSIG) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         memcpy(&hash, &script[3], 20);
         return true;
     }
     return false;
 }
 
+<<<<<<< HEAD
 bool CScriptCompressor::IsToScriptID(CScriptID &hash) const
 {
     if (script.size() == 23 && script[0] == OP_HASH160 && script[1] == 20
                             && script[22] == OP_EQUAL) {
+=======
+bool CScriptCompressor::IsToScriptID(CScriptID& hash) const
+{
+    if (script.size() == 23 && script[0] == OP_HASH160 && script[1] == 20 && script[22] == OP_EQUAL) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         memcpy(&hash, &script[2], 20);
         return true;
     }
     return false;
 }
 
+<<<<<<< HEAD
 bool CScriptCompressor::IsToPubKey(CPubKey &pubkey) const
 {
     if (script.size() == 35 && script[0] == 33 && script[34] == OP_CHECKSIG
@@ -39,13 +56,26 @@ bool CScriptCompressor::IsToPubKey(CPubKey &pubkey) const
     }
     if (script.size() == 67 && script[0] == 65 && script[66] == OP_CHECKSIG
                             && script[1] == 0x04) {
+=======
+bool CScriptCompressor::IsToPubKey(CPubKey& pubkey) const
+{
+    if (script.size() == 35 && script[0] == 33 && script[34] == OP_CHECKSIG && (script[1] == 0x02 || script[1] == 0x03)) {
+        pubkey.Set(&script[1], &script[34]);
+        return true;
+    }
+    if (script.size() == 67 && script[0] == 65 && script[66] == OP_CHECKSIG && script[1] == 0x04) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         pubkey.Set(&script[1], &script[66]);
         return pubkey.IsFullyValid(); // if not fully valid, a case that would not be compressible
     }
     return false;
 }
 
+<<<<<<< HEAD
 bool CScriptCompressor::Compress(std::vector<unsigned char> &out) const
+=======
+bool CScriptCompressor::Compress(std::vector<unsigned char>& out) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     CKeyID keyID;
     if (IsToKeyID(keyID)) {
@@ -85,9 +115,15 @@ unsigned int CScriptCompressor::GetSpecialSize(unsigned int nSize) const
     return 0;
 }
 
+<<<<<<< HEAD
 bool CScriptCompressor::Decompress(unsigned int nSize, const std::vector<unsigned char> &in)
 {
     switch(nSize) {
+=======
+bool CScriptCompressor::Decompress(unsigned int nSize, const std::vector<unsigned char>& in)
+{
+    switch (nSize) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     case 0x00:
         script.resize(25);
         script[0] = OP_DUP;
@@ -152,9 +188,15 @@ uint64_t CTxOutCompressor::CompressAmount(uint64_t n)
         int d = (n % 10);
         assert(d >= 1 && d <= 9);
         n /= 10;
+<<<<<<< HEAD
         return 1 + (n*9 + d - 1)*10 + e;
     } else {
         return 1 + (n - 1)*10 + 9;
+=======
+        return 1 + (n * 9 + d - 1) * 10 + e;
+    } else {
+        return 1 + (n - 1) * 10 + 9;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 }
 
@@ -173,9 +215,15 @@ uint64_t CTxOutCompressor::DecompressAmount(uint64_t x)
         int d = (x % 9) + 1;
         x /= 9;
         // x = n
+<<<<<<< HEAD
         n = x*10 + d;
     } else {
         n = x+1;
+=======
+        n = x * 10 + d;
+    } else {
+        n = x + 1;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     while (e) {
         n *= 10;

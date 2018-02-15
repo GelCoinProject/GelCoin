@@ -6,7 +6,11 @@ AlignTrailingComments: true
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: false
 AllowShortFunctionsOnASingleLine: All
+<<<<<<< HEAD
 AllowShortIfStatementsOnASingleLine: false
+=======
+AllowShortIfStatementsOnASingleLine: true
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true

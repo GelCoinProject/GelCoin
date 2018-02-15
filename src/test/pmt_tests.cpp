@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "consensus/merkle.h"
+=======
+// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "merkleblock.h"
 #include "serialize.h"
 #include "streams.h"
 #include "uint256.h"
+<<<<<<< HEAD
 #include "arith_uint256.h"
 #include "version.h"
 #include "random.h"
@@ -15,6 +23,12 @@
 #include <vector>
 
 #include <boost/assign/list_of.hpp>
+=======
+#include "version.h"
+
+#include <vector>
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include <boost/test/unit_test.hpp>
 
 using namespace std;
@@ -24,6 +38,7 @@ class CPartialMerkleTreeTester : public CPartialMerkleTree
 public:
     // flip one bit in one of the hashes - this should break the authentication
     void Damage() {
+<<<<<<< HEAD
         unsigned int n = insecure_rand() % vHash.size();
         int bit = insecure_rand() % 256;
         *(vHash[n].begin() + (bit>>3)) ^= 1<<(bit&7);
@@ -35,6 +50,19 @@ BOOST_FIXTURE_TEST_SUITE(pmt_tests, BasicTestingSetup)
 BOOST_AUTO_TEST_CASE(pmt_test1)
 {
     seed_insecure_rand(false);
+=======
+        unsigned int n = rand() % vHash.size();
+        int bit = rand() % 256;
+        uint256 &hash = vHash[n];
+        hash ^= ((uint256)1 << bit);
+    }
+};
+
+BOOST_AUTO_TEST_SUITE(pmt_tests)
+
+BOOST_AUTO_TEST_CASE(pmt_test1)
+{
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     static const unsigned int nTxCounts[] = {1, 4, 7, 17, 56, 100, 127, 256, 312, 513, 1000, 4095};
 
     for (int n = 0; n < 12; n++) {
@@ -44,13 +72,22 @@ BOOST_AUTO_TEST_CASE(pmt_test1)
         CBlock block;
         for (unsigned int j=0; j<nTx; j++) {
             CMutableTransaction tx;
+<<<<<<< HEAD
             tx.nLockTime = j; // actual transaction data doesn't matter; just make the nLockTime's unique
+=======
+            tx.nLockTime = rand(); // actual transaction data doesn't matter; just make the nLockTime's unique
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             block.vtx.push_back(CTransaction(tx));
         }
 
         // calculate actual merkle root and height
+<<<<<<< HEAD
         uint256 merkleRoot1 = BlockMerkleRoot(block);
         std::vector<uint256> vTxid(nTx, uint256());
+=======
+        uint256 merkleRoot1 = block.BuildMerkleTree();
+        std::vector<uint256> vTxid(nTx, 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         for (unsigned int j=0; j<nTx; j++)
             vTxid[j] = block.vtx[j].GetHash();
         int nHeight = 1, nTx_ = nTx;
@@ -65,7 +102,11 @@ BOOST_AUTO_TEST_CASE(pmt_test1)
             std::vector<bool> vMatch(nTx, false);
             std::vector<uint256> vMatchTxid1;
             for (unsigned int j=0; j<nTx; j++) {
+<<<<<<< HEAD
                 bool fInclude = (insecure_rand() & ((1 << (att/2)) - 1)) == 0;
+=======
+                bool fInclude = (rand() & ((1 << (att/2)) - 1)) == 0;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 vMatch[j] = fInclude;
                 if (fInclude)
                     vMatchTxid1.push_back(vTxid[j]);
@@ -92,7 +133,11 @@ BOOST_AUTO_TEST_CASE(pmt_test1)
 
             // check that it has the same merkle root as the original, and a valid one
             BOOST_CHECK(merkleRoot1 == merkleRoot2);
+<<<<<<< HEAD
             BOOST_CHECK(!merkleRoot2.IsNull());
+=======
+            BOOST_CHECK(merkleRoot2 != 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
             // check that it contains the matched transactions (in the same order!)
             BOOST_CHECK(vMatchTxid1 == vMatchTxid2);
@@ -109,6 +154,7 @@ BOOST_AUTO_TEST_CASE(pmt_test1)
     }
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(pmt_malleability)
 {
     std::vector<uint256> vTxid = boost::assign::list_of
@@ -125,4 +171,6 @@ BOOST_AUTO_TEST_CASE(pmt_malleability)
     BOOST_CHECK(tree.ExtractMatches(vTxid).IsNull());
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_SUITE_END()

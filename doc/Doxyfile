@@ -28,13 +28,21 @@ DOXYFILE_ENCODING      = UTF-8
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded
 # by quotes) that should identify the project.
 
+<<<<<<< HEAD
 PROJECT_NAME           = "GelCoin"
+=======
+PROJECT_NAME           = LUX
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number.
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
+<<<<<<< HEAD
 PROJECT_NUMBER         = 0.12.2.3
+=======
+PROJECT_NUMBER         = 2.3.99
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer
@@ -112,7 +120,11 @@ ABBREVIATE_BRIEF       = "The $name class" \
                          represents \
                          a \
                          an \
+<<<<<<< HEAD
                          the
+=======
+                         the 
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # If the ALWAYS_DETAILED_SEC and REPEAT_BRIEF tags are both set to YES then
 # Doxygen will generate a detailed section even if there is only a brief
@@ -341,7 +353,11 @@ EXTRACT_PRIVATE        = YES
 # If the EXTRACT_STATIC tag is set to YES all static members of a file
 # will be included in the documentation.
 
+<<<<<<< HEAD
 EXTRACT_STATIC         = YES
+=======
+EXTRACT_STATIC         = NO
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES classes (and structs)
 # defined locally in source files will be included in the documentation.

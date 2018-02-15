@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>576</width>
+<<<<<<< HEAD
     <height>402</height>
+=======
+    <height>417</height>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,10 +34,17 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Automatically start GelCoin after logging in to the system.</string>
          </property>
          <property name="text">
           <string>&amp;Start GelCoin on system login</string>
+=======
+          <string>Automatically start LUX after logging in to the system.</string>
+         </property>
+         <property name="text">
+          <string>&amp;Start LUX on system login</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
         </widget>
        </item>
@@ -130,6 +141,7 @@
          </property>
         </spacer>
        </item>
+<<<<<<< HEAD
       </layout>
      </widget>
      <widget class="QWidget" name="tabWallet">
@@ -208,18 +220,30 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4_Wallet">
+=======
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4_Main">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          <item>
           <widget class="QLabel" name="label">
            <property name="toolTip">
             <string>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</string>
            </property>
            <property name="text">
+<<<<<<< HEAD
             <string>PrivateSend rounds to use</string>
+=======
+            <string>Obfuscation rounds to use</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <widget class="QSpinBox" name="privateSendRounds">
+=======
+          <widget class="QSpinBox" name="darksendRounds">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="minimum">
             <number>2</number>
            </property>
@@ -238,7 +262,11 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>This amount acts as a threshold to turn off PrivateSend once it's reached.</string>
+=======
+            <string>This amount acts as a threshold to turn off Obfuscation once it's reached.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
            <property name="statusTip">
             <string notr="true"/>
@@ -253,11 +281,16 @@
             <string notr="true"/>
            </property>
            <property name="text">
+<<<<<<< HEAD
             <string>Amount of GelCoin to keep anonymized</string>
+=======
+            <string>Amount of LUX to keep anonymized</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>
          <item>
+<<<<<<< HEAD
           <widget class="QSpinBox" name="privateSendAmount">
            <property name="minimum">
             <number>2</number>
@@ -267,6 +300,17 @@
            </property>
            <property name="singleStep">
             <number>10</number>
+=======
+          <widget class="QSpinBox" name="anonymizeLux">
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>100000</number>
+           </property>
+           <property name="singleStep">
+            <number>100</number>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
            <property name="value">
             <number>1000</number>
@@ -275,6 +319,55 @@
          </item>
         </layout>
        </item>
+<<<<<<< HEAD
+=======
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabWallet">
+      <attribute name="title">
+       <string>W&amp;allet</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_Wallet">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Expert</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="coinControlFeatures">
+            <property name="toolTip">
+             <string>Whether to show coin control features or not.</string>
+            </property>
+            <property name="text">
+             <string>Enable coin &amp;control features</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="showMasternodesTab">
+            <property name="toolTip">
+             <string>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</string>
+            </property>
+            <property name="text">
+             <string>Show Masternodes Tab</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="spendZeroConfChange">
+            <property name="toolTip">
+             <string>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</string>
+            </property>
+            <property name="text">
+             <string>&amp;Spend unconfirmed change</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <item>
         <spacer name="verticalSpacer_Wallet">
          <property name="orientation">
@@ -298,7 +391,11 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Automatically open the GelCoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+=======
+          <string>Automatically open the LUX client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -318,7 +415,11 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Connect to the GelCoin network through a SOCKS5 proxy.</string>
+=======
+          <string>Connect to the LUX network through a SOCKS5 proxy.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -407,6 +508,7 @@
         </layout>
        </item>
        <item>
+<<<<<<< HEAD
         <layout class="QHBoxLayout" name="horizontalLayout_2_Network">
          <item>
           <widget class="QLabel" name="proxyActiveNets">
@@ -594,6 +696,8 @@
         </layout>
        </item>
        <item>
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         <spacer name="verticalSpacer_Network">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -614,6 +718,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Window">
        <item>
+<<<<<<< HEAD
         <widget class="QCheckBox" name="hideTrayIcon">
          <property name="toolTip">
           <string>&amp;Hide the icon from the system tray.</string>
@@ -624,6 +729,8 @@
         </widget>
        </item>
        <item>
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         <widget class="QCheckBox" name="minimizeToTray">
          <property name="toolTip">
           <string>Show only a tray icon after minimizing the window.</string>
@@ -636,7 +743,11 @@
        <item>
         <widget class="QCheckBox" name="minimizeOnClose">
          <property name="toolTip">
+<<<<<<< HEAD
           <string>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</string>
+=======
+          <string>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="text">
           <string>M&amp;inimize on close</string>
@@ -681,7 +792,11 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The user interface language can be set here. This setting will take effect after restarting GelCoin.</string>
+=======
+            <string>The user interface language can be set here. This setting will take effect after restarting LUX.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>
@@ -703,7 +818,11 @@
          </property>
          <property name="text">
           <string>Language missing or translation incomplete? Help contributing translations here:
+<<<<<<< HEAD
 https://www.transifex.com/projects/p/gelcoin/</string>
+=======
+https://www.transifex.com/lux-project/lux-project-translations</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -780,7 +899,11 @@ https://www.transifex.com/projects/p/gelcoin/</string>
          <item>
           <widget class="QLabel" name="thirdPartyTxUrlsLabel">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items.&lt;br/&gt;%s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
+=======
+            <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
            <property name="text">
             <string>Third party transaction URLs</string>
@@ -793,7 +916,11 @@ https://www.transifex.com/projects/p/gelcoin/</string>
          <item>
           <widget class="QLineEdit" name="thirdPartyTxUrls">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items.&lt;br/&gt;%s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
+=======
+            <string>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>

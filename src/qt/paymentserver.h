@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2011-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +10,11 @@
 #define BITCOIN_QT_PAYMENTSERVER_H
 
 // This class handles payment requests from clicking on
+<<<<<<< HEAD
 // gelcoin: URIs
+=======
+// lux: URIs
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 //
 // This is somewhat tricky, because we have to deal with
 // the situation where the user clicks on a link during
@@ -62,7 +70,11 @@ class PaymentServer : public QObject
 public:
     // Parse URIs on command line
     // Returns false on error
+<<<<<<< HEAD
     static void ipcParseCommandLine(int argc, char *argv[]);
+=======
+    static void ipcParseCommandLine(int argc, char* argv[]);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     // Returns true if there were URIs on the command line
     // which were successfully sent to an already-running
@@ -86,6 +98,7 @@ public:
     static X509_STORE* getCertStore();
 
     // OptionsModel is used for getting proxy settings and display unit
+<<<<<<< HEAD
     void setOptionsModel(OptionsModel *optionsModel);
 
     // Verify that the payment request network matches the client network
@@ -98,16 +111,33 @@ public:
     static bool verifyAmount(const CAmount& requestAmount);
 
 Q_SIGNALS:
+=======
+    void setOptionsModel(OptionsModel* optionsModel);
+
+    // This is now public, because we use it in paymentservertests.cpp
+    static bool readPaymentRequestFromFile(const QString& filename, PaymentRequestPlus& request);
+
+signals:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // Fired when a valid payment request is received
     void receivedPaymentRequest(SendCoinsRecipient);
 
     // Fired when a valid PaymentACK is received
+<<<<<<< HEAD
     void receivedPaymentACK(const QString &paymentACKMsg);
 
     // Fired when a message should be reported to the user
     void message(const QString &title, const QString &message, unsigned int style);
 
 public Q_SLOTS:
+=======
+    void receivedPaymentACK(const QString& paymentACKMsg);
+
+    // Fired when a message should be reported to the user
+    void message(const QString& title, const QString& message, unsigned int style);
+
+public slots:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // Signal this when the main window's UI is ready
     // to display payment requests to the user
     void uiReady();
@@ -118,31 +148,52 @@ public Q_SLOTS:
     // Handle an incoming URI, URI with local file scheme or file
     void handleURIOrFile(const QString& s);
 
+<<<<<<< HEAD
 private Q_SLOTS:
     void handleURIConnection();
     void netRequestFinished(QNetworkReply*);
     void reportSslErrors(QNetworkReply*, const QList<QSslError> &);
+=======
+private slots:
+    void handleURIConnection();
+    void netRequestFinished(QNetworkReply*);
+    void reportSslErrors(QNetworkReply*, const QList<QSslError>&);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     void handlePaymentACK(const QString& paymentACKMsg);
 
 protected:
     // Constructor registers this on the parent QApplication to
     // receive QEvent::FileOpen and QEvent:Drop events
+<<<<<<< HEAD
     bool eventFilter(QObject *object, QEvent *event);
 
 private:
     static bool readPaymentRequestFromFile(const QString& filename, PaymentRequestPlus& request);
     bool processPaymentRequest(const PaymentRequestPlus& request, SendCoinsRecipient& recipient);
+=======
+    bool eventFilter(QObject* object, QEvent* event);
+
+private:
+    bool processPaymentRequest(PaymentRequestPlus& request, SendCoinsRecipient& recipient);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     void fetchRequest(const QUrl& url);
 
     // Setup networking
     void initNetManager();
 
+<<<<<<< HEAD
     bool saveURIs;                      // true during startup
     QLocalServer* uriServer;
 
     QNetworkAccessManager* netManager;  // Used to fetch payment requests
 
     OptionsModel *optionsModel;
+=======
+    bool saveURIs; // true during startup
+    QLocalServer* uriServer;
+    QNetworkAccessManager* netManager;  // Used to fetch payment requests
+    OptionsModel* optionsModel;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 #endif // BITCOIN_QT_PAYMENTSERVER_H

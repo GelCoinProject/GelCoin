@@ -3,7 +3,11 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/gelcoin-config.h"
+=======
+#include "config/lux-config.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #include <cstddef>
@@ -65,4 +69,8 @@ bool glibc_sanity_test()
         return false;
 #endif
     return sanity_test_memcpy<1025>();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

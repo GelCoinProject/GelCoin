@@ -1,19 +1,31 @@
 // Copyright 2014 BitPay, Inc.
+<<<<<<< HEAD
 // Distributed under the MIT software license, see the accompanying
+=======
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <stdint.h>
 #include <vector>
 #include <string>
 #include <map>
+<<<<<<< HEAD
 #include <univalue.h>
 #include "test/test_gelcoin.h"
+=======
+#include "univalue/univalue.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <boost/test/unit_test.hpp>
 
 using namespace std;
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(univalue_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(univalue_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(univalue_constructor)
 {
@@ -63,6 +75,7 @@ BOOST_AUTO_TEST_CASE(univalue_constructor)
     BOOST_CHECK_EQUAL(v9.getValStr(), "zappa");
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(univalue_typecheck)
 {
     UniValue v1;
@@ -105,6 +118,8 @@ BOOST_AUTO_TEST_CASE(univalue_typecheck)
     BOOST_CHECK_THROW(vals[1].get_bool(), runtime_error);
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_CASE(univalue_set)
 {
     UniValue v(UniValue::VSTR, "foo");
@@ -114,13 +129,21 @@ BOOST_AUTO_TEST_CASE(univalue_set)
 
     BOOST_CHECK(v.setObject());
     BOOST_CHECK(v.isObject());
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(v.size(), 0);
+=======
+    BOOST_CHECK_EQUAL(v.count(), 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BOOST_CHECK_EQUAL(v.getType(), UniValue::VOBJ);
     BOOST_CHECK(v.empty());
 
     BOOST_CHECK(v.setArray());
     BOOST_CHECK(v.isArray());
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(v.size(), 0);
+=======
+    BOOST_CHECK_EQUAL(v.count(), 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     BOOST_CHECK(v.setStr("zum"));
     BOOST_CHECK(v.isStr());
@@ -187,7 +210,11 @@ BOOST_AUTO_TEST_CASE(univalue_array)
     BOOST_CHECK(arr.push_backV(vec));
 
     BOOST_CHECK_EQUAL(arr.empty(), false);
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(arr.size(), 5);
+=======
+    BOOST_CHECK_EQUAL(arr.count(), 5);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     BOOST_CHECK_EQUAL(arr[0].getValStr(), "1023");
     BOOST_CHECK_EQUAL(arr[1].getValStr(), "zippy");
@@ -199,7 +226,11 @@ BOOST_AUTO_TEST_CASE(univalue_array)
 
     arr.clear();
     BOOST_CHECK(arr.empty());
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(arr.size(), 0);
+=======
+    BOOST_CHECK_EQUAL(arr.count(), 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 BOOST_AUTO_TEST_CASE(univalue_object)
@@ -239,7 +270,11 @@ BOOST_AUTO_TEST_CASE(univalue_object)
     BOOST_CHECK(obj.pushKVs(obj2));
 
     BOOST_CHECK_EQUAL(obj.empty(), false);
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(obj.size(), 9);
+=======
+    BOOST_CHECK_EQUAL(obj.count(), 9);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     BOOST_CHECK_EQUAL(obj["age"].getValStr(), "100");
     BOOST_CHECK_EQUAL(obj["first"].getValStr(), "John");
@@ -282,11 +317,19 @@ BOOST_AUTO_TEST_CASE(univalue_object)
 
     obj.clear();
     BOOST_CHECK(obj.empty());
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(obj.size(), 0);
 }
 
 static const char *json1 =
 "[1.10000000,{\"key1\":\"str\\u0000\",\"key2\":800,\"key3\":{\"name\":\"martian http://test.com\"}}]";
+=======
+    BOOST_CHECK_EQUAL(obj.count(), 0);
+}
+
+static const char *json1 =
+"[1.1,{\"key1\":\"str\",\"key2\":800,\"key3\":{\"name\":\"martian\"}}]";
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(univalue_readwrite)
 {
@@ -297,6 +340,7 @@ BOOST_AUTO_TEST_CASE(univalue_readwrite)
     BOOST_CHECK(v.read(strJson1));
 
     BOOST_CHECK(v.isArray());
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(v.size(), 2);
 
     BOOST_CHECK_EQUAL(v[0].getValStr(), "1.10000000");
@@ -309,11 +353,24 @@ BOOST_AUTO_TEST_CASE(univalue_readwrite)
     std::string correctValue("str");
     correctValue.push_back('\0');
     BOOST_CHECK_EQUAL(obj["key1"].getValStr(), correctValue);
+=======
+    BOOST_CHECK_EQUAL(v.count(), 2);
+
+    BOOST_CHECK_EQUAL(v[0].getValStr(), "1.1");
+
+    UniValue obj = v[1];
+    BOOST_CHECK(obj.isObject());
+    BOOST_CHECK_EQUAL(obj.count(), 3);
+
+    BOOST_CHECK(obj["key1"].isStr());
+    BOOST_CHECK_EQUAL(obj["key1"].getValStr(), "str");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BOOST_CHECK(obj["key2"].isNum());
     BOOST_CHECK_EQUAL(obj["key2"].getValStr(), "800");
     BOOST_CHECK(obj["key3"].isObject());
 
     BOOST_CHECK_EQUAL(strJson1, v.write());
+<<<<<<< HEAD
 
     /* Check for (correctly reporting) a parsing error if the initial
        JSON construct is followed by more stuff.  Note that whitespace
@@ -329,6 +386,8 @@ BOOST_AUTO_TEST_CASE(univalue_readwrite)
     BOOST_CHECK(!v.read("[]{}"));
     BOOST_CHECK(!v.read("{}[]"));
     BOOST_CHECK(!v.read("{} 42"));
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -1,24 +1,41 @@
 #!/usr/bin/make -f
 # -*- mode: makefile; coding: utf-8 -*-
 
+<<<<<<< HEAD
 #DEB_MAKE_CHECK_TARGET = test_gelcoin
 #build/gelcoind::
 #	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),,src/test_gelcoin)
 
 DEB_INSTALL_EXAMPLES_gelcoind += debian/examples/*
 DEB_INSTALL_MANPAGES_gelcoind += debian/manpages/*
+=======
+#DEB_MAKE_CHECK_TARGET = test_lux
+#build/bitcoind::
+#	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),,src/test_lux)
+
+DEB_INSTALL_EXAMPLES_bitcoind += debian/examples/*
+DEB_INSTALL_MANPAGES_bitcoind += debian/manpages/*
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 %:
 	dh --with bash-completion $@
 
 override_dh_auto_clean:
 	if [ -f Makefile ]; then $(MAKE) distclean; fi
+<<<<<<< HEAD
 	rm -rf Makefile.in aclocal.m4 configure src/Makefile.in src/gelcoin-config.h.in src/build-aux src/qt/Makefile.in src/qt/test/Makefile.in src/test/Makefile.in
+=======
+	rm -rf Makefile.in aclocal.m4 configure src/Makefile.in src/lux-config.h.in src/build-aux src/qt/Makefile.in src/qt/test/Makefile.in src/test/Makefile.in
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # Yea, autogen should be run on the source archive, but I like doing git archive
 override_dh_auto_configure:
 	./autogen.sh
+<<<<<<< HEAD
 	./configure --without-miniupnpc --with-gui=qt4
+=======
+	./configure
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 override_dh_auto_test:
 	make check

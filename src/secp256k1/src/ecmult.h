@@ -10,6 +10,7 @@
 #include "num.h"
 #include "group.h"
 
+<<<<<<< HEAD
 typedef struct {
     /* For accelerating the computation of a*P + b*G: */
     secp256k1_ge_storage (*pre_g)[];    /* odd multiples of the generator */
@@ -27,5 +28,12 @@ static int secp256k1_ecmult_context_is_built(const secp256k1_ecmult_context *ctx
 
 /** Double multiply: R = na*A + ng*G */
 static void secp256k1_ecmult(const secp256k1_ecmult_context *ctx, secp256k1_gej *r, const secp256k1_gej *a, const secp256k1_scalar *na, const secp256k1_scalar *ng);
+=======
+static void secp256k1_ecmult_start(void);
+static void secp256k1_ecmult_stop(void);
+
+/** Double multiply: R = na*A + ng*G */
+static void secp256k1_ecmult(secp256k1_gej_t *r, const secp256k1_gej_t *a, const secp256k1_scalar_t *na, const secp256k1_scalar_t *ng);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #endif

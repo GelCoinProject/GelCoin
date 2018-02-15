@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "qvalidatedlineedit.h"
@@ -7,16 +12,23 @@
 #include "bitcoinaddressvalidator.h"
 #include "guiconstants.h"
 
+<<<<<<< HEAD
 QValidatedLineEdit::QValidatedLineEdit(QWidget *parent) :
     QLineEdit(parent),
     valid(true),
     checkValidator(0)
+=======
+QValidatedLineEdit::QValidatedLineEdit(QWidget* parent) : QLineEdit(parent),
+                                                          valid(true),
+                                                          checkValidator(0)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     connect(this, SIGNAL(textChanged(QString)), this, SLOT(markValid()));
 }
 
 void QValidatedLineEdit::setValid(bool valid)
 {
+<<<<<<< HEAD
     if(valid == this->valid)
     {
         return;
@@ -28,12 +40,25 @@ void QValidatedLineEdit::setValid(bool valid)
     }
     else
     {
+=======
+    if (valid == this->valid) {
+        return;
+    }
+
+    if (valid) {
+        setStyleSheet("");
+    } else {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         setStyleSheet(STYLE_INVALID);
     }
     this->valid = valid;
 }
 
+<<<<<<< HEAD
 void QValidatedLineEdit::focusInEvent(QFocusEvent *evt)
+=======
+void QValidatedLineEdit::focusInEvent(QFocusEvent* evt)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     // Clear invalid flag on focus
     setValid(true);
@@ -41,7 +66,11 @@ void QValidatedLineEdit::focusInEvent(QFocusEvent *evt)
     QLineEdit::focusInEvent(evt);
 }
 
+<<<<<<< HEAD
 void QValidatedLineEdit::focusOutEvent(QFocusEvent *evt)
+=======
+void QValidatedLineEdit::focusOutEvent(QFocusEvent* evt)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     checkValidity();
 
@@ -62,6 +91,7 @@ void QValidatedLineEdit::clear()
 
 void QValidatedLineEdit::setEnabled(bool enabled)
 {
+<<<<<<< HEAD
     if (!enabled)
     {
         // A disabled QValidatedLineEdit should be marked valid
@@ -69,6 +99,12 @@ void QValidatedLineEdit::setEnabled(bool enabled)
     }
     else
     {
+=======
+    if (!enabled) {
+        // A disabled QValidatedLineEdit should be marked valid
+        setValid(true);
+    } else {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         // Recheck validity when QValidatedLineEdit gets enabled
         checkValidity();
     }
@@ -78,6 +114,7 @@ void QValidatedLineEdit::setEnabled(bool enabled)
 
 void QValidatedLineEdit::checkValidity()
 {
+<<<<<<< HEAD
     if (text().isEmpty())
     {
         setValid(true);
@@ -89,6 +126,15 @@ void QValidatedLineEdit::checkValidity()
         // Check contents on focus out
         if (checkValidator)
         {
+=======
+    if (text().isEmpty()) {
+        setValid(true);
+    } else if (hasAcceptableInput()) {
+        setValid(true);
+
+        // Check contents on focus out
+        if (checkValidator) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             QString address = text();
             int pos = 0;
             if (checkValidator->validate(address, pos) == QValidator::Acceptable)
@@ -96,6 +142,7 @@ void QValidatedLineEdit::checkValidity()
             else
                 setValid(false);
         }
+<<<<<<< HEAD
     }
     else
         setValid(false);
@@ -121,3 +168,13 @@ bool QValidatedLineEdit::isValid()
 
     return valid;
 }
+=======
+    } else
+        setValid(false);
+}
+
+void QValidatedLineEdit::setCheckValidator(const QValidator* v)
+{
+    checkValidator = v;
+}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

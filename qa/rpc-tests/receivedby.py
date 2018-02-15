@@ -1,12 +1,22 @@
 #!/usr/bin/env python2
+<<<<<<< HEAD
 # Copyright (c) 2014-2015 The Bitcoin Core developers
+=======
+# Copyright (c) 2014 The Bitcoin Core developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 # Exercise the listreceivedbyaddress API
 
+<<<<<<< HEAD
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
+=======
+from test_framework import BitcoinTestFramework
+from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+from util import *
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 
 def get_sub_array_from_array(object_array, to_match):
@@ -25,12 +35,42 @@ def get_sub_array_from_array(object_array, to_match):
         return item
     return []
 
+<<<<<<< HEAD
 class ReceivedByTest(BitcoinTestFramework):
 
     def setup_nodes(self):
         #This test requires mocktime
         enable_mocktime()
         return start_nodes(4, self.options.tmpdir)
+=======
+def check_array_result(object_array, to_match, expected, should_not_find = False):
+    """
+        Pass in array of JSON objects, a dictionary with key/value pairs
+        to match against, and another dictionary with expected key/value
+        pairs.
+        If the should_not_find flag is true, to_match should not be found in object_array
+        """
+    if should_not_find == True:
+        expected = { }
+    num_matched = 0
+    for item in object_array:
+        all_match = True
+        for key,value in to_match.items():
+            if item[key] != value:
+                all_match = False
+        if not all_match:
+            continue
+        for key,value in expected.items():
+            if item[key] != value:
+                raise AssertionError("%s : expected %s=%s"%(str(item), str(key), str(value)))
+            num_matched = num_matched+1
+    if num_matched == 0 and should_not_find != True:
+        raise AssertionError("No objects matched %s"%(str(to_match)))
+    if num_matched > 0 and should_not_find == True:
+        raise AssertionError("Objects was matched %s"%(str(to_match)))
+
+class ReceivedByTest(BitcoinTestFramework):
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     def run_test(self):
         '''
@@ -42,11 +82,16 @@ class ReceivedByTest(BitcoinTestFramework):
         self.sync_all()
 
         #Check not listed in listreceivedbyaddress because has 0 confirmations
+<<<<<<< HEAD
         assert_array_result(self.nodes[1].listreceivedbyaddress(),
+=======
+        check_array_result(self.nodes[1].listreceivedbyaddress(),
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                            {"address":addr},
                            { },
                            True)
         #Bury Tx under 10 block so it will be returned by listreceivedbyaddress
+<<<<<<< HEAD
         self.nodes[1].generate(10)
         self.sync_all()
         assert_array_result(self.nodes[1].listreceivedbyaddress(),
@@ -62,6 +107,23 @@ class ReceivedByTest(BitcoinTestFramework):
         #Empty Tx
         addr = self.nodes[1].getnewaddress()
         assert_array_result(self.nodes[1].listreceivedbyaddress(0, False, True),
+=======
+        self.nodes[1].setgenerate(True, 10)
+        self.sync_all()
+        check_array_result(self.nodes[1].listreceivedbyaddress(),
+                           {"address":addr},
+                           {"address":addr, "account":"", "amount":Decimal("0.1"), "confirmations":10, "txids":[txid,]})
+        #With min confidence < 10
+        check_array_result(self.nodes[1].listreceivedbyaddress(5),
+                           {"address":addr},
+                           {"address":addr, "account":"", "amount":Decimal("0.1"), "confirmations":10, "txids":[txid,]})
+        #With min confidence > 10, should not find Tx
+        check_array_result(self.nodes[1].listreceivedbyaddress(11),{"address":addr},{ },True)
+
+        #Empty Tx
+        addr = self.nodes[1].getnewaddress()
+        check_array_result(self.nodes[1].listreceivedbyaddress(0,True),
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                            {"address":addr},
                            {"address":addr, "account":"", "amount":0, "confirmations":0, "txids":[]})
 
@@ -84,7 +146,11 @@ class ReceivedByTest(BitcoinTestFramework):
             raise AssertionError("Wrong balance returned by getreceivedbyaddress, %0.2f"%(balance))
 
         #Bury Tx under 10 block so it will be returned by the default getreceivedbyaddress
+<<<<<<< HEAD
         self.nodes[1].generate(10)
+=======
+        self.nodes[1].setgenerate(True, 10)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         self.sync_all()
         balance = self.nodes[1].getreceivedbyaddress(addr)
         if balance != Decimal("0.1"):
@@ -105,7 +171,11 @@ class ReceivedByTest(BitcoinTestFramework):
         self.sync_all()
 
         # listreceivedbyaccount should return received_by_account_json because of 0 confirmations
+<<<<<<< HEAD
         assert_array_result(self.nodes[1].listreceivedbyaccount(),
+=======
+        check_array_result(self.nodes[1].listreceivedbyaccount(),
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                            {"account":account},
                            received_by_account_json)
 
@@ -114,10 +184,17 @@ class ReceivedByTest(BitcoinTestFramework):
         if balance != balance_by_account:
             raise AssertionError("Wrong balance returned by getreceivedbyaccount, %0.2f"%(balance))
 
+<<<<<<< HEAD
         self.nodes[1].generate(10)
         self.sync_all()
         # listreceivedbyaccount should return updated account balance
         assert_array_result(self.nodes[1].listreceivedbyaccount(),
+=======
+        self.nodes[1].setgenerate(True, 10)
+        self.sync_all()
+        # listreceivedbyaccount should return updated account balance
+        check_array_result(self.nodes[1].listreceivedbyaccount(),
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                            {"account":account},
                            {"account":received_by_account_json["account"], "amount":(received_by_account_json["amount"] + Decimal("0.1"))})
 
@@ -128,7 +205,11 @@ class ReceivedByTest(BitcoinTestFramework):
 
         #Create a new account named "mynewaccount" that has a 0 balance
         self.nodes[1].getaccountaddress("mynewaccount")
+<<<<<<< HEAD
         received_by_account_json = get_sub_array_from_array(self.nodes[1].listreceivedbyaccount(0, False, True),{"account":"mynewaccount"})
+=======
+        received_by_account_json = get_sub_array_from_array(self.nodes[1].listreceivedbyaccount(0,True),{"account":"mynewaccount"})
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         if len(received_by_account_json) == 0:
             raise AssertionError("No accounts found in node")
 

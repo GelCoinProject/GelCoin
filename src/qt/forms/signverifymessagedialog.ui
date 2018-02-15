@@ -30,7 +30,11 @@
        <item>
         <widget class="QLabel" name="infoLabel_SM">
          <property name="text">
+<<<<<<< HEAD
           <string>You can sign messages/agreements with your addresses to prove you can receive GelCoin sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
+=======
+          <string>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -48,7 +52,11 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_SM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The GelCoin address to sign the message with</string>
+=======
+            <string>The LUX address to sign the message with</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>
@@ -60,6 +68,13 @@
            <property name="text">
             <string/>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="shortcut">
             <string>Alt+A</string>
            </property>
@@ -76,6 +91,13 @@
            <property name="text">
             <string/>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="shortcut">
             <string>Alt+P</string>
            </property>
@@ -128,6 +150,13 @@
            <property name="text">
             <string/>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/editcopy</normaloff>:/icons/editcopy</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -140,11 +169,22 @@
          <item>
           <widget class="QPushButton" name="signMessageButton_SM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Sign the message to prove you own this GelCoin address</string>
+=======
+            <string>Sign the message to prove you own this LUX address</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
            <property name="text">
             <string>Sign &amp;Message</string>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -158,6 +198,13 @@
            <property name="text">
             <string>Clear &amp;All</string>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -217,7 +264,11 @@
        <item>
         <widget class="QLabel" name="infoLabel_VM">
          <property name="text">
+<<<<<<< HEAD
           <string>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</string>
+=======
+          <string>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -238,7 +289,11 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_VM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>The GelCoin address the message was signed with</string>
+=======
+            <string>The LUX address the message was signed with</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
           </widget>
          </item>
@@ -250,6 +305,13 @@
            <property name="text">
             <string/>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="shortcut">
             <string>Alt+A</string>
            </property>
@@ -271,11 +333,22 @@
          <item>
           <widget class="QPushButton" name="verifyMessageButton_VM">
            <property name="toolTip">
+<<<<<<< HEAD
             <string>Verify the message to ensure it was signed with the specified GelCoin address</string>
+=======
+            <string>Verify the message to ensure it was signed with the specified LUX address</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            </property>
            <property name="text">
             <string>Verify &amp;Message</string>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/transaction_0</normaloff>:/icons/transaction_0</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -289,6 +362,13 @@
            <property name="text">
             <string>Clear &amp;All</string>
            </property>
+<<<<<<< HEAD
+=======
+           <property name="icon">
+            <iconset resource="../lux.qrc">
+             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+           </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -352,7 +432,11 @@
   </customwidget>
  </customwidgets>
  <resources>
+<<<<<<< HEAD
   <include location="../gelcoin.qrc"/>
+=======
+  <include location="../lux.qrc"/>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  </resources>
  <connections/>
 </ui>

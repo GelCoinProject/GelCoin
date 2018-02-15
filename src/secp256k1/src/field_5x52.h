@@ -16,6 +16,7 @@ typedef struct {
     int magnitude;
     int normalized;
 #endif
+<<<<<<< HEAD
 } secp256k1_fe;
 
 /* Unpacks a constant into a overlapping multi-limbed FE element. */
@@ -43,5 +44,8 @@ typedef struct {
     (d4) | (((uint64_t)(d5)) << 32), \
     (d6) | (((uint64_t)(d7)) << 32) \
 }}
+=======
+} secp256k1_fe_t;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #endif

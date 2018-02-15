@@ -1,20 +1,35 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2014 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "recentrequeststablemodel.h"
 
 #include "bitcoinunits.h"
+<<<<<<< HEAD
 #include "guiutil.h"
 #include "optionsmodel.h"
 
 #include "clientversion.h"
+=======
+#include "clientversion.h"
+#include "guiutil.h"
+#include "optionsmodel.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "streams.h"
 
 #include <boost/foreach.hpp>
 
+<<<<<<< HEAD
 RecentRequestsTableModel::RecentRequestsTableModel(CWallet *wallet, WalletModel *parent) :
     QAbstractTableModel(parent), walletModel(parent)
+=======
+RecentRequestsTableModel::RecentRequestsTableModel(CWallet* wallet, WalletModel* parent) : walletModel(parent)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     Q_UNUSED(wallet);
     nReceiveRequestsMaxId = 0;
@@ -22,7 +37,11 @@ RecentRequestsTableModel::RecentRequestsTableModel(CWallet *wallet, WalletModel 
     // Load entries from wallet
     std::vector<std::string> vReceiveRequests;
     parent->loadReceiveRequests(vReceiveRequests);
+<<<<<<< HEAD
     BOOST_FOREACH(const std::string& request, vReceiveRequests)
+=======
+    BOOST_FOREACH (const std::string& request, vReceiveRequests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         addNewRequest(request);
 
     /* These columns must match the indices in the ColumnIndex enumeration */
@@ -36,20 +55,29 @@ RecentRequestsTableModel::~RecentRequestsTableModel()
     /* Intentionally left empty */
 }
 
+<<<<<<< HEAD
 int RecentRequestsTableModel::rowCount(const QModelIndex &parent) const
+=======
+int RecentRequestsTableModel::rowCount(const QModelIndex& parent) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     Q_UNUSED(parent);
 
     return list.length();
 }
 
+<<<<<<< HEAD
 int RecentRequestsTableModel::columnCount(const QModelIndex &parent) const
+=======
+int RecentRequestsTableModel::columnCount(const QModelIndex& parent) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     Q_UNUSED(parent);
 
     return columns.length();
 }
 
+<<<<<<< HEAD
 QVariant RecentRequestsTableModel::data(const QModelIndex &index, int role) const
 {
     if(!index.isValid() || index.row() >= list.length())
@@ -79,6 +107,29 @@ QVariant RecentRequestsTableModel::data(const QModelIndex &index, int role) cons
             }
             else
             {
+=======
+QVariant RecentRequestsTableModel::data(const QModelIndex& index, int role) const
+{
+    if (!index.isValid() || index.row() >= list.length())
+        return QVariant();
+
+    const RecentRequestEntry* rec = &list[index.row()];
+
+    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+        switch (index.column()) {
+        case Date:
+            return GUIUtil::dateTimeStr(rec->date);
+        case Label:
+            if (rec->recipient.label.isEmpty() && role == Qt::DisplayRole) {
+                return tr("(no label)");
+            } else {
+                return rec->recipient.label;
+            }
+        case Message:
+            if (rec->recipient.message.isEmpty() && role == Qt::DisplayRole) {
+                return tr("(no message)");
+            } else {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 return rec->recipient.message;
             }
         case Amount:
@@ -89,26 +140,41 @@ QVariant RecentRequestsTableModel::data(const QModelIndex &index, int role) cons
             else
                 return BitcoinUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount);
         }
+<<<<<<< HEAD
     }
     else if (role == Qt::TextAlignmentRole)
     {
         if (index.column() == Amount)
             return (int)(Qt::AlignRight|Qt::AlignVCenter);
+=======
+    } else if (role == Qt::TextAlignmentRole) {
+        if (index.column() == Amount)
+            return (int)(Qt::AlignRight | Qt::AlignVCenter);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     return QVariant();
 }
 
+<<<<<<< HEAD
 bool RecentRequestsTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
+=======
+bool RecentRequestsTableModel::setData(const QModelIndex& index, const QVariant& value, int role)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     return true;
 }
 
 QVariant RecentRequestsTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
+<<<<<<< HEAD
     if(orientation == Qt::Horizontal)
     {
         if(role == Qt::DisplayRole && section < columns.size())
         {
+=======
+    if (orientation == Qt::Horizontal) {
+        if (role == Qt::DisplayRole && section < columns.size()) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             return columns[section];
         }
     }
@@ -119,27 +185,41 @@ QVariant RecentRequestsTableModel::headerData(int section, Qt::Orientation orien
 void RecentRequestsTableModel::updateAmountColumnTitle()
 {
     columns[Amount] = getAmountTitle();
+<<<<<<< HEAD
     Q_EMIT headerDataChanged(Qt::Horizontal,Amount,Amount);
+=======
+    emit headerDataChanged(Qt::Horizontal, Amount, Amount);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 /** Gets title for amount column including current display unit if optionsModel reference available. */
 QString RecentRequestsTableModel::getAmountTitle()
 {
     QString amountTitle = tr("Amount");
+<<<<<<< HEAD
     if (this->walletModel->getOptionsModel() != NULL)
     {
         amountTitle += " ("+BitcoinUnits::name(this->walletModel->getOptionsModel()->getDisplayUnit()) + ")";
+=======
+    if (this->walletModel->getOptionsModel() != NULL) {
+        amountTitle += " (" + BitcoinUnits::name(this->walletModel->getOptionsModel()->getDisplayUnit()) + ")";
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     return amountTitle;
 }
 
+<<<<<<< HEAD
 QModelIndex RecentRequestsTableModel::index(int row, int column, const QModelIndex &parent) const
+=======
+QModelIndex RecentRequestsTableModel::index(int row, int column, const QModelIndex& parent) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     Q_UNUSED(parent);
 
     return createIndex(row, column);
 }
 
+<<<<<<< HEAD
 bool RecentRequestsTableModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(parent);
@@ -150,6 +230,16 @@ bool RecentRequestsTableModel::removeRows(int row, int count, const QModelIndex 
         for (int i = 0; i < count; ++i)
         {
             rec = &list[row+i];
+=======
+bool RecentRequestsTableModel::removeRows(int row, int count, const QModelIndex& parent)
+{
+    Q_UNUSED(parent);
+
+    if (count > 0 && row >= 0 && (row + count) <= list.size()) {
+        const RecentRequestEntry* rec;
+        for (int i = 0; i < count; ++i) {
+            rec = &list[row + i];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             if (!walletModel->saveReceiveRequest(rec->recipient.address.toStdString(), rec->id, ""))
                 return false;
         }
@@ -163,13 +253,21 @@ bool RecentRequestsTableModel::removeRows(int row, int count, const QModelIndex 
     }
 }
 
+<<<<<<< HEAD
 Qt::ItemFlags RecentRequestsTableModel::flags(const QModelIndex &index) const
+=======
+Qt::ItemFlags RecentRequestsTableModel::flags(const QModelIndex& index) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
 // called when adding a request from the GUI
+<<<<<<< HEAD
 void RecentRequestsTableModel::addNewRequest(const SendCoinsRecipient &recipient)
+=======
+void RecentRequestsTableModel::addNewRequest(const SendCoinsRecipient& recipient)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     RecentRequestEntry newEntry;
     newEntry.id = ++nReceiveRequestsMaxId;
@@ -186,7 +284,11 @@ void RecentRequestsTableModel::addNewRequest(const SendCoinsRecipient &recipient
 }
 
 // called from ctor when loading from wallet
+<<<<<<< HEAD
 void RecentRequestsTableModel::addNewRequest(const std::string &recipient)
+=======
+void RecentRequestsTableModel::addNewRequest(const std::string& recipient)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     std::vector<char> data(recipient.begin(), recipient.end());
     CDataStream ss(data, SER_DISK, CLIENT_VERSION);
@@ -204,7 +306,11 @@ void RecentRequestsTableModel::addNewRequest(const std::string &recipient)
 }
 
 // actually add to table in GUI
+<<<<<<< HEAD
 void RecentRequestsTableModel::addNewRequest(RecentRequestEntry &recipient)
+=======
+void RecentRequestsTableModel::addNewRequest(RecentRequestEntry& recipient)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     beginInsertRows(QModelIndex(), 0, 0);
     list.prepend(recipient);
@@ -214,7 +320,11 @@ void RecentRequestsTableModel::addNewRequest(RecentRequestEntry &recipient)
 void RecentRequestsTableModel::sort(int column, Qt::SortOrder order)
 {
     qSort(list.begin(), list.end(), RecentRequestEntryLessThan(column, order));
+<<<<<<< HEAD
     Q_EMIT dataChanged(index(0, 0, QModelIndex()), index(list.size() - 1, NUMBER_OF_COLUMNS - 1, QModelIndex()));
+=======
+    emit dataChanged(index(0, 0, QModelIndex()), index(list.size() - 1, NUMBER_OF_COLUMNS - 1, QModelIndex()));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 void RecentRequestsTableModel::updateDisplayUnit()
@@ -222,6 +332,7 @@ void RecentRequestsTableModel::updateDisplayUnit()
     updateAmountColumnTitle();
 }
 
+<<<<<<< HEAD
 bool RecentRequestEntryLessThan::operator()(RecentRequestEntry &left, RecentRequestEntry &right) const
 {
     RecentRequestEntry *pLeft = &left;
@@ -231,6 +342,16 @@ bool RecentRequestEntryLessThan::operator()(RecentRequestEntry &left, RecentRequ
 
     switch(column)
     {
+=======
+bool RecentRequestEntryLessThan::operator()(RecentRequestEntry& left, RecentRequestEntry& right) const
+{
+    RecentRequestEntry* pLeft = &left;
+    RecentRequestEntry* pRight = &right;
+    if (order == Qt::DescendingOrder)
+        std::swap(pLeft, pRight);
+
+    switch (column) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     case RecentRequestsTableModel::Date:
         return pLeft->date.toTime_t() < pRight->date.toTime_t();
     case RecentRequestsTableModel::Label:

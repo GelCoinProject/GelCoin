@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "serialize.h"
 #include "streams.h"
+<<<<<<< HEAD
 #include "hash.h"
 #include "test/test_gelcoin.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <stdint.h>
 
 #include <boost/test/unit_test.hpp>
+<<<<<<< HEAD
 using namespace std;
 
 BOOST_FIXTURE_TEST_SUITE(serialize_tests, BasicTestingSetup)
@@ -170,6 +179,12 @@ BOOST_AUTO_TEST_CASE(doubles)
         BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
     }
 }
+=======
+
+using namespace std;
+
+BOOST_AUTO_TEST_SUITE(serialize_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(varints)
 {
@@ -319,6 +334,7 @@ BOOST_AUTO_TEST_CASE(insert_delete)
     BOOST_CHECK_EQUAL(ss.size(), 0);
 }
 
+<<<<<<< HEAD
 // Change struct size and check if it can be deserialized
 // from old version archive and vice versa
 struct old_version
@@ -394,4 +410,6 @@ BOOST_AUTO_TEST_CASE(class_methods)
     BOOST_CHECK(methodtest3 == methodtest4);
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_SUITE_END()

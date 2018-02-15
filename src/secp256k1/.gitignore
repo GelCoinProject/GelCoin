@@ -1,4 +1,5 @@
 bench_inv
+<<<<<<< HEAD
 bench_ecdh
 bench_sign
 bench_verify
@@ -7,6 +8,11 @@ bench_recover
 bench_internal
 tests
 gen_context
+=======
+bench_sign
+bench_verify
+tests
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 *.exe
 *.so
 *.a
@@ -31,7 +37,10 @@ build-aux/
 *~
 src/libsecp256k1-config.h
 src/libsecp256k1-config.h.in
+<<<<<<< HEAD
 src/ecmult_static_context.h
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 m4/libtool.m4
 m4/ltoptions.m4
 m4/ltsugar.m4

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2013 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_MACNOTIFICATIONHANDLER_H
@@ -16,6 +21,7 @@ class MacNotificationHandler : public QObject
 public:
     /** shows a 10.8+ UserNotification in the UserNotificationCenter
      */
+<<<<<<< HEAD
     void showNotification(const QString &title, const QString &text);
 
     /** executes AppleScript */
@@ -24,6 +30,16 @@ public:
     /** check if OS can handle UserNotifications */
     bool hasUserNotificationCenterSupport(void);
     static MacNotificationHandler *instance();
+=======
+    void showNotification(const QString& title, const QString& text);
+
+    /** executes AppleScript */
+    void sendAppleScript(const QString& script);
+
+    /** check if OS can handle UserNotifications */
+    bool hasUserNotificationCenterSupport(void);
+    static MacNotificationHandler* instance();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 

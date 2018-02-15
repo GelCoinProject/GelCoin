@@ -23,6 +23,46 @@
    </item>
    <item>
     <widget class="QTableView" name="tableView">
+<<<<<<< HEAD
+=======
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>51</red>
+           <green>51</green>
+           <blue>51</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Text">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>85</red>
+           <green>85</green>
+           <blue>85</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -59,6 +99,13 @@
        <property name="text">
         <string>&amp;New</string>
        </property>
+<<<<<<< HEAD
+=======
+       <property name="icon">
+        <iconset resource="../lux.qrc">
+         <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+       </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -72,6 +119,13 @@
        <property name="text">
         <string>&amp;Copy</string>
        </property>
+<<<<<<< HEAD
+=======
+       <property name="icon">
+        <iconset resource="../lux.qrc">
+         <normaloff>:/icons/editcopy</normaloff>:/icons/editcopy</iconset>
+       </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -85,6 +139,13 @@
        <property name="text">
         <string>&amp;Delete</string>
        </property>
+<<<<<<< HEAD
+=======
+       <property name="icon">
+        <iconset resource="../lux.qrc">
+         <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+       </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -111,6 +172,13 @@
        <property name="text">
         <string>&amp;Export</string>
        </property>
+<<<<<<< HEAD
+=======
+       <property name="icon">
+        <iconset resource="../lux.qrc">
+         <normaloff>:/icons/export</normaloff>:/icons/export</iconset>
+       </property>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <property name="autoDefault">
         <bool>false</bool>
        </property>
@@ -137,7 +205,11 @@
   </layout>
  </widget>
  <resources>
+<<<<<<< HEAD
   <include location="../gelcoin.qrc"/>
+=======
+  <include location="../lux.qrc"/>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  </resources>
  <connections/>
 </ui>

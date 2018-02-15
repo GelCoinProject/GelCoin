@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -9,19 +10,37 @@
 #include "chainparams.h"
 #include "clientversion.h"
 #include "data/alertTests.raw.h"
+=======
+// Copyright (c) 2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+//
+// Unit tests for alert system
+//
+
+#include "alert.h"
+#include "clientversion.h"
+#include "data/alertTests.raw.h"
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "serialize.h"
 #include "streams.h"
 #include "util.h"
 #include "utilstrencodings.h"
 
+<<<<<<< HEAD
 #include "test/test_gelcoin.h"
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include <fstream>
 
 #include <boost/filesystem/operations.hpp>
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
+<<<<<<< HEAD
 //
 // Sign a CAlert and serialize it
 //
@@ -55,6 +74,13 @@ bool SignAndSave(CAlert &alert)
 // alertTests contains 8 alerts, generated with this code
 //
 void GenerateAlertTests()
+=======
+#if 0
+//
+// alertTests contains 7 alerts, generated with this code:
+// (SignAndSave code not shown, alert signing key is secret)
+//
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     CAlert alert;
     alert.nRelayUntil   = 60;
@@ -67,6 +93,7 @@ void GenerateAlertTests()
     alert.strComment    = "Alert comment";
     alert.strStatusBar  = "Alert 1";
 
+<<<<<<< HEAD
     SignAndSave(alert);
 
     alert.setSubVer.insert(std::string("/Satoshi:0.1.0/"));
@@ -76,37 +103,72 @@ void GenerateAlertTests()
     alert.setSubVer.insert(std::string("/Satoshi:0.2.0/"));
     alert.strStatusBar  = "Alert 1 for Satoshi 0.1.0, 0.2.0";
     SignAndSave(alert);
+=======
+    SignAndSave(alert, "test/alertTests");
+
+    alert.setSubVer.insert(std::string("/Satoshi:0.1.0/"));
+    alert.strStatusBar  = "Alert 1 for Satoshi 0.1.0";
+    SignAndSave(alert, "test/alertTests");
+
+    alert.setSubVer.insert(std::string("/Satoshi:0.2.0/"));
+    alert.strStatusBar  = "Alert 1 for Satoshi 0.1.0, 0.2.0";
+    SignAndSave(alert, "test/alertTests");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     alert.setSubVer.clear();
     ++alert.nID;
     alert.nCancel = 1;
     alert.nPriority = 100;
     alert.strStatusBar  = "Alert 2, cancels 1";
+<<<<<<< HEAD
     SignAndSave(alert);
 
     alert.nExpiration += 60;
     ++alert.nID;
     SignAndSave(alert);
+=======
+    SignAndSave(alert, "test/alertTests");
+
+    alert.nExpiration += 60;
+    ++alert.nID;
+    SignAndSave(alert, "test/alertTests");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ++alert.nID;
     alert.nMinVer = 11;
     alert.nMaxVer = 22;
+<<<<<<< HEAD
     SignAndSave(alert);
+=======
+    SignAndSave(alert, "test/alertTests");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ++alert.nID;
     alert.strStatusBar  = "Alert 2 for Satoshi 0.1.0";
     alert.setSubVer.insert(std::string("/Satoshi:0.1.0/"));
+<<<<<<< HEAD
     SignAndSave(alert);
+=======
+    SignAndSave(alert, "test/alertTests");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ++alert.nID;
     alert.nMinVer = 0;
     alert.nMaxVer = 999999;
     alert.strStatusBar  = "Evil Alert'; /bin/ls; echo '";
     alert.setSubVer.clear();
+<<<<<<< HEAD
     SignAndSave(alert);
 }
 
 struct ReadAlerts : public TestingSetup
+=======
+    SignAndSave(alert, "test/alertTests");
+}
+#endif
+
+struct ReadAlerts
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     ReadAlerts()
     {
@@ -120,7 +182,11 @@ struct ReadAlerts : public TestingSetup
                 alerts.push_back(alert);
             }
         }
+<<<<<<< HEAD
         catch (const std::exception&) { }
+=======
+        catch (std::exception) { }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     ~ReadAlerts() { }
 
@@ -141,6 +207,7 @@ struct ReadAlerts : public TestingSetup
 
 BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
 
+<<<<<<< HEAD
 // Steps to generate alert tests:
 // - update alerts in GenerateAlertTests() (optional)
 // - enable code below (#if 1)
@@ -156,15 +223,24 @@ BOOST_AUTO_TEST_CASE(GenerateAlerts)
     GenerateAlertTests();
 }
 #endif
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(AlertApplies)
 {
     SetMockTime(11);
+<<<<<<< HEAD
     const std::vector<unsigned char>& alertKey = Params(CBaseChainParams::MAIN).AlertKey();
 
     BOOST_FOREACH(const CAlert& alert, alerts)
     {
         BOOST_CHECK(alert.CheckSignature(alertKey));
+=======
+
+    BOOST_FOREACH(const CAlert& alert, alerts)
+    {
+        BOOST_CHECK(alert.CheckSignature());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     BOOST_CHECK(alerts.size() >= 3);
@@ -201,15 +277,25 @@ BOOST_AUTO_TEST_CASE(AlertApplies)
 BOOST_AUTO_TEST_CASE(AlertNotify)
 {
     SetMockTime(11);
+<<<<<<< HEAD
     const std::vector<unsigned char>& alertKey = Params(CBaseChainParams::MAIN).AlertKey();
 
     boost::filesystem::path temp = GetTempPath() /
         boost::filesystem::unique_path("alertnotify-%%%%.txt");
+=======
+
+    boost::filesystem::path temp = GetTempPath() / "alertnotify.txt";
+    boost::filesystem::remove(temp);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     mapArgs["-alertnotify"] = std::string("echo %s >> ") + temp.string();
 
     BOOST_FOREACH(CAlert alert, alerts)
+<<<<<<< HEAD
         alert.ProcessAlert(alertKey, false);
+=======
+        alert.ProcessAlert(false);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     std::vector<std::string> r = read_lines(temp);
     BOOST_CHECK_EQUAL(r.size(), 4u);

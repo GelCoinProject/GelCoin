@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "util.h"
 
+<<<<<<< HEAD
 #include "support/allocators/secure.h"
 #include "test/test_gelcoin.h"
 
 #include <boost/test/unit_test.hpp>
 
 BOOST_FIXTURE_TEST_SUITE(allocator_tests, BasicTestingSetup)
+=======
+#include "allocators.h"
+
+#include <boost/test/unit_test.hpp>
+
+BOOST_AUTO_TEST_SUITE(allocator_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 // Dummy memory page locker for platform independent tests
 static const void *last_lock_addr, *last_unlock_addr;

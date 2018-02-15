@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -68,6 +72,7 @@ enum
     // discouraged NOPs fails the script. This verification flag will never be
     // a mandatory flag applied to scripts in a block. NOPs that are not
     // executed, e.g.  within an unexecuted IF ENDIF block, are *not* rejected.
+<<<<<<< HEAD
     SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS  = (1U << 7),
 
     // Require that only a single stack element remains after evaluation. This changes the success criterion from
@@ -90,6 +95,12 @@ enum
 
 bool CheckSignatureEncoding(const std::vector<unsigned char> &vchSig, unsigned int flags, ScriptError* serror);
 
+=======
+    SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS  = (1U << 7)
+
+};
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 uint256 SignatureHash(const CScript &scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType);
 
 class BaseSignatureChecker
@@ -100,6 +111,7 @@ public:
         return false;
     }
 
+<<<<<<< HEAD
     virtual bool CheckLockTime(const CScriptNum& nLockTime) const
     {
          return false;
@@ -110,6 +122,8 @@ public:
          return false;
     }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     virtual ~BaseSignatureChecker() {}
 };
 
@@ -125,8 +139,11 @@ protected:
 public:
     TransactionSignatureChecker(const CTransaction* txToIn, unsigned int nInIn) : txTo(txToIn), nIn(nInIn) {}
     bool CheckSig(const std::vector<unsigned char>& scriptSig, const std::vector<unsigned char>& vchPubKey, const CScript& scriptCode) const;
+<<<<<<< HEAD
     bool CheckLockTime(const CScriptNum& nLockTime) const;
     bool CheckSequence(const CScriptNum& nSequence) const;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 class MutableTransactionSignatureChecker : public TransactionSignatureChecker

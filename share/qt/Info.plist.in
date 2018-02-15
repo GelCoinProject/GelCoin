@@ -3,7 +3,11 @@
 <plist version="0.9">
 <dict>
   <key>LSMinimumSystemVersion</key>
+<<<<<<< HEAD
   <string>10.7.0</string>
+=======
+  <string>10.8.0</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
   <key>LSArchitecturePriority</key>
   <array>
@@ -17,7 +21,11 @@
   <string>APPL</string>
 
   <key>CFBundleGetInfoString</key>
+<<<<<<< HEAD
   <string>@CLIENT_VERSION_MAJOR@.@CLIENT_VERSION_MINOR@.@CLIENT_VERSION_REVISION@, Copyright © 2009-@COPYRIGHT_YEAR@ The Bitcoin Core developers, 2014-@COPYRIGHT_YEAR@ The GelCoin developers</string>
+=======
+  <string>@CLIENT_VERSION_MAJOR@.@CLIENT_VERSION_MINOR@.@CLIENT_VERSION_REVISION@, Copyright © 2009-@COPYRIGHT_YEAR@ The Bitcoin Core developers, 2014-@COPYRIGHT_YEAR@ The Dash Core developers, 2015-@COPYRIGHT_YEAR@ The Lux Core developers</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
   <key>CFBundleShortVersionString</key>
   <string>@CLIENT_VERSION_MAJOR@.@CLIENT_VERSION_MINOR@.@CLIENT_VERSION_REVISION@</string>
@@ -29,6 +37,7 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
+<<<<<<< HEAD
   <string>GelCoin-Qt</string>
   
   <key>CFBundleName</key>
@@ -39,6 +48,12 @@
 
   <key>CFBundleIdentifier</key>
   <string>org.gelcoin.GelCoin-Qt</string>
+=======
+  <string>LUX-Qt</string>
+
+  <key>CFBundleIdentifier</key>
+  <string>io.lux.Lux-Qt</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +61,17 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
+<<<<<<< HEAD
       <string>org.gelcoin.GelCoinPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>gelcoin</string>
+=======
+      <string>io.lux.LuxPayment</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>lux</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       </array>
     </dict>
   </array>
@@ -58,9 +80,15 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
+<<<<<<< HEAD
       <string>org.gelcoin.paymentrequest</string>
       <key>UTTypeDescription</key>
       <string>GelCoin payment request</string>
+=======
+      <string>io.lux.paymentrequest</string>
+      <key>UTTypeDescription</key>
+      <string>Lux payment request</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
@@ -68,10 +96,17 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
+<<<<<<< HEAD
         <string>application/x-gelcoin-payment-request</string>
         <key>public.filename-extension</key>
         <array>
           <string>gelcoinpaymentrequest</string>
+=======
+        <string>application/x-lux-payment-request</string>
+        <key>public.filename-extension</key>
+        <array>
+          <string>luxpaymentrequest</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         </array>
       </dict>
     </dict>
@@ -84,7 +119,11 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
+<<<<<<< HEAD
         <string>org.gelcoin.paymentrequest</string>
+=======
+        <string>io.lux.paymentrequest</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>
@@ -99,7 +138,11 @@
 
   <key>LSAppNapIsDisabled</key>
     <string>True</string>
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   <key>LSApplicationCategoryType</key>
     <string>public.app-category.finance</string>
 </dict>

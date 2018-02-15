@@ -1,17 +1,29 @@
 ---
+<<<<<<< HEAD
 name: "gelcoin-dmg-signer"
+=======
+name: "lux-dmg-signer"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 suites:
 - "trusty"
 architectures:
 - "amd64"
 packages:
 - "faketime"
+<<<<<<< HEAD
 reference_datetime: "2017-01-01 00:00:00"
 remotes:
 - "url": "https://github.com/gelcoinpay/gelcoin-detached-sigs.git"
   "dir": "signature"
 files:
 - "gelcoin-osx-unsigned.tar.gz"
+=======
+remotes:
+- "url": "https://github.com/lux-project/lux-detached-sigs.git"
+  "dir": "signature"
+files:
+- "lux-osx-unsigned.tar.gz"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -28,10 +40,20 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
+<<<<<<< HEAD
   UNSIGNED=gelcoin-osx-unsigned.tar.gz
   SIGNED=gelcoin-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   ./detached-sig-apply.sh ${UNSIGNED} signature/osx
   ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "GelCoin-Core" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
+=======
+  UNSIGNED=lux-osx-unsigned.tar.gz
+  SIGNED=lux-osx-signed.dmg
+
+  tar -xf ${UNSIGNED}
+  OSX_VOLNAME="$(cat osx_volname)"
+  ./detached-sig-apply.sh ${UNSIGNED} signature/osx
+  ${WRAP_DIR}/genisoimage -no-cache-inodes -D -l -probe -V "Lux-Qt" -no-pad -r -dir-mode 0755 -apple -o uncompressed.dmg signed-app
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   ${WRAP_DIR}/dmg dmg uncompressed.dmg ${OUTDIR}/${SIGNED}

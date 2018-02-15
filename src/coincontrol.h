@@ -1,19 +1,35 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers               -*- c++ -*-
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_COINCONTROL_H
 #define BITCOIN_COINCONTROL_H
 
 #include "primitives/transaction.h"
+<<<<<<< HEAD
+=======
+#include "script/standard.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 /** Coin Control Features. */
 class CCoinControl
 {
 public:
     CTxDestination destChange;
+<<<<<<< HEAD
     bool fUsePrivateSend;
     bool fUseInstantSend;
+=======
+    bool useObfuscation;
+    bool useSwiftTX;
+    bool fSplitBlock;
+    int nSplitBlock;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     //! If false, allows unselected inputs, but requires all selected inputs be used
     bool fAllowOtherInputs;
     //! Includes watch only addresses which match the ISMINE_WATCH_SOLVABLE criteria
@@ -29,12 +45,23 @@ public:
     void SetNull()
     {
         destChange = CNoDestination();
+<<<<<<< HEAD
         fAllowOtherInputs = false;
         fAllowWatchOnly = false;
         setSelected.clear();
         fUseInstantSend = false;
         fUsePrivateSend = true;
         nMinimumTotalFee = 0;
+=======
+        setSelected.clear();
+        useSwiftTX = false;
+        useObfuscation = true;
+        fAllowOtherInputs = false;
+        fAllowWatchOnly = false;
+        nMinimumTotalFee = 0;
+        fSplitBlock = false;
+        nSplitBlock = 1;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     bool HasSelected() const
@@ -42,9 +69,16 @@ public:
         return (setSelected.size() > 0);
     }
 
+<<<<<<< HEAD
     bool IsSelected(const COutPoint& output) const
     {
         return (setSelected.count(output) > 0);
+=======
+    bool IsSelected(const uint256& hash, unsigned int n) const
+    {
+        COutPoint outpt(hash, n);
+        return (setSelected.count(outpt) > 0);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     void Select(const COutPoint& output)
@@ -62,7 +96,11 @@ public:
         setSelected.clear();
     }
 
+<<<<<<< HEAD
     void ListSelected(std::vector<COutPoint>& vOutpoints) const
+=======
+    void ListSelected(std::vector<COutPoint>& vOutpoints)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         vOutpoints.assign(setSelected.begin(), setSelected.end());
     }

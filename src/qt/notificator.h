@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_NOTIFICATOR_H
 #define BITCOIN_QT_NOTIFICATOR_H
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/gelcoin-config.h"
+=======
+#include "config/lux-config.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #include <QIcon>
@@ -21,7 +30,11 @@ class QDBusInterface;
 QT_END_NAMESPACE
 
 /** Cross-platform desktop notification client. */
+<<<<<<< HEAD
 class Notificator: public QObject
+=======
+class Notificator : public QObject
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     Q_OBJECT
 
@@ -29,6 +42,7 @@ public:
     /** Create a new notificator.
        @note Ownership of trayIcon is not transferred to this object.
     */
+<<<<<<< HEAD
     Notificator(const QString &programName, QSystemTrayIcon *trayIcon, QWidget *parent);
     ~Notificator();
 
@@ -41,6 +55,19 @@ public:
     };
 
 public Q_SLOTS:
+=======
+    Notificator(const QString& programName, QSystemTrayIcon* trayIcon, QWidget* parent);
+    ~Notificator();
+
+    // Message class
+    enum Class {
+        Information, /**< Informational message */
+        Warning,     /**< Notify user of potential problem */
+        Critical     /**< An error occurred */
+    };
+
+public slots:
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     /** Show notification message.
        @param[in] cls    general message class
        @param[in] title  title shown with message
@@ -49,6 +76,7 @@ public Q_SLOTS:
        @param[in] millisTimeout notification timeout in milliseconds (defaults to 10 seconds)
        @note Platform implementations are free to ignore any of the provided fields except for \a text.
      */
+<<<<<<< HEAD
     void notify(Class cls, const QString &title, const QString &text,
                 const QIcon &icon = QIcon(), int millisTimeout = 10000);
 
@@ -74,6 +102,32 @@ private:
 #ifdef Q_OS_MAC
     void notifyGrowl(Class cls, const QString &title, const QString &text, const QIcon &icon);
     void notifyMacUserNotificationCenter(Class cls, const QString &title, const QString &text, const QIcon &icon);
+=======
+    void notify(Class cls, const QString& title, const QString& text, const QIcon& icon = QIcon(), int millisTimeout = 10000);
+
+private:
+    QWidget* parent;
+    enum Mode {
+        None,                  /**< Ignore informational notifications, and show a modal pop-up dialog for Critical notifications. */
+        Freedesktop,           /**< Use DBus org.freedesktop.Notifications */
+        QSystemTray,           /**< Use QSystemTray::showMessage */
+        Growl12,               /**< Use the Growl 1.2 notification system (Mac only) */
+        Growl13,               /**< Use the Growl 1.3 notification system (Mac only) */
+        UserNotificationCenter /**< Use the 10.8+ User Notification Center (Mac only) */
+    };
+    QString programName;
+    Mode mode;
+    QSystemTrayIcon* trayIcon;
+#ifdef USE_DBUS
+    QDBusInterface* interface;
+
+    void notifyDBus(Class cls, const QString& title, const QString& text, const QIcon& icon, int millisTimeout);
+#endif
+    void notifySystray(Class cls, const QString& title, const QString& text, const QIcon& icon, int millisTimeout);
+#ifdef Q_OS_MAC
+    void notifyGrowl(Class cls, const QString& title, const QString& text, const QIcon& icon);
+    void notifyMacUserNotificationCenter(Class cls, const QString& title, const QString& text, const QIcon& icon);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 };
 

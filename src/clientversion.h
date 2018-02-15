@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers               -*- c++ -*-
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,18 +10,30 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/gelcoin-config.h"
+=======
+#include "config/lux-config.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #else
 
 /**
  * client versioning and copyright year
  */
 
+<<<<<<< HEAD
 //! These need to be macros, as clientversion.cpp's and gelcoin*-res.rc's voodoo requires it
 #define CLIENT_VERSION_MAJOR 0
 #define CLIENT_VERSION_MINOR 12
 #define CLIENT_VERSION_REVISION 2
 #define CLIENT_VERSION_BUILD 3
+=======
+//! These need to be macros, as clientversion.cpp's and lux*-res.rc's voodoo requires it
+#define CLIENT_VERSION_MAJOR 4
+#define CLIENT_VERSION_MINOR 0
+#define CLIENT_VERSION_REVISION 0
+#define CLIENT_VERSION_BUILD 0
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 //! Set to true for release, false for prerelease or test build
 #define CLIENT_VERSION_IS_RELEASE true
@@ -38,10 +54,17 @@
 #define DO_STRINGIZE(X) #X
 
 //! Copyright string used in Windows .rc files
+<<<<<<< HEAD
 #define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, 2014-" STRINGIZE(COPYRIGHT_YEAR) " The GelCoin Developers"
 
 /**
  * gelcoind-res.rc includes this file, but it cannot cope with real c++ code.
+=======
+#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, 2014-" STRINGIZE(COPYRIGHT_YEAR) " The Dash Core Developers, 2015-" STRINGIZE(COPYRIGHT_YEAR) " The LUX Core Developers"
+
+/**
+ * luxd-res.rc includes this file, but it cannot cope with real c++ code.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  * WINDRES_PREPROC is defined to indicate that its pre-processor is running.
  * Anything other than a define should be guarded below.
  */
@@ -52,10 +75,17 @@
 #include <vector>
 
 static const int CLIENT_VERSION =
+<<<<<<< HEAD
                            1000000 * CLIENT_VERSION_MAJOR
                          +   10000 * CLIENT_VERSION_MINOR
                          +     100 * CLIENT_VERSION_REVISION
                          +       1 * CLIENT_VERSION_BUILD;
+=======
+    1000000 * CLIENT_VERSION_MAJOR  ///
+    + 10000 * CLIENT_VERSION_MINOR  ///
+    + 100 * CLIENT_VERSION_REVISION ///
+    + 1 * CLIENT_VERSION_BUILD;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 extern const std::string CLIENT_NAME;
 extern const std::string CLIENT_BUILD;

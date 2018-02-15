@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,17 +32,27 @@
 class CKeyID : public uint160
 {
 public:
+<<<<<<< HEAD
     CKeyID() : uint160() {}
     CKeyID(const uint160& in) : uint160(in) {}
 };
 
 typedef uint256 ChainCode;
 
+=======
+    CKeyID() : uint160(0) {}
+    CKeyID(const uint160& in) : uint160(in) {}
+};
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 /** An encapsulated public key. */
 class CPubKey
 {
 private:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     /**
      * Just store the serialized data.
      * Its length can very cheaply be computed from the first byte.
@@ -177,11 +192,14 @@ public:
      */
     bool Verify(const uint256& hash, const std::vector<unsigned char>& vchSig) const;
 
+<<<<<<< HEAD
     /**
      * Check whether a signature is normalized (lower-S).
      */
     static bool CheckLowS(const std::vector<unsigned char>& vchSig);
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     //! Recover a public key from a compact signature.
     bool RecoverCompact(const uint256& hash, const std::vector<unsigned char>& vchSig);
 
@@ -189,13 +207,29 @@ public:
     bool Decompress();
 
     //! Derive BIP32 child pubkey.
+<<<<<<< HEAD
     bool Derive(CPubKey& pubkeyChild, ChainCode &ccChild, unsigned int nChild, const ChainCode& cc) const;
+=======
+    bool Derive(CPubKey& pubkeyChild, unsigned char ccChild[32], unsigned int nChild, const unsigned char cc[32]) const;
+
+    std::vector<unsigned char> Raw() const
+    {
+        return std::vector<unsigned char>(vch, vch + size());
+    }
+
+    std::string GetHex()
+    {
+        std::string my_std_string(reinterpret_cast<const char*>(vch), 65);
+        return my_std_string;
+    }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 struct CExtPubKey {
     unsigned char nDepth;
     unsigned char vchFingerprint[4];
     unsigned int nChild;
+<<<<<<< HEAD
     ChainCode chaincode;
     CPubKey pubkey;
 
@@ -203,11 +237,21 @@ struct CExtPubKey {
     {
         return a.nDepth == b.nDepth && memcmp(&a.vchFingerprint[0], &b.vchFingerprint[0], 4) == 0 && a.nChild == b.nChild &&
                a.chaincode == b.chaincode && a.pubkey == b.pubkey;
+=======
+    unsigned char vchChainCode[32];
+    CPubKey pubkey;
+
+    friend bool operator==(const CExtPubKey& a, const CExtPubKey& b)
+    {
+        return a.nDepth == b.nDepth && memcmp(&a.vchFingerprint[0], &b.vchFingerprint[0], 4) == 0 && a.nChild == b.nChild &&
+               memcmp(&a.vchChainCode[0], &b.vchChainCode[0], 32) == 0 && a.pubkey == b.pubkey;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     void Encode(unsigned char code[74]) const;
     void Decode(const unsigned char code[74]);
     bool Derive(CExtPubKey& out, unsigned int nChild) const;
+<<<<<<< HEAD
 
     unsigned int GetSerializeSize(int nType, int nVersion) const
     {
@@ -243,6 +287,8 @@ class ECCVerifyHandle
 public:
     ECCVerifyHandle();
     ~ECCVerifyHandle();
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 #endif // BITCOIN_PUBKEY_H

@@ -14,9 +14,15 @@ class PlatformStyle
 {
 public:
     /** Get style associated with provided platform name, or 0 if not known */
+<<<<<<< HEAD
     static const PlatformStyle *instantiate(const QString &platformId);
 
     const QString &getName() const { return name; }
+=======
+    static const PlatformStyle* instantiate(const QString& platformId);
+
+    const QString& getName() const { return name; }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     bool getImagesOnButtons() const { return imagesOnButtons; }
     bool getUseExtraSpacing() const { return useExtraSpacing; }
@@ -40,7 +46,11 @@ public:
     QIcon TextColorIcon(const QIcon& icon) const;
 
 private:
+<<<<<<< HEAD
     PlatformStyle(const QString &name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing);
+=======
+    PlatformStyle(const QString& name, bool imagesOnButtons, bool colorizeIcons, bool useExtraSpacing);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     QString name;
     bool imagesOnButtons;
@@ -52,4 +62,7 @@ private:
 };
 
 #endif // BITCOIN_QT_PLATFORMSTYLE_H
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

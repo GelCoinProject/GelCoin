@@ -5,8 +5,13 @@ AC_CONFIG_MACRO_DIR([build-aux/m4])
 AC_CANONICAL_HOST
 AH_TOP([#ifndef LIBSECP256K1_CONFIG_H])
 AH_TOP([#define LIBSECP256K1_CONFIG_H])
+<<<<<<< HEAD
 AH_BOTTOM([#endif /*LIBSECP256K1_CONFIG_H*/])
 AM_INIT_AUTOMAKE([foreign subdir-objects])
+=======
+AH_BOTTOM([#endif //LIBSECP256K1_CONFIG_H])
+AM_INIT_AUTOMAKE([foreign])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 LT_INIT
 
 dnl make the compilation flags quiet unless V=1 is used
@@ -17,6 +22,7 @@ PKG_PROG_PKG_CONFIG
 AC_PATH_TOOL(AR, ar)
 AC_PATH_TOOL(RANLIB, ranlib)
 AC_PATH_TOOL(STRIP, strip)
+<<<<<<< HEAD
 AX_PROG_CC_FOR_BUILD
 
 if test "x$CFLAGS" = "x"; then
@@ -29,6 +35,22 @@ AC_PROG_CC_C89
 if test x"$ac_cv_prog_cc_c89" = x"no"; then
   AC_MSG_ERROR([c89 compiler support required])
 fi
+=======
+
+AC_PROG_CC_C99
+if test x"$ac_cv_prog_cc_c99" == x"no"; then
+  AC_MSG_ERROR([c99 compiler support required])
+fi
+
+case $host in
+  *mingw*)
+     use_pkgconfig=no
+     ;;
+   *)
+     use_pkgconfig=yes
+     ;;
+esac
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 case $host_os in
   *darwin*)
@@ -64,7 +86,11 @@ esac
 
 CFLAGS="$CFLAGS -W"
 
+<<<<<<< HEAD
 warn_CFLAGS="-std=c89 -pedantic -Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes -Wno-unused-function -Wno-long-long -Wno-overlength-strings"
+=======
+warn_CFLAGS="-Wall -Wextra -Wcast-align -Wnested-externs -Wshadow -Wstrict-prototypes -Wno-unused-function"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 saved_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS $warn_CFLAGS"
 AC_MSG_CHECKING([if ${CC} supports ${warn_CFLAGS}])
@@ -74,6 +100,7 @@ AC_COMPILE_IFELSE([AC_LANG_SOURCE([[char foo;]])],
       CFLAGS="$saved_CFLAGS"
     ])
 
+<<<<<<< HEAD
 saved_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -fvisibility=hidden"
 AC_MSG_CHECKING([if ${CC} supports -fvisibility=hidden])
@@ -87,6 +114,13 @@ AC_ARG_ENABLE(benchmark,
     AS_HELP_STRING([--enable-benchmark],[compile benchmark (default is no)]),
     [use_benchmark=$enableval],
     [use_benchmark=no])
+=======
+
+AC_ARG_ENABLE(benchmark,
+    AS_HELP_STRING([--enable-benchmark],[compile benchmark (default is yes)]),
+    [use_benchmark=$enableval],
+    [use_benchmark=yes])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 AC_ARG_ENABLE(tests,
     AS_HELP_STRING([--enable-tests],[compile tests (default is yes)]),
@@ -97,6 +131,7 @@ AC_ARG_ENABLE(endomorphism,
     AS_HELP_STRING([--enable-endomorphism],[enable endomorphism (default is no)]),
     [use_endomorphism=$enableval],
     [use_endomorphism=no])
+<<<<<<< HEAD
     
 AC_ARG_ENABLE(ecmult_static_precomputation,
     AS_HELP_STRING([--enable-ecmult-static-precomputation],[enable precomputed ecmult table for signing (default is yes)]),
@@ -122,11 +157,19 @@ AC_ARG_WITH([field], [AS_HELP_STRING([--with-field=64bit|32bit|auto],
 [Specify Field Implementation. Default is auto])],[req_field=$withval], [req_field=auto])
 
 AC_ARG_WITH([bignum], [AS_HELP_STRING([--with-bignum=gmp|no|auto],
+=======
+
+AC_ARG_WITH([field], [AS_HELP_STRING([--with-field=gmp|64bit|64bit_asm|32bit|auto],
+[Specify Field Implementation. Default is auto])],[req_field=$withval], [req_field=auto])
+
+AC_ARG_WITH([bignum], [AS_HELP_STRING([--with-bignum=gmp|none|auto],
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 [Specify Bignum Implementation. Default is auto])],[req_bignum=$withval], [req_bignum=auto])
 
 AC_ARG_WITH([scalar], [AS_HELP_STRING([--with-scalar=64bit|32bit|auto],
 [Specify scalar implementation. Default is auto])],[req_scalar=$withval], [req_scalar=auto])
 
+<<<<<<< HEAD
 AC_ARG_WITH([asm], [AS_HELP_STRING([--with-asm=x86_64|no|auto]
 [Specify assembly optimizations to use. Default is auto])],[req_asm=$withval], [req_asm=auto])
 
@@ -167,18 +210,35 @@ if test x"$req_field" = x"auto"; then
   if test x"set_asm" = x"x86_64"; then
     set_field=64bit
   fi
+=======
+AC_CHECK_TYPES([__int128])
+
+AC_CHECK_DECL(__builtin_expect,AC_DEFINE(HAVE_BUILTIN_EXPECT,1,[Define this symbol if __builtin_expect is available]),,)
+
+if test x"$req_field" = x"auto"; then
+  SECP_64BIT_ASM_CHECK
+  if test x"$has_64bit_asm" = x"yes"; then
+    set_field=64bit_asm
+  fi
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   if test x"$set_field" = x; then
     SECP_INT128_CHECK
     if test x"$has_int128" = x"yes"; then
       set_field=64bit
     fi
   fi
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   if test x"$set_field" = x; then
     set_field=32bit
   fi
 else
   set_field=$req_field
   case $set_field in
+<<<<<<< HEAD
   64bit)
     if test x"$set_asm" != x"x86_64"; then
       SECP_INT128_CHECK
@@ -186,6 +246,16 @@ else
         AC_MSG_ERROR([64bit field explicitly requested but neither __int128 support or x86_64 assembly available])
       fi
     fi
+=======
+  64bit_asm)
+    SECP_64BIT_ASM_CHECK
+    ;;
+  64bit)
+    SECP_INT128_CHECK
+    ;;
+  gmp)
+    SECP_GMP_CHECK
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ;;
   32bit)
     ;;
@@ -196,9 +266,17 @@ else
 fi
 
 if test x"$req_scalar" = x"auto"; then
+<<<<<<< HEAD
   SECP_INT128_CHECK
   if test x"$has_int128" = x"yes"; then
     set_scalar=64bit
+=======
+  if test x"$set_scalar" = x; then
+    SECP_INT128_CHECK
+    if test x"$has_int128" = x"yes"; then
+      set_scalar=64bit
+    fi
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   fi
   if test x"$set_scalar" = x; then
     set_scalar=32bit
@@ -208,9 +286,12 @@ else
   case $set_scalar in
   64bit)
     SECP_INT128_CHECK
+<<<<<<< HEAD
     if test x"$has_int128" != x"yes"; then
       AC_MSG_ERROR([64bit scalar explicitly requested but __int128 support not available])
     fi
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ;;
   32bit)
     ;;
@@ -221,6 +302,7 @@ else
 fi
 
 if test x"$req_bignum" = x"auto"; then
+<<<<<<< HEAD
   SECP_GMP_CHECK
   if test x"$has_gmp" = x"yes"; then
     set_bignum=gmp
@@ -228,17 +310,26 @@ if test x"$req_bignum" = x"auto"; then
 
   if test x"$set_bignum" = x; then
     set_bignum=no
+=======
+  if test x"$set_bignum" = x; then
+    set_bignum=none
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   fi
 else
   set_bignum=$req_bignum
   case $set_bignum in
   gmp)
     SECP_GMP_CHECK
+<<<<<<< HEAD
     if test x"$has_gmp" != x"yes"; then
       AC_MSG_ERROR([gmp bignum explicitly requested but libgmp not available])
     fi
     ;;
   no)
+=======
+    ;;
+  none)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     ;;
   *)
     AC_MSG_ERROR([invalid bignum implementation selection])
@@ -246,6 +337,7 @@ else
   esac
 fi
 
+<<<<<<< HEAD
 # select assembly optimization
 case $set_asm in
 x86_64)
@@ -263,6 +355,22 @@ case $set_field in
 64bit)
   AC_DEFINE(USE_FIELD_5X52, 1, [Define this symbol to use the FIELD_5X52 implementation])
   ;;
+=======
+# select field implementation
+case $set_field in
+64bit_asm)
+  AC_DEFINE(USE_FIELD_5X52_ASM, 1, [Define this symbol to use the assembly version for the 5x52 field implementation])
+  AC_DEFINE(USE_FIELD_5X52, 1, [Define this symbol to use the FIELD_5X52 implementation])
+  ;;
+64bit)
+  AC_DEFINE(USE_FIELD_5X52_INT128, 1, [Define this symbol to use the __int128 version for the 5x52 field implementation])
+  AC_DEFINE(USE_FIELD_5X52, 1, [Define this symbol to use the FIELD_5X52 implementation])
+  ;;
+gmp)
+  AC_DEFINE(HAVE_LIBGMP,1,[Define this symbol if libgmp is installed])
+  AC_DEFINE(USE_FIELD_GMP, 1, [Define this symbol to use the FIELD_GMP implementation])
+  ;;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 32bit)
   AC_DEFINE(USE_FIELD_10X26, 1, [Define this symbol to use the FIELD_10X26 implementation])
   ;;
@@ -279,7 +387,11 @@ gmp)
   AC_DEFINE(USE_FIELD_INV_NUM, 1, [Define this symbol to use the num-based field inverse implementation])
   AC_DEFINE(USE_SCALAR_INV_NUM, 1, [Define this symbol to use the num-based scalar inverse implementation])
   ;;
+<<<<<<< HEAD
 no)
+=======
+none)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   AC_DEFINE(USE_NUM_NONE, 1, [Define this symbol to use no num implementation])
   AC_DEFINE(USE_FIELD_INV_BUILTIN, 1, [Define this symbol to use the native field inverse implementation])
   AC_DEFINE(USE_SCALAR_INV_BUILTIN, 1, [Define this symbol to use the native scalar inverse implementation])
@@ -304,7 +416,11 @@ esac
 
 if test x"$use_tests" = x"yes"; then
   SECP_OPENSSL_CHECK
+<<<<<<< HEAD
   if test x"$has_openssl_ec" = x"yes"; then
+=======
+  if test x"$has_openssl_ec" == x"yes"; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     AC_DEFINE(ENABLE_OPENSSL_TESTS, 1, [Define this symbol if OpenSSL EC functions are available])
     SECP_TEST_INCLUDES="$SSL_CFLAGS $CRYPTO_CFLAGS"
     SECP_TEST_LIBS="$CRYPTO_LIBS"
@@ -318,7 +434,11 @@ if test x"$use_tests" = x"yes"; then
   fi
 fi
 
+<<<<<<< HEAD
 if test x"$set_bignum" = x"gmp"; then
+=======
+if test x"$set_field" = x"gmp" || test x"$set_bignum" = x"gmp"; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   SECP_LIBS="$SECP_LIBS $GMP_LIBS"
   SECP_INCLUDES="$SECP_INCLUDES $GMP_CPPFLAGS"
 fi
@@ -327,6 +447,7 @@ if test x"$use_endomorphism" = x"yes"; then
   AC_DEFINE(USE_ENDOMORPHISM, 1, [Define this symbol to use endomorphism optimization])
 fi
 
+<<<<<<< HEAD
 if test x"$use_ecmult_static_precomputation" = x"yes"; then
   AC_DEFINE(USE_ECMULT_STATIC_PRECOMPUTATION, 1, [Define this symbol to use a statically generated ecmult table])
 fi
@@ -354,6 +475,11 @@ AC_MSG_NOTICE([Building ECDH module: $enable_module_ecdh])
 
 AC_MSG_NOTICE([Building Schnorr signatures module: $enable_module_schnorr])
 AC_MSG_NOTICE([Building ECDSA pubkey recovery module: $enable_module_recovery])
+=======
+AC_MSG_NOTICE([Using field implementation: $set_field])
+AC_MSG_NOTICE([Using bignum implementation: $set_bignum])
+AC_MSG_NOTICE([Using scalar implementation: $set_scalar])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 AC_CONFIG_HEADERS([src/libsecp256k1-config.h])
 AC_CONFIG_FILES([Makefile libsecp256k1.pc])
@@ -361,12 +487,19 @@ AC_SUBST(SECP_INCLUDES)
 AC_SUBST(SECP_LIBS)
 AC_SUBST(SECP_TEST_LIBS)
 AC_SUBST(SECP_TEST_INCLUDES)
+<<<<<<< HEAD
 AM_CONDITIONAL([USE_TESTS], [test x"$use_tests" != x"no"])
 AM_CONDITIONAL([USE_BENCHMARK], [test x"$use_benchmark" = x"yes"])
 AM_CONDITIONAL([USE_ECMULT_STATIC_PRECOMPUTATION], [test x"$use_ecmult_static_precomputation" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_ECDH], [test x"$enable_module_ecdh" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_SCHNORR], [test x"$enable_module_schnorr" = x"yes"])
 AM_CONDITIONAL([ENABLE_MODULE_RECOVERY], [test x"$enable_module_recovery" = x"yes"])
+=======
+AC_SUBST(YASM_BINFMT)
+AM_CONDITIONAL([USE_ASM], [test x"$set_field" == x"64bit_asm"])
+AM_CONDITIONAL([USE_TESTS], [test x"$use_tests" != x"no"])
+AM_CONDITIONAL([USE_BENCHMARK], [test x"$use_benchmark" != x"no"])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 dnl make sure nothing new is exported so that we don't break the cache
 PKGCONFIG_PATH_TEMP="$PKG_CONFIG_PATH"

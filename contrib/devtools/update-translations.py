@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/usr/bin/python
+=======
+#!/usr/bin/env python
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # Copyright (c) 2014 Wladimir J. van der Laan
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -26,7 +30,11 @@ import xml.etree.ElementTree as ET
 # Name of transifex tool
 TX = 'tx'
 # Name of source language file
+<<<<<<< HEAD
 SOURCE_LANG = 'gelcoin_en.ts'
+=======
+SOURCE_LANG = 'lux_en.ts'
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 # Directory with locale files
 LOCALE_DIR = 'src/qt/locale'
 # Minimum number of messages for translation to be considered at all
@@ -51,10 +59,14 @@ def find_format_specifiers(s):
         percent = s.find('%', pos)
         if percent < 0:
             break
+<<<<<<< HEAD
         try:
             specifiers.append(s[percent+1])
         except:
             print('Failed to get specifier')
+=======
+        specifiers.append(s[percent+1])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         pos = percent+2
     return specifiers
 
@@ -68,6 +80,17 @@ def split_format_specifiers(specifiers):
         else:
             other.append(s)
 
+<<<<<<< HEAD
+=======
+    # If both numeric format specifiers and "others" are used, assume we're dealing
+    # with a Qt-formatted message. In the case of Qt formatting (see https://doc.qt.io/qt-5/qstring.html#arg)
+    # only numeric formats are replaced at all. This means "(percentage: %1%)" is valid, without needing
+    # any kind of escaping that would be necessary for strprintf. Without this, this function
+    # would wrongly detect '%)' as a printf format specifier.
+    if numeric:
+        other = []
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     # numeric (Qt) can be present in any order, others (strprintf) must be in specified order
     return set(numeric),other
 
@@ -79,7 +102,11 @@ def check_format_specifiers(source, translation, errors, numerus):
     source_f = split_format_specifiers(find_format_specifiers(source))
     # assert that no source messages contain both Qt and strprintf format specifiers
     # if this fails, go change the source as this is hacky and confusing!
+<<<<<<< HEAD
     #assert(not(source_f[0] and source_f[1]))
+=======
+    assert(not(source_f[0] and source_f[1]))
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     try:
         translation_f = split_format_specifiers(find_format_specifiers(translation))
     except IndexError:
@@ -198,6 +225,11 @@ def postprocess_translations(reduce_diff_hacks=False):
 
 if __name__ == '__main__':
     check_at_repository_root()
+<<<<<<< HEAD
     # fetch_all_translations()
     postprocess_translations()
 
+=======
+    fetch_all_translations()
+    postprocess_translations()
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

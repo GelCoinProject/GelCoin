@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -36,7 +41,12 @@ private:
      */
     static const unsigned int nSpecialScripts = 6;
 
+<<<<<<< HEAD
     CScript &script;
+=======
+    CScript& script;
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 protected:
     /**
      * These check for scripts for which a special case with a shorter encoding is defined.
@@ -45,6 +55,7 @@ protected:
      * whether the public key is valid (as invalid ones cannot be represented in compressed
      * form).
      */
+<<<<<<< HEAD
     bool IsToKeyID(CKeyID &hash) const;
     bool IsToScriptID(CScriptID &hash) const;
     bool IsToPubKey(CPubKey &pubkey) const;
@@ -56,6 +67,21 @@ public:
     CScriptCompressor(CScript &scriptIn) : script(scriptIn) { }
 
     unsigned int GetSerializeSize(int nType, int nVersion) const {
+=======
+    bool IsToKeyID(CKeyID& hash) const;
+    bool IsToScriptID(CScriptID& hash) const;
+    bool IsToPubKey(CPubKey& pubkey) const;
+
+    bool Compress(std::vector<unsigned char>& out) const;
+    unsigned int GetSpecialSize(unsigned int nSize) const;
+    bool Decompress(unsigned int nSize, const std::vector<unsigned char>& out);
+
+public:
+    CScriptCompressor(CScript& scriptIn) : script(scriptIn) {}
+
+    unsigned int GetSerializeSize(int nType, int nVersion) const
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         std::vector<unsigned char> compr;
         if (Compress(compr))
             return compr.size();
@@ -63,8 +89,14 @@ public:
         return script.size() + VARINT(nSize).GetSerializeSize(nType, nVersion);
     }
 
+<<<<<<< HEAD
     template<typename Stream>
     void Serialize(Stream &s, int nType, int nVersion) const {
+=======
+    template <typename Stream>
+    void Serialize(Stream& s, int nType, int nVersion) const
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         std::vector<unsigned char> compr;
         if (Compress(compr)) {
             s << CFlatData(compr);
@@ -75,8 +107,14 @@ public:
         s << CFlatData(script);
     }
 
+<<<<<<< HEAD
     template<typename Stream>
     void Unserialize(Stream &s, int nType, int nVersion) {
+=======
+    template <typename Stream>
+    void Unserialize(Stream& s, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         unsigned int nSize = 0;
         s >> VARINT(nSize);
         if (nSize < nSpecialScripts) {
@@ -86,6 +124,7 @@ public:
             return;
         }
         nSize -= nSpecialScripts;
+<<<<<<< HEAD
         if (nSize > MAX_SCRIPT_SIZE) {
             // Overly long script, replace with a short invalid one
             script << OP_RETURN;
@@ -94,6 +133,10 @@ public:
             script.resize(nSize);
             s >> REF(CFlatData(script));
         }
+=======
+        script.resize(nSize);
+        s >> REF(CFlatData(script));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 };
 
@@ -101,18 +144,31 @@ public:
 class CTxOutCompressor
 {
 private:
+<<<<<<< HEAD
     CTxOut &txout;
+=======
+    CTxOut& txout;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 public:
     static uint64_t CompressAmount(uint64_t nAmount);
     static uint64_t DecompressAmount(uint64_t nAmount);
 
+<<<<<<< HEAD
     CTxOutCompressor(CTxOut &txoutIn) : txout(txoutIn) { }
+=======
+    CTxOutCompressor(CTxOut& txoutIn) : txout(txoutIn) {}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
+<<<<<<< HEAD
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+=======
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         if (!ser_action.ForRead()) {
             uint64_t nVal = CompressAmount(txout.nValue);
             READWRITE(VARINT(nVal));

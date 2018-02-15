@@ -7,11 +7,19 @@ build_darwin_OTOOL: = $(shell xcrun -f otool)
 build_darwin_NM: = $(shell xcrun -f nm)
 build_darwin_INSTALL_NAME_TOOL:=$(shell xcrun -f install_name_tool)
 build_darwin_SHA256SUM = shasum -a 256
+<<<<<<< HEAD
 build_darwin_DOWNLOAD = curl --location --fail --connect-timeout $(DOWNLOAD_CONNECT_TIMEOUT) --retry $(DOWNLOAD_RETRIES) -L -o
 
 #darwin host on darwin builder. overrides darwin host preferences.
 darwin_CC=$(shell xcrun -f clang) -mmacosx-version-min=$(OSX_MIN_VERSION)
 darwin_CXX:=$(shell xcrun -f clang++) -mmacosx-version-min=$(OSX_MIN_VERSION)
+=======
+build_darwin_DOWNLOAD = curl --location --fail --connect-timeout $(DOWNLOAD_CONNECT_TIMEOUT) --retry $(DOWNLOAD_RETRIES) -o
+
+#darwin host on darwin builder. overrides darwin host preferences.
+darwin_CC=$(shell xcrun -f clang) -mmacosx-version-min=$(OSX_MIN_VERSION)
+darwin_CXX:=$(shell xcrun -f clang++) -mmacosx-version-min=$(OSX_MIN_VERSION) -stdlib=libc++
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 darwin_AR:=$(shell xcrun -f ar)
 darwin_RANLIB:=$(shell xcrun -f ranlib)
 darwin_STRIP:=$(shell xcrun -f strip)

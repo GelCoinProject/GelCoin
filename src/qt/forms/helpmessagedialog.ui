@@ -6,6 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>780</width>
     <height>500</height>
    </rect>
@@ -87,10 +88,38 @@
       </widget>
      </item>
     </layout>
+=======
+    <width>800</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">LUX Core - Command-line options</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <widget class="QLabel" name="graphic">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../lux.qrc">:/images/about</pixmap>
+     </property>
+    </widget>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
+<<<<<<< HEAD
       <widget class="QTextEdit" name="helpMessage">
        <property name="readOnly">
         <bool>true</bool>
@@ -102,6 +131,9 @@
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
        </property>
+=======
+      <widget class="QScrollArea" name="scrollArea">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOn</enum>
        </property>
@@ -113,22 +145,34 @@
          <rect>
           <x>0</x>
           <y>0</y>
+<<<<<<< HEAD
           <width>630</width>
           <height>201</height>
+=======
+          <width>659</width>
+          <height>348</height>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
+<<<<<<< HEAD
           <widget class="QLabel" name="aboutMessage">
+=======
+          <widget class="QLabel" name="helpMessageLabel">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="cursor">
             <cursorShape>IBeamCursor</cursorShape>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
            </property>
+<<<<<<< HEAD
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
            </property>
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
            <property name="openExternalLinks">
             <bool>true</bool>
            </property>
@@ -142,6 +186,7 @@
       </widget>
      </item>
      <item>
+<<<<<<< HEAD
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -158,6 +203,8 @@
       </spacer>
      </item>
      <item>
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       <widget class="QDialogButtonBox" name="okButton">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -172,7 +219,11 @@
   </layout>
  </widget>
  <resources>
+<<<<<<< HEAD
   <include location="../gelcoin.qrc"/>
+=======
+  <include location="../lux.qrc"/>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  </resources>
  <connections>
   <connection>

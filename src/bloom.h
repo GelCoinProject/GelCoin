@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2012-2014 The Bitcoin developers               -*- c++ -*-
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,8 +25,12 @@ static const unsigned int MAX_HASH_FUNCS = 50;
  * First two bits of nFlags control how much IsRelevantAndUpdate actually updates
  * The remaining bits are reserved
  */
+<<<<<<< HEAD
 enum bloomflags
 {
+=======
+enum bloomflags {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BLOOM_UPDATE_NONE = 0,
     BLOOM_UPDATE_ALL = 1,
     // Only adds outpoints to the filter if the output is a pay-to-pubkey/pay-to-multisig script
@@ -32,6 +40,7 @@ enum bloomflags
 
 /**
  * BloomFilter is a probabilistic filter which SPV clients provide
+<<<<<<< HEAD
  * so that we can filter the transactions we send them.
  * 
  * This allows for significantly more efficient transaction and block downloads.
@@ -40,6 +49,16 @@ enum bloomflags
  * positive rate, making us send it transactions which aren't actually its,
  * allowing clients to trade more bandwidth for more privacy by obfuscating which
  * keys are controlled by them.
+=======
+ * so that we can filter the transactions we sends them.
+ * 
+ * This allows for significantly more efficient transaction and block downloads.
+ * 
+ * Because bloom filters are probabilistic, an SPV node can increase the false-
+ * positive rate, making us send them transactions which aren't actually theirs, 
+ * allowing clients to trade more bandwidth for more privacy by obfuscating which
+ * keys are owned by them.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  */
 class CBloomFilter
 {
@@ -53,10 +72,13 @@ private:
 
     unsigned int Hash(unsigned int nHashNum, const std::vector<unsigned char>& vDataToHash) const;
 
+<<<<<<< HEAD
     // Private constructor for CRollingBloomFilter, no restrictions on size
     CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweak);
     friend class CRollingBloomFilter;
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 public:
     /**
      * Creates a new bloom filter which will provide the given fp rate when filled with the given number of elements
@@ -73,7 +95,12 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
+<<<<<<< HEAD
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+=======
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(vData);
         READWRITE(nHashFuncs);
         READWRITE(nTweak);
@@ -89,7 +116,10 @@ public:
     bool contains(const uint256& hash) const;
 
     void clear();
+<<<<<<< HEAD
     void reset(unsigned int nNewTweak);
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     //! True if the size is <= MAX_BLOOM_FILTER_SIZE and the number of hash functions is <= MAX_HASH_FUNCS
     //! (catch a filter which was just deserialized which was too big)
@@ -102,6 +132,7 @@ public:
     void UpdateEmptyFull();
 };
 
+<<<<<<< HEAD
 /**
  * RollingBloomFilter is a probabilistic "keep track of most recently inserted" set.
  * Construct it with the number of items to keep track of, and a false-positive
@@ -135,4 +166,6 @@ private:
 };
 
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif // BITCOIN_BLOOM_H

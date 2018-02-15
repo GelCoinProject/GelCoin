@@ -38,7 +38,11 @@ AC_DEFUN([BITCOIN_FIND_BDB48],[
   done
   if test "x$bdbpath" = "xX"; then
     AC_MSG_RESULT([no])
+<<<<<<< HEAD
     AC_MSG_ERROR([libdb_cxx headers missing, GelCoin requires this library for wallet functionality (--disable-wallet to disable wallet functionality)])
+=======
+    AC_MSG_ERROR(libdb_cxx headers missing)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   elif test "x$bdb48path" = "xX"; then
     BITCOIN_SUBDIR_TO_INCLUDE(BDB_CPPFLAGS,[${bdbpath}],db_cxx)
     AC_ARG_WITH([incompatible-bdb],[AS_HELP_STRING([--with-incompatible-bdb], [allow using a bdb version other than 4.8])],[
@@ -60,7 +64,11 @@ AC_DEFUN([BITCOIN_FIND_BDB48],[
     ])
   done
   if test "x$BDB_LIBS" = "x"; then
+<<<<<<< HEAD
       AC_MSG_ERROR([libdb_cxx missing, GelCoin requires this library for wallet functionality (--disable-wallet to disable wallet functionality)])
+=======
+      AC_MSG_ERROR([libdb_cxx missing, Bitcoin Core requires this library for wallet functionality (--disable-wallet to disable wallet functionality)])
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   fi
   AC_SUBST(BDB_LIBS)
 ])

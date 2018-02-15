@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -7,6 +8,20 @@
 #include "validation.h" // For CheckBlock
 #include "primitives/block.h"
 #include "test/test_gelcoin.h"
+=======
+// Copyright (c) 2013-2014 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+//
+// Unit tests for block.CheckBlock()
+//
+
+
+
+#include "clientversion.h"
+#include "main.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "utiltime.h"
 
 #include <cstdio>
@@ -16,7 +31,11 @@
 #include <boost/test/unit_test.hpp>
 
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(CheckBlock_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(CheckBlock_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 bool read_block(const std::string& filename, CBlock& block)
 {

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_SYNC_H
@@ -14,6 +20,7 @@
 #include <boost/thread/recursive_mutex.hpp>
 
 
+<<<<<<< HEAD
 /////////////////////////////////////////////////
 //                                             //
 // THE SIMPLE DEFINITION, EXCLUDING DEBUG CODE //
@@ -21,6 +28,18 @@
 /////////////////////////////////////////////////
 
 /*
+=======
+////////////////////////////////////////////////
+//                                            //
+// THE SIMPLE DEFINITON, EXCLUDING DEBUG CODE //
+//                                            //
+////////////////////////////////////////////////
+
+/*
+ 
+ 
+ 
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 CCriticalSection mutex;
     boost::recursive_mutex mutex;
 
@@ -39,18 +58,32 @@ ENTER_CRITICAL_SECTION(mutex); // no RAII
 
 LEAVE_CRITICAL_SECTION(mutex); // no RAII
     mutex.unlock();
+<<<<<<< HEAD
  */
 
+=======
+ 
+ 
+ 
+ */
+
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 ///////////////////////////////
 //                           //
 // THE ACTUAL IMPLEMENTATION //
 //                           //
 ///////////////////////////////
 
+<<<<<<< HEAD
 /**
  * Template mixin that adds -Wthread-safety locking
  * annotations to a subset of the mutex API.
  */
+=======
+// Template mixin that adds -Wthread-safety locking annotations to a
+// subset of the mutex API.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 template <typename PARENT>
 class LOCKABLE AnnotatedMixin : public PARENT
 {
@@ -71,10 +104,15 @@ public:
     }
 };
 
+<<<<<<< HEAD
 /**
  * Wrapped boost mutex: supports recursive locking, but no waiting
  * TODO: We should move away from using the recursive lock by default.
  */
+=======
+/** Wrapped boost mutex: supports recursive locking, but no waiting  */
+// TODO: We should move away from using the recursive lock by default.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 typedef AnnotatedMixin<boost::recursive_mutex> CCriticalSection;
 
 /** Wrapped boost mutex: supports waiting but not recursive locking */
@@ -89,7 +127,13 @@ void LeaveCritical();
 std::string LocksHeld();
 void AssertLockHeldInternal(const char* pszName, const char* pszFile, int nLine, void* cs);
 #else
+<<<<<<< HEAD
 void static inline EnterCritical(const char* pszName, const char* pszFile, int nLine, void* cs, bool fTry = false) {}
+=======
+void static inline EnterCritical(const char* pszName, const char* pszFile, int nLine, void* cs, bool fTry = false)
+{
+}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 void static inline LeaveCritical() {}
 void static inline AssertLockHeldInternal(const char* pszName, const char* pszFile, int nLine, void* cs) {}
 #endif
@@ -101,7 +145,11 @@ void PrintLockContention(const char* pszName, const char* pszFile, int nLine);
 
 /** Wrapper around boost::unique_lock<Mutex> */
 template <typename Mutex>
+<<<<<<< HEAD
 class SCOPED_LOCKABLE CMutexLock
+=======
+class CMutexLock
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
 private:
     boost::unique_lock<Mutex> lock;
@@ -129,7 +177,11 @@ private:
     }
 
 public:
+<<<<<<< HEAD
     CMutexLock(Mutex& mutexIn, const char* pszName, const char* pszFile, int nLine, bool fTry = false) EXCLUSIVE_LOCK_FUNCTION(mutexIn) : lock(mutexIn, boost::defer_lock)
+=======
+    CMutexLock(Mutex& mutexIn, const char* pszName, const char* pszFile, int nLine, bool fTry = false) : lock(mutexIn, boost::defer_lock)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         if (fTry)
             TryEnter(pszName, pszFile, nLine);
@@ -137,6 +189,7 @@ public:
             Enter(pszName, pszFile, nLine);
     }
 
+<<<<<<< HEAD
     CMutexLock(Mutex* pmutexIn, const char* pszName, const char* pszFile, int nLine, bool fTry = false) EXCLUSIVE_LOCK_FUNCTION(pmutexIn)
     {
         if (!pmutexIn) return;
@@ -149,6 +202,9 @@ public:
     }
 
     ~CMutexLock() UNLOCK_FUNCTION()
+=======
+    ~CMutexLock()
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         if (lock.owns_lock())
             LeaveCritical();
@@ -162,10 +218,14 @@ public:
 
 typedef CMutexLock<CCriticalSection> CCriticalBlock;
 
+<<<<<<< HEAD
 #define PASTE(x, y) x ## y
 #define PASTE2(x, y) PASTE(x, y)
 
 #define LOCK(cs) CCriticalBlock PASTE2(criticalblock, __COUNTER__)(cs, #cs, __FILE__, __LINE__)
+=======
+#define LOCK(cs) CCriticalBlock criticalblock(cs, #cs, __FILE__, __LINE__)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #define LOCK2(cs1, cs2) CCriticalBlock criticalblock1(cs1, #cs1, __FILE__, __LINE__), criticalblock2(cs2, #cs2, __FILE__, __LINE__)
 #define TRY_LOCK(cs, name) CCriticalBlock name(cs, #cs, __FILE__, __LINE__, true)
 

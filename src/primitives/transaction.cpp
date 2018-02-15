@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -9,6 +10,25 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include "primitives/block.h"
+#include "primitives/transaction.h"
+
+#include "chain.h"
+#include "hash.h"
+#include "main.h"
+#include "tinyformat.h"
+#include "utilstrencodings.h"
+
+#include <boost/foreach.hpp>
+
+extern bool GetTransaction(const uint256 &hash, CTransaction &txOut, uint256 &hashBlock, bool fAllowSlow);
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 std::string COutPoint::ToString() const
 {
     return strprintf("COutPoint(%s, %u)", hash.ToString()/*.substr(0,10)*/, n);
@@ -19,6 +39,14 @@ std::string COutPoint::ToStringShort() const
     return strprintf("%s-%u", hash.ToString().substr(0,64), n);
 }
 
+<<<<<<< HEAD
+=======
+uint256 COutPoint::GetHash()
+{
+    return Hash(BEGIN(hash), END(hash), BEGIN(n), END(n));
+}
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 CTxIn::CTxIn(COutPoint prevoutIn, CScript scriptSigIn, uint32_t nSequenceIn)
 {
     prevout = prevoutIn;
@@ -41,8 +69,13 @@ std::string CTxIn::ToString() const
     if (prevout.IsNull())
         str += strprintf(", coinbase %s", HexStr(scriptSig));
     else
+<<<<<<< HEAD
         str += strprintf(", scriptSig=%s", HexStr(scriptSig).substr(0, 24));
     if (nSequence != SEQUENCE_FINAL)
+=======
+        str += strprintf(", scriptSig=%s", scriptSig.ToString().substr(0,24));
+    if (nSequence != std::numeric_limits<unsigned int>::max())
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         str += strprintf(", nSequence=%u", nSequence);
     str += ")";
     return str;
@@ -55,6 +88,17 @@ CTxOut::CTxOut(const CAmount& nValueIn, CScript scriptPubKeyIn)
     nRounds = -10;
 }
 
+<<<<<<< HEAD
+=======
+bool COutPoint::IsMasternodeReward(const CTransaction* tx) const
+{
+    if(!tx->IsCoinStake())
+        return false;
+
+    return (n == tx->vout.size() - 1) && (tx->vout[1].scriptPubKey != tx->vout[n].scriptPubKey);
+}
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 uint256 CTxOut::GetHash() const
 {
     return SerializeHash(*this);
@@ -62,11 +106,19 @@ uint256 CTxOut::GetHash() const
 
 std::string CTxOut::ToString() const
 {
+<<<<<<< HEAD
     return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, HexStr(scriptPubKey).substr(0, 30));
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
 CMutableTransaction::CMutableTransaction(const CTransaction& tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {}
+=======
+    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, scriptPubKey.ToString().substr(0,30));
+}
+
+CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nTime(0), nLockTime(0) {}
+CMutableTransaction::CMutableTransaction(const CTransaction& tx) : nVersion(tx.nVersion), nTime(tx.nTime), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 uint256 CMutableTransaction::GetHash() const
 {
@@ -76,8 +128,12 @@ uint256 CMutableTransaction::GetHash() const
 std::string CMutableTransaction::ToString() const
 {
     std::string str;
+<<<<<<< HEAD
     str += strprintf("CMutableTransaction(hash=%s, ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
         GetHash().ToString().substr(0,10),
+=======
+    str += strprintf("CMutableTransaction(ver=%d, vin.size=%u, vout.size=%u, nLockTime=%u)\n",
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         nVersion,
         vin.size(),
         vout.size(),
@@ -94,14 +150,24 @@ void CTransaction::UpdateHash() const
     *const_cast<uint256*>(&hash) = SerializeHash(*this);
 }
 
+<<<<<<< HEAD
 CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0) { }
 
 CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {
+=======
+CTransaction::CTransaction() : hash(0), nVersion(CTransaction::CURRENT_VERSION), nTime(0), vin(), vout(), nLockTime(0) { }
+
+CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), nTime(tx.nTime), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     UpdateHash();
 }
 
 CTransaction& CTransaction::operator=(const CTransaction &tx) {
     *const_cast<int*>(&nVersion) = tx.nVersion;
+<<<<<<< HEAD
+=======
+    *const_cast<unsigned int*>(&nTime) = tx.nTime;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     *const_cast<std::vector<CTxIn>*>(&vin) = tx.vin;
     *const_cast<std::vector<CTxOut>*>(&vout) = tx.vout;
     *const_cast<unsigned int*>(&nLockTime) = tx.nLockTime;
@@ -116,7 +182,11 @@ CAmount CTransaction::GetValueOut() const
     {
         nValueOut += it->nValue;
         if (!MoneyRange(it->nValue) || !MoneyRange(nValueOut))
+<<<<<<< HEAD
             throw std::runtime_error("CTransaction::GetValueOut(): value out of range");
+=======
+            throw std::runtime_error("CTransaction::GetValueOut() : value out of range");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
     return nValueOut;
 }
@@ -147,11 +217,14 @@ unsigned int CTransaction::CalculateModifiedSize(unsigned int nTxSize) const
     return nTxSize;
 }
 
+<<<<<<< HEAD
 unsigned int CTransaction::GetTotalSize() const
 {
     return ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION);
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 std::string CTransaction::ToString() const
 {
     std::string str;

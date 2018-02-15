@@ -21,8 +21,13 @@ if [ -e "$(which git 2>/dev/null)" -a "$(git rev-parse --is-inside-work-tree 2>/
     git diff >/dev/null 2>/dev/null 
 
     # if latest commit is tagged and not dirty, then override using the tag name
+<<<<<<< HEAD
     RAWDESC=$(git describe --abbrev=0 2>/dev/null)
     if [ "$(git rev-parse HEAD)" = "$(git rev-list -1 $RAWDESC 2>/dev/null)" ]; then
+=======
+    RAWDESC=$(git describe --tags --abbrev=0 2>/dev/null)
+    if [ "$(git rev-parse HEAD)" = "$(git rev-list -1 $RAWDESC)" ]; then
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         git diff-index --quiet HEAD -- && DESC=$RAWDESC
     fi
 

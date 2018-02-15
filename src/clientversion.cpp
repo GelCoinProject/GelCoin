@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2012-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,10 +14,17 @@
 
 /**
  * Name of client reported in the 'version' message. Report the same name
+<<<<<<< HEAD
  * for both gelcoind and gelcoin-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
 const std::string CLIENT_NAME("GelCoin");
+=======
+ * for both luxd and lux-qt, to make it harder for attackers to
+ * target servers or GUI users specifically.
+ */
+const std::string CLIENT_NAME("LUX Core");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 /**
  * Client version number
@@ -42,11 +53,19 @@ const std::string CLIENT_NAME("GelCoin");
 #include "build.h"
 #endif
 
+<<<<<<< HEAD
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
 #define GIT_COMMIT_ID "e596762ca22d"
 #define GIT_COMMIT_DATE "Thu, 11 Jan 2018 12:31:49 +0300"
+=======
+//! git will put "#define GIT_ARCHIVE 1" on the next line inside archives.
+#define GIT_ARCHIVE 1
+#ifdef GIT_ARCHIVE
+#define GIT_COMMIT_ID "cbcb549"
+#define GIT_COMMIT_DATE "Tue, 26 Dec 2017 18:03 -1803"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \
@@ -100,11 +119,18 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
     std::ostringstream ss;
     ss << "/";
     ss << name << ":" << FormatVersion(nClientVersion);
+<<<<<<< HEAD
     if (!comments.empty())
     {
         std::vector<std::string>::const_iterator it(comments.begin());
         ss << "(" << *it;
         for(++it; it != comments.end(); ++it)
+=======
+    if (!comments.empty()) {
+        std::vector<std::string>::const_iterator it(comments.begin());
+        ss << "(" << *it;
+        for (++it; it != comments.end(); ++it)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             ss << "; " << *it;
         ss << ")";
     }

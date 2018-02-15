@@ -1430,7 +1430,11 @@ TEST(DBTest, CustomComparator) {
     ASSERT_EQ("twenty", Get("[0x14]"));
     ASSERT_EQ("NOT_FOUND", Get("[15]"));
     ASSERT_EQ("NOT_FOUND", Get("[0xf]"));
+<<<<<<< HEAD
     Compact("[0]", "[9599]");
+=======
+    Compact("[0]", "[9999]");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   }
 
   for (int run = 0; run < 2; run++) {

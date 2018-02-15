@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 bin_PROGRAMS += qt/gelcoin-qt
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
 
@@ -19,10 +20,33 @@ QT_TS = \
   qt/locale/gelcoin_vi.ts \
   qt/locale/gelcoin_zh_CN.ts \
   qt/locale/gelcoin_zh_TW.ts
+=======
+# -*- makefile-gmake -*-
+
+bin_PROGRAMS += qt/lux-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# lux qt core #
+QT_TS = \
+  qt/locale/lux_ca.ts \
+  qt/locale/lux_da.ts \
+  qt/locale/lux_de.ts \
+  qt/locale/lux_en.ts \
+  qt/locale/lux_en_US.ts \
+  qt/locale/lux_es.ts \
+  qt/locale/lux_fr_FR.ts \
+  qt/locale/lux_it.ts \
+  qt/locale/lux_ja.ts \
+  qt/locale/lux_pt.ts \
+  qt/locale/lux_ro_RO.ts \
+  qt/locale/lux_ru.ts \
+  qt/locale/lux_zh_TW.ts
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
   qt/forms/askpassphrasedialog.ui \
+<<<<<<< HEAD
   qt/forms/coincontroldialog.ui \
   qt/forms/darksendconfig.ui \
   qt/forms/editaddressdialog.ui \
@@ -36,6 +60,26 @@ QT_FORMS_UI = \
   qt/forms/receivecoinsdialog.ui \
   qt/forms/receiverequestdialog.ui \
   qt/forms/debugwindow.ui \
+=======
+  qt/forms/bip38tooldialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/obfuscationconfig.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/masternodemanager.ui \
+  qt/forms/addeditadrenalinenode.ui \
+  qt/forms/adrenalinenodeconfigdialog.ui \
+  qt/forms/multisenddialog.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/overviewpage.ui \
+  qt/forms/tradingdialog.ui \
+  qt/forms/receivecoinsdialog.ui \
+  qt/forms/receiverequestdialog.ui \
+  qt/forms/rpcconsole.ui \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/forms/sendcoinsdialog.ui \
   qt/forms/sendcoinsentry.ui \
   qt/forms/signverifymessagedialog.ui \
@@ -45,28 +89,52 @@ QT_MOC_CPP = \
   qt/moc_addressbookpage.cpp \
   qt/moc_addresstablemodel.cpp \
   qt/moc_askpassphrasedialog.cpp \
+<<<<<<< HEAD
   qt/moc_bantablemodel.cpp \
+=======
+  qt/moc_bip38tooldialog.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/moc_bitcoinaddressvalidator.cpp \
   qt/moc_bitcoinamountfield.cpp \
   qt/moc_bitcoingui.cpp \
   qt/moc_bitcoinunits.cpp \
+<<<<<<< HEAD
+=======
+  qt/moc_blockexplorer.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
   qt/moc_csvmodelwriter.cpp \
+<<<<<<< HEAD
   qt/moc_darksendconfig.cpp \
+=======
+  qt/moc_obfuscationconfig.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/moc_editaddressdialog.cpp \
   qt/moc_guiutil.cpp \
   qt/moc_intro.cpp \
   qt/moc_macdockiconhandler.cpp \
   qt/moc_macnotificationhandler.cpp \
+<<<<<<< HEAD
   qt/moc_modaloverlay.cpp \
   qt/moc_masternodelist.cpp \
+=======
+  qt/moc_masternodemanager.cpp \
+  qt/moc_addeditadrenalinenode.cpp \
+  qt/moc_adrenalinenodeconfigdialog.cpp \
+  qt/moc_multisenddialog.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/moc_notificator.cpp \
   qt/moc_openuridialog.cpp \
   qt/moc_optionsdialog.cpp \
   qt/moc_optionsmodel.cpp \
   qt/moc_overviewpage.cpp \
+<<<<<<< HEAD
+=======
+  qt/moc_tradingdialog.cpp \
+  qt/moc_qcustomplot.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/moc_peertablemodel.cpp \
   qt/moc_paymentserver.cpp \
   qt/moc_qvalidatedlineedit.cpp \
@@ -95,16 +163,27 @@ BITCOIN_MM = \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
+<<<<<<< HEAD
   qt/gelcoin.moc \
+=======
+  qt/lux.moc \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/bitcoinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
+<<<<<<< HEAD
 QT_QRC_CPP = qt/qrc_gelcoin.cpp
 QT_QRC = qt/gelcoin.qrc
 QT_QRC_LOCALE_CPP = qt/qrc_gelcoin_locale.cpp
 QT_QRC_LOCALE = qt/gelcoin_locale.qrc
+=======
+QT_QRC_CPP = qt/qrc_lux.cpp
+QT_QRC = qt/lux.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_lux_locale.cpp
+QT_QRC_LOCALE = qt/lux_locale.qrc
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 PROTOBUF_CC = qt/paymentrequest.pb.cc
 PROTOBUF_H = qt/paymentrequest.pb.h
@@ -114,30 +193,53 @@ BITCOIN_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
+<<<<<<< HEAD
   qt/bantablemodel.h \
+=======
+  qt/bip38tooldialog.h \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/bitcoinaddressvalidator.h \
   qt/bitcoinamountfield.h \
   qt/bitcoingui.h \
   qt/bitcoinunits.h \
+<<<<<<< HEAD
+=======
+  qt/blockexplorer.h \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
   qt/csvmodelwriter.h \
+<<<<<<< HEAD
   qt/darksendconfig.h \
+=======
+  qt/obfuscationconfig.h \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/editaddressdialog.h \
   qt/guiconstants.h \
   qt/guiutil.h \
   qt/intro.h \
   qt/macdockiconhandler.h \
   qt/macnotificationhandler.h \
+<<<<<<< HEAD
   qt/modaloverlay.h \
   qt/masternodelist.h \
+=======
+  qt/masternodemanager.h \
+  qt/addeditadrenalinenode.h \
+  qt/adrenalinenodeconfigdialog.h \
+  qt/multisenddialog.h \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/networkstyle.h \
   qt/notificator.h \
   qt/openuridialog.h \
   qt/optionsdialog.h \
   qt/optionsmodel.h \
   qt/overviewpage.h \
+<<<<<<< HEAD
+=======
+  qt/tradingdialog.h \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/paymentrequestplus.h \
   qt/paymentserver.h \
   qt/peertablemodel.h \
@@ -152,7 +254,10 @@ BITCOIN_QT_H = \
   qt/sendcoinsentry.h \
   qt/signverifymessagedialog.h \
   qt/splashscreen.h \
+<<<<<<< HEAD
   qt/trafficgraphdata.h \
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/trafficgraphwidget.h \
   qt/transactiondesc.h \
   qt/transactiondescdialog.h \
@@ -165,6 +270,7 @@ BITCOIN_QT_H = \
   qt/walletmodel.h \
   qt/walletmodeltransaction.h \
   qt/walletview.h \
+<<<<<<< HEAD
   qt/winshutdownmonitor.h
 
 RES_ICONS = \
@@ -391,15 +497,89 @@ RES_ICONS = \
 
 BITCOIN_QT_CPP = \
   qt/bantablemodel.cpp \
+=======
+  qt/winshutdownmonitor.h \
+  qt/qcustomplot.h
+
+RES_ICONS = \
+  qt/res/icons/add.png \
+  qt/res/icons/address-book.png \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
+  qt/res/icons/transaction0.png \
+  qt/res/icons/transaction2.png \
+  qt/res/icons/transaction_conflicted.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/unit_lux.png \
+  qt/res/icons/unit_mlux.png \
+  qt/res/icons/unit_ulux.png \
+  qt/res/icons/unit_tlux.png \
+  qt/res/icons/unit_tmlux.png \
+  qt/res/icons/unit_tulux.png
+
+BITCOIN_QT_CPP = \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/bitcoinaddressvalidator.cpp \
   qt/bitcoinamountfield.cpp \
   qt/bitcoingui.cpp \
   qt/bitcoinunits.cpp \
+<<<<<<< HEAD
+=======
+  qt/blockexplorer.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
   qt/intro.cpp \
+<<<<<<< HEAD
   qt/modaloverlay.cpp \
+=======
+  qt/masternodemanager.cpp \
+  qt/addeditadrenalinenode.cpp \
+  qt/adrenalinenodeconfigdialog.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/networkstyle.cpp \
   qt/notificator.cpp \
   qt/optionsdialog.cpp \
@@ -410,6 +590,7 @@ BITCOIN_QT_CPP = \
   qt/qvaluecombobox.cpp \
   qt/rpcconsole.cpp \
   qt/splashscreen.cpp \
+<<<<<<< HEAD
   qt/trafficgraphdata.cpp \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
@@ -417,12 +598,18 @@ BITCOIN_QT_CPP = \
 if TARGET_WINDOWS
 BITCOIN_QT_CPP += qt/winshutdownmonitor.cpp
 endif
+=======
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp \
+  qt/winshutdownmonitor.cpp
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 if ENABLE_WALLET
 BITCOIN_QT_CPP += \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
+<<<<<<< HEAD
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
   qt/darksendconfig.cpp \
@@ -430,6 +617,22 @@ BITCOIN_QT_CPP += \
   qt/masternodelist.cpp \
   qt/openuridialog.cpp \
   qt/overviewpage.cpp \
+=======
+  qt/bip38tooldialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/obfuscationconfig.cpp \
+  qt/editaddressdialog.cpp \
+  qt/masternodemanager.cpp \
+  qt/addeditadrenalinenode.cpp \
+  qt/adrenalinenodeconfigdialog.cpp \
+  qt/multisenddialog.cpp \
+  qt/openuridialog.cpp \
+  qt/overviewpage.cpp \
+  qt/qcustomplot.cpp \
+  qt/tradingdialog.cpp \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \
   qt/receivecoinsdialog.cpp \
@@ -448,6 +651,7 @@ BITCOIN_QT_CPP += \
   qt/walletmodel.cpp \
   qt/walletmodeltransaction.cpp \
   qt/walletview.cpp
+<<<<<<< HEAD
 endif
 
 RES_IMAGES = \
@@ -519,6 +723,38 @@ BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
 qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+=======
+
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/lux_logo_horizontal.png \
+  qt/res/images/downArrow.png \
+  qt/res/images/downArrow_small.png \
+  qt/res/images/upArrow_small.png \
+  qt/res/images/leftArrow_small.png \
+  qt/res/images/rightArrow_small.png \
+  qt/res/images/qtreeview_selected.png \
+  qt/res/images/walletFrame.png \
+  qt/res/images/walletFrame_bg.png \
+  qt/res/images/walletFrame_bg.png
+
+RES_CSS = \
+  qt/res/css/default.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/lux-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
@@ -532,13 +768,18 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
+<<<<<<< HEAD
 $(qt_libbitcoinqt_a_OBJECTS) $(qt_gelcoin_qt_OBJECTS) : | $(QT_MOC)
+=======
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_lux_qt_OBJECTS) : | $(QT_MOC)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #Generating these with a half-written protobuf header leads to wacky results.
 #This makes sure it's done.
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
+<<<<<<< HEAD
 # gelcoin-qt binary #
 qt_gelcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
@@ -563,10 +804,32 @@ qt_gelcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL)
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_gelcoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 qt_gelcoin_qt_LIBTOOLFLAGS = --tag CXX
+=======
+# lux-qt binary #
+qt_lux_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
+
+qt_lux_qt_SOURCES = qt/lux.cpp
+if TARGET_DARWIN
+  qt_lux_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_lux_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_lux_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_lux_qt_LDADD += $(LIBBITCOIN_WALLET)
+endif
+qt_lux_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1)
+qt_lux_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_lux_qt_LIBTOOLFLAGS = --tag CXX
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
 
+<<<<<<< HEAD
 SECONDARY: $(QT_QM)
 
 qt/gelcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_consensus_a_SOURCES) $(libbitcoin_util_a_SOURCES)
@@ -576,26 +839,52 @@ qt/gelcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOUR
 translate: qt/gelcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) qt/gelcoin.cpp $(BITCOIN_QT_H) $(BITCOIN_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/gelcoin_en.ts
+=======
+.SECONDARY: $(QT_QM)
+
+qt/luxstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: qt/luxstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/lux_en.ts
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC)
 	@test -f $(@D)/$(<F) || cp -f $< $(@D)
+<<<<<<< HEAD
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) $(RCCFLAGS) -name gelcoin_locale $(@D)/$(<F) | \
+=======
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name lux_locale $(@D)/$(<F) | \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
 	@test -f $(RCC)
+<<<<<<< HEAD
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) $(RCCFLAGS) -name gelcoin $< | \
+=======
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name lux $< | \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
 
 CLEANFILES += $(CLEAN_QT)
 
+<<<<<<< HEAD
 gelcoin_qt_clean: FORCE
 	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_gelcoin_qt_OBJECTS) qt/gelcoin-qt$(EXEEXT) $(LIBBITCOINQT)
 
 gelcoin_qt : qt/gelcoin-qt$(EXEEXT)
+=======
+lux_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_lux_qt_OBJECTS) qt/lux-qt$(EXEEXT) $(LIBBITCOINQT)
+
+lux_qt : qt/lux-qt$(EXEEXT)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 ui_%.h: %.ui
 	@test -f $(UIC)
@@ -603,11 +892,19 @@ ui_%.h: %.ui
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
 
 %.moc: %.cpp
+<<<<<<< HEAD
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 moc_%.cpp: %.h
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+=======
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 %.qm: %.ts

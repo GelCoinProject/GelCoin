@@ -1,6 +1,7 @@
 Expectations for DNS Seed operators
 ====================================
 
+<<<<<<< HEAD
 GelCoin attempts to minimize the level of trust in DNS seeds,
 but DNS seeds still pose a small amount of risk for the network.
 As such, DNS seeds must be run by entities which have some minimum
@@ -18,6 +19,27 @@ contracted by the operator are equally expected to uphold these expectations.
 1. The DNS seed results must consist exclusively of fairly selected and
 functioning GelCoin nodes from the public network to the best of the
 operator's understanding and capability.
+=======
+LUX Core attempts to minimize the level of trust in DNS seeds,
+but DNS seeds still pose a small amount of risk for the network.
+As such, DNS seeds must be run by entities which have some minimum
+level of trust within the LUX community.
+
+Other implementations of LUX software may also use the same
+seeds and may be more exposed. In light of this exposure this
+document establishes some basic expectations for the expectations
+for the operation of dnsseeds.
+
+0. A DNS seed operating organization or person is expected
+to follow good host security practices and maintain control of
+their serving infrastructure and not sell or transfer control of their
+DNS seed. Any hosting services contracted by the operator are
+equally expected to uphold these expectations.
+
+1. The DNS seed results must consist exclusively of fairly selected and
+functioning LUX nodes from the public network to the best of the
+operators understanding and capability.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 2. For the avoidance of doubt, the results may be randomized but must not
 single-out any group of hosts to receive different results unless due to an
@@ -26,8 +48,13 @@ urgent technical necessity and disclosed.
 3. The results may not be served with a DNS TTL of less than one minute.
 
 4. Any logging of DNS queries should be only that which is necessary
+<<<<<<< HEAD
 for the operation of the service or urgent health of the GelCoin
 network and must not be retained longer than necessary nor disclosed
+=======
+for the operation of the service or urgent health of the LUX
+network and must not be retained longer than necessary or disclosed
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 to any third party.
 
 5. Information gathered as a result of the operators node-spidering
@@ -42,9 +69,15 @@ details of their operating practices.
 related to the DNS seed operation.
 
 If these expectations cannot be satisfied the operator should
+<<<<<<< HEAD
 discontinue providing services and contact the active GelCoin
 Core development team as well as posting on
 [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
+=======
+discontinue providing services and contact the active LUX
+Core development team as well as posting on the
+[LUX](https://luxcore.io).
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 Behavior outside of these expectations may be reasonable in some
 situations but should be discussed in public in advance.

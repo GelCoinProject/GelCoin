@@ -1,8 +1,14 @@
 # Copyright 2014 BitPay, Inc.
+<<<<<<< HEAD
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 from __future__ import division,print_function,unicode_literals
+=======
+# Distributed under the MIT/X11 software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 import subprocess
 import os
 import json

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2012 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "sync.h"
@@ -15,7 +20,12 @@
 #ifdef DEBUG_LOCKCONTENTION
 void PrintLockContention(const char* pszName, const char* pszFile, int nLine)
 {
+<<<<<<< HEAD
     LogPrintf("LOCKCONTENTION: %s Locker: %s:%d\n", pszName, pszFile, nLine);
+=======
+    LogPrintf("LOCKCONTENTION: %s\n", pszName);
+    LogPrintf("Locker: %s:%d\n", pszFile, nLine);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 #endif /* DEBUG_LOCKCONTENTION */
 
@@ -32,22 +42,36 @@ void PrintLockContention(const char* pszName, const char* pszFile, int nLine)
 //
 
 struct CLockLocation {
+<<<<<<< HEAD
     CLockLocation(const char* pszName, const char* pszFile, int nLine, bool fTryIn)
+=======
+    CLockLocation(const char* pszName, const char* pszFile, int nLine)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         mutexName = pszName;
         sourceFile = pszFile;
         sourceLine = nLine;
+<<<<<<< HEAD
         fTry = fTryIn;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     std::string ToString() const
     {
+<<<<<<< HEAD
         return mutexName + "  " + sourceFile + ":" + itostr(sourceLine) + (fTry ? " (TRY)" : "");
+=======
+        return mutexName + "  " + sourceFile + ":" + itostr(sourceLine);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     std::string MutexName() const { return mutexName; }
 
+<<<<<<< HEAD
     bool fTry;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 private:
     std::string mutexName;
     std::string sourceFile;
@@ -63,6 +87,7 @@ static boost::thread_specific_ptr<LockStack> lockstack;
 
 static void potential_deadlock_detected(const std::pair<void*, void*>& mismatch, const LockStack& s1, const LockStack& s2)
 {
+<<<<<<< HEAD
     // We attempt to not assert on probably-not deadlocks by assuming that
     // a try lock will immediately have otherwise bailed if it had
     // failed to get the lock
@@ -114,6 +139,25 @@ static void potential_deadlock_detected(const std::pair<void*, void*>& mismatch,
         LogPrintf("%s\n", strOutput.c_str());
     }
     assert(onlyMaybeDeadlock);
+=======
+    LogPrintf("POTENTIAL DEADLOCK DETECTED\n");
+    LogPrintf("Previous lock order was:\n");
+    BOOST_FOREACH (const PAIRTYPE(void*, CLockLocation) & i, s2) {
+        if (i.first == mismatch.first)
+            LogPrintf(" (1)");
+        if (i.first == mismatch.second)
+            LogPrintf(" (2)");
+        LogPrintf(" %s\n", i.second.ToString());
+    }
+    LogPrintf("Current lock order is:\n");
+    BOOST_FOREACH (const PAIRTYPE(void*, CLockLocation) & i, s1) {
+        if (i.first == mismatch.first)
+            LogPrintf(" (1)");
+        if (i.first == mismatch.second)
+            LogPrintf(" (2)");
+        LogPrintf(" %s\n", i.second.ToString());
+    }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 static void push_lock(void* c, const CLockLocation& locklocation, bool fTry)
@@ -121,6 +165,10 @@ static void push_lock(void* c, const CLockLocation& locklocation, bool fTry)
     if (lockstack.get() == NULL)
         lockstack.reset(new LockStack);
 
+<<<<<<< HEAD
+=======
+    LogPrint("lock", "Locking: %s\n", locklocation.ToString());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     dd_mutex.lock();
 
     (*lockstack).push_back(std::make_pair(c, locklocation));
@@ -136,8 +184,15 @@ static void push_lock(void* c, const CLockLocation& locklocation, bool fTry)
             lockorders[p1] = (*lockstack);
 
             std::pair<void*, void*> p2 = std::make_pair(c, i.first);
+<<<<<<< HEAD
             if (lockorders.count(p2))
                 potential_deadlock_detected(p1, lockorders[p2], lockorders[p1]);
+=======
+            if (lockorders.count(p2)) {
+                potential_deadlock_detected(p1, lockorders[p2], lockorders[p1]);
+                break;
+            }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         }
     }
     dd_mutex.unlock();
@@ -145,6 +200,13 @@ static void push_lock(void* c, const CLockLocation& locklocation, bool fTry)
 
 static void pop_lock()
 {
+<<<<<<< HEAD
+=======
+    if (fDebug) {
+        const CLockLocation& locklocation = (*lockstack).rbegin()->second;
+        LogPrint("lock", "Unlocked: %s\n", locklocation.ToString());
+    }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     dd_mutex.lock();
     (*lockstack).pop_back();
     dd_mutex.unlock();
@@ -152,7 +214,11 @@ static void pop_lock()
 
 void EnterCritical(const char* pszName, const char* pszFile, int nLine, void* cs, bool fTry)
 {
+<<<<<<< HEAD
     push_lock(cs, CLockLocation(pszName, pszFile, nLine, fTry), fTry);
+=======
+    push_lock(cs, CLockLocation(pszName, pszFile, nLine), fTry);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 void LeaveCritical()

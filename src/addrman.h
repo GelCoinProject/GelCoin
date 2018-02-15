@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 // Copyright (c) 2012 Pieter Wuille
+=======
+// Copyright (c) 2012 Pieter Wuille                             -*- c++ -*-
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_ADDRMAN_H
 #define BITCOIN_ADDRMAN_H
 
+<<<<<<< HEAD
 #include "netaddress.h"
+=======
+#include "netbase.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "protocol.h"
 #include "random.h"
 #include "sync.h"
@@ -17,6 +25,7 @@
 #include <stdint.h>
 #include <vector>
 
+<<<<<<< HEAD
 /**
  * Extended statistics about a CAddress
  */
@@ -28,6 +37,13 @@ public:
     //! last try whatsoever by us (memory only)
     int64_t nLastTry;
 
+=======
+/** 
+ * Extended statistics about a CAddress 
+ */
+class CAddrInfo : public CAddress
+{
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 private:
     //! where knowledge about this address first came from
     CNetAddr source;
@@ -35,6 +51,12 @@ private:
     //! last successful connection by us
     int64_t nLastSuccess;
 
+<<<<<<< HEAD
+=======
+    //! last try whatsoever by us:
+    // int64_t CAddress::nLastTry
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     //! connection attempts since last successful attempt
     int nAttempts;
 
@@ -50,11 +72,19 @@ private:
     friend class CAddrMan;
 
 public:
+<<<<<<< HEAD
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
+=======
+    ADD_SERIALIZE_METHODS;
+
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         READWRITE(*(CAddress*)this);
         READWRITE(source);
         READWRITE(nLastSuccess);
@@ -71,7 +101,11 @@ public:
         nRandomPos = -1;
     }
 
+<<<<<<< HEAD
     CAddrInfo(const CAddress &addrIn, const CNetAddr &addrSource) : CAddress(addrIn), source(addrSource)
+=======
+    CAddrInfo(const CAddress& addrIn, const CNetAddr& addrSource) : CAddress(addrIn), source(addrSource)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         Init();
     }
@@ -82,6 +116,7 @@ public:
     }
 
     //! Calculate in which "tried" bucket this entry belongs
+<<<<<<< HEAD
     int GetTriedBucket(const uint256 &nKey) const;
 
     //! Calculate in which "new" bucket this entry belongs, given a certain source
@@ -89,33 +124,60 @@ public:
 
     //! Calculate in which "new" bucket this entry belongs, using its default source
     int GetNewBucket(const uint256 &nKey) const
+=======
+    int GetTriedBucket(const uint256& nKey) const;
+
+    //! Calculate in which "new" bucket this entry belongs, given a certain source
+    int GetNewBucket(const uint256& nKey, const CNetAddr& src) const;
+
+    //! Calculate in which "new" bucket this entry belongs, using its default source
+    int GetNewBucket(const uint256& nKey) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         return GetNewBucket(nKey, source);
     }
 
     //! Calculate in which position of a bucket to store this entry.
+<<<<<<< HEAD
     int GetBucketPosition(const uint256 &nKey, bool fNew, int nBucket) const;
+=======
+    int GetBucketPosition(const uint256& nKey, bool fNew, int nBucket) const;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     //! Determine whether the statistics about this entry are bad enough so that it can just be deleted
     bool IsTerrible(int64_t nNow = GetAdjustedTime()) const;
 
     //! Calculate the relative chance this entry should be given when selecting nodes to connect to
     double GetChance(int64_t nNow = GetAdjustedTime()) const;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 /** Stochastic address manager
  *
  * Design goals:
+<<<<<<< HEAD
  *  * Keep the address tables in-memory, and asynchronously dump the entire table to peers.dat.
+=======
+ *  * Keep the address tables in-memory, and asynchronously dump the entire to able in peers.dat.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  *  * Make sure no (localized) attacker can fill the entire table with his nodes/addresses.
  *
  * To that end:
  *  * Addresses are organized into buckets.
+<<<<<<< HEAD
  *    * Addresses that have not yet been tried go into 1024 "new" buckets.
  *      * Based on the address range (/16 for IPv4) of the source of information, 64 buckets are selected at random.
  *      * The actual bucket is chosen from one of these, based on the range in which the address itself is located.
  *      * One single address can occur in up to 8 different buckets to increase selection chances for addresses that
+=======
+ *    * Address that have not yet been tried go into 1024 "new" buckets.
+ *      * Based on the address range (/16 for IPv4) of source of the information, 64 buckets are selected at random
+ *      * The actual bucket is chosen from one of these, based on the range the address itself is located.
+ *      * One single address can occur in up to 8 different buckets, to increase selection chances for addresses that
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  *        are seen frequently. The chance for increasing this multiplicity decreases exponentially.
  *      * When adding a new address to a full bucket, a randomly chosen entry (with a bias favoring less recently seen
  *        ones) is removed from it first.
@@ -175,6 +237,12 @@ private:
     //! critical section to protect the inner data structures
     mutable CCriticalSection cs;
 
+<<<<<<< HEAD
+=======
+    //! secret key to randomize bucket select with
+    uint256 nKey;
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     //! last used nId
     int nIdCount;
 
@@ -200,6 +268,7 @@ private:
     int vvNew[ADDRMAN_NEW_BUCKET_COUNT][ADDRMAN_BUCKET_SIZE];
 
 protected:
+<<<<<<< HEAD
     //! secret key to randomize bucket select with
     uint256 nKey;
 
@@ -209,6 +278,14 @@ protected:
     //! find an entry, creating it if necessary.
     //! nTime and nServices of the found node are updated, if necessary.
     CAddrInfo* Create(const CAddress &addr, const CNetAddr &addrSource, int *pnId = NULL);
+=======
+    //! Find an entry.
+    CAddrInfo* Find(const CNetAddr& addr, int* pnId = NULL);
+
+    //! find an entry, creating it if necessary.
+    //! nTime and nServices of the found node are updated, if necessary.
+    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = NULL);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     //! Swap two elements in vRandom.
     void SwapRandom(unsigned int nRandomPos1, unsigned int nRandomPos2);
@@ -223,6 +300,7 @@ protected:
     void ClearNew(int nUBucket, int nUBucketPos);
 
     //! Mark an entry "good", possibly moving it from "new" to "tried".
+<<<<<<< HEAD
     void Good_(const CService &addr, int64_t nTime);
 
     //! Add an entry to the "new" table.
@@ -236,6 +314,19 @@ protected:
 
     //! Wraps GetRandInt to allow tests to override RandomInt and make it determinismistic.
     virtual int RandomInt(int nMax);
+=======
+    void Good_(const CService& addr, int64_t nTime);
+
+    //! Add an entry to the "new" table.
+    bool Add_(const CAddress& addr, const CNetAddr& source, int64_t nTimePenalty);
+
+    //! Mark an entry as attempted to connect.
+    void Attempt_(const CService& addr, int64_t nTime);
+
+    //! Select an address to connect to.
+    //! nUnkBias determines how much to favor new addresses over tried ones (min=0, max=100)
+    CAddress Select_();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #ifdef DEBUG_ADDRMAN
     //! Perform consistency check. Returns an error code or zero.
@@ -243,6 +334,7 @@ protected:
 #endif
 
     //! Select several addresses at once.
+<<<<<<< HEAD
     void GetAddr_(std::vector<CAddress> &vAddr);
 
     //! Mark an entry as currently-connected-to.
@@ -250,6 +342,12 @@ protected:
 
     //! Update an entry's service bits.
     void SetServices_(const CService &addr, ServiceFlags nServices);
+=======
+    void GetAddr_(std::vector<CAddress>& vAddr);
+
+    //! Mark an entry as currently-connected-to.
+    void Connected_(const CService& addr, int64_t nTime);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 public:
     /**
@@ -272,7 +370,11 @@ public:
      * Notice that vvTried, mapAddr and vVector are never encoded explicitly;
      * they are instead reconstructed from the other information.
      *
+<<<<<<< HEAD
      * vvNew is serialized, but only used if ADDRMAN_UNKNOWN_BUCKET_COUNT didn't change,
+=======
+     * vvNew is serialized, but only used if ADDRMAN_UNKOWN_BUCKET_COUNT didn't change,
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      * otherwise it is reconstructed as well.
      *
      * This format is more complex, but significantly smaller (at most 1.5 MiB), and supports
@@ -281,8 +383,13 @@ public:
      * We don't use ADD_SERIALIZE_METHODS since the serialization and deserialization code has
      * very little in common.
      */
+<<<<<<< HEAD
     template<typename Stream>
     void Serialize(Stream &s, int nType, int nVersionDummy) const
+=======
+    template <typename Stream>
+    void Serialize(Stream& s, int nType, int nVersionDummy) const
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         LOCK(cs);
 
@@ -299,7 +406,11 @@ public:
         int nIds = 0;
         for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
             mapUnkIds[(*it).first] = nIds;
+<<<<<<< HEAD
             const CAddrInfo &info = (*it).second;
+=======
+            const CAddrInfo& info = (*it).second;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             if (info.nRefCount) {
                 assert(nIds != nNew); // this means nNew was wrong, oh ow
                 s << info;
@@ -308,7 +419,11 @@ public:
         }
         nIds = 0;
         for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
+<<<<<<< HEAD
             const CAddrInfo &info = (*it).second;
+=======
+            const CAddrInfo& info = (*it).second;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             if (info.fInTried) {
                 assert(nIds != nTried); // this means nTried was wrong, oh ow
                 s << info;
@@ -331,7 +446,11 @@ public:
         }
     }
 
+<<<<<<< HEAD
     template<typename Stream>
+=======
+    template <typename Stream>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     void Unserialize(Stream& s, int nType, int nVersionDummy)
     {
         LOCK(cs);
@@ -354,7 +473,11 @@ public:
 
         // Deserialize entries from the new table.
         for (int n = 0; n < nNew; n++) {
+<<<<<<< HEAD
             CAddrInfo &info = mapInfo[n];
+=======
+            CAddrInfo& info = mapInfo[n];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             s >> info;
             mapAddr[info] = n;
             info.nRandomPos = vRandom.size();
@@ -401,7 +524,11 @@ public:
                 int nIndex = 0;
                 s >> nIndex;
                 if (nIndex >= 0 && nIndex < nNew) {
+<<<<<<< HEAD
                     CAddrInfo &info = mapInfo[nIndex];
+=======
+                    CAddrInfo& info = mapInfo[nIndex];
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                     int nUBucketPos = info.GetBucketPosition(nKey, true, bucket);
                     if (nVersion == 1 && nUBuckets == ADDRMAN_NEW_BUCKET_COUNT && vvNew[bucket][nUBucketPos] == -1 && info.nRefCount < ADDRMAN_NEW_BUCKETS_PER_ADDRESS) {
                         info.nRefCount++;
@@ -413,7 +540,11 @@ public:
 
         // Prune new entries with refcount 0 (as a result of collisions).
         int nLostUnk = 0;
+<<<<<<< HEAD
         for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end(); ) {
+=======
+        for (std::map<int, CAddrInfo>::const_iterator it = mapInfo.begin(); it != mapInfo.end();) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             if (it->second.fInTried == false && it->second.nRefCount == 0) {
                 std::map<int, CAddrInfo>::const_iterator itCopy = it++;
                 Delete(itCopy->first);
@@ -461,11 +592,19 @@ public:
 
     ~CAddrMan()
     {
+<<<<<<< HEAD
         nKey.SetNull();
     }
 
     //! Return the number of (unique) addresses in all tables.
     size_t size() const
+=======
+        nKey = uint256(0);
+    }
+
+    //! Return the number of (unique) addresses in all tables.
+    int size()
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         return vRandom.size();
     }
@@ -477,14 +616,22 @@ public:
         {
             LOCK(cs);
             int err;
+<<<<<<< HEAD
             if ((err=Check_()))
+=======
+            if ((err = Check_()))
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 LogPrintf("ADDRMAN CONSISTENCY CHECK FAILED!!! err=%i\n", err);
         }
 #endif
     }
 
     //! Add a single address.
+<<<<<<< HEAD
     bool Add(const CAddress &addr, const CNetAddr& source, int64_t nTimePenalty = 0)
+=======
+    bool Add(const CAddress& addr, const CNetAddr& source, int64_t nTimePenalty = 0)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         bool fRet = false;
         {
@@ -499,7 +646,11 @@ public:
     }
 
     //! Add multiple addresses.
+<<<<<<< HEAD
     bool Add(const std::vector<CAddress> &vAddr, const CNetAddr& source, int64_t nTimePenalty = 0)
+=======
+    bool Add(const std::vector<CAddress>& vAddr, const CNetAddr& source, int64_t nTimePenalty = 0)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         int nAdd = 0;
         {
@@ -515,7 +666,11 @@ public:
     }
 
     //! Mark an entry as accessible.
+<<<<<<< HEAD
     void Good(const CService &addr, int64_t nTime = GetAdjustedTime())
+=======
+    void Good(const CService& addr, int64_t nTime = GetAdjustedTime())
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         {
             LOCK(cs);
@@ -526,7 +681,11 @@ public:
     }
 
     //! Mark an entry as connection attempted to.
+<<<<<<< HEAD
     void Attempt(const CService &addr, int64_t nTime = GetAdjustedTime())
+=======
+    void Attempt(const CService& addr, int64_t nTime = GetAdjustedTime())
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         {
             LOCK(cs);
@@ -538,6 +697,7 @@ public:
 
     /**
      * Choose an address to connect to.
+<<<<<<< HEAD
      */
     CAddrInfo Select(bool newOnly = false)
     {
@@ -546,6 +706,17 @@ public:
             LOCK(cs);
             Check();
             addrRet = Select_(newOnly);
+=======
+     * nUnkBias determines how much "new" entries are favored over "tried" ones (0-100).
+     */
+    CAddress Select()
+    {
+        CAddress addrRet;
+        {
+            LOCK(cs);
+            Check();
+            addrRet = Select_();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             Check();
         }
         return addrRet;
@@ -565,7 +736,11 @@ public:
     }
 
     //! Mark an entry as currently-connected-to.
+<<<<<<< HEAD
     void Connected(const CService &addr, int64_t nTime = GetAdjustedTime())
+=======
+    void Connected(const CService& addr, int64_t nTime = GetAdjustedTime())
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         {
             LOCK(cs);
@@ -574,6 +749,7 @@ public:
             Check();
         }
     }
+<<<<<<< HEAD
 
     void SetServices(const CService &addr, ServiceFlags nServices)
     {
@@ -583,6 +759,8 @@ public:
         Check();
     }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 #endif // BITCOIN_ADDRMAN_H

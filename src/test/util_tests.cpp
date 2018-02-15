@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "util.h"
@@ -10,7 +15,10 @@
 #include "sync.h"
 #include "utilstrencodings.h"
 #include "utilmoneystr.h"
+<<<<<<< HEAD
 #include "test/test_gelcoin.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <stdint.h>
 #include <vector>
@@ -19,7 +27,11 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(util_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(util_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(util_criticalsection)
 {
@@ -146,6 +158,7 @@ BOOST_AUTO_TEST_CASE(util_GetArg)
 
 BOOST_AUTO_TEST_CASE(util_FormatMoney)
 {
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(FormatMoney(0), "0.00");
     BOOST_CHECK_EQUAL(FormatMoney((COIN/10000)*123456789), "12345.6789");
     BOOST_CHECK_EQUAL(FormatMoney(-COIN), "-1.00");
@@ -167,6 +180,31 @@ BOOST_AUTO_TEST_CASE(util_FormatMoney)
     BOOST_CHECK_EQUAL(FormatMoney(COIN/1000000), "0.000001");
     BOOST_CHECK_EQUAL(FormatMoney(COIN/10000000), "0.0000001");
     BOOST_CHECK_EQUAL(FormatMoney(COIN/100000000), "0.00000001");
+=======
+    BOOST_CHECK_EQUAL(FormatMoney(0, false), "0.00");
+    BOOST_CHECK_EQUAL(FormatMoney((COIN/10000)*123456789, false), "12345.6789");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN, true), "+1.00");
+    BOOST_CHECK_EQUAL(FormatMoney(-COIN, false), "-1.00");
+    BOOST_CHECK_EQUAL(FormatMoney(-COIN, true), "-1.00");
+
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*100000000, false), "100000000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*10000000, false), "10000000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*1000000, false), "1000000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*100000, false), "100000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*10000, false), "10000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*1000, false), "1000.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*100, false), "100.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN*10, false), "10.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN, false), "1.00");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/10, false), "0.10");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/100, false), "0.01");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/1000, false), "0.001");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/10000, false), "0.0001");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/100000, false), "0.00001");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/1000000, false), "0.000001");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/10000000, false), "0.0000001");
+    BOOST_CHECK_EQUAL(FormatMoney(COIN/100000000, false), "0.00000001");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 BOOST_AUTO_TEST_CASE(util_ParseMoney)
@@ -196,8 +234,11 @@ BOOST_AUTO_TEST_CASE(util_ParseMoney)
     BOOST_CHECK_EQUAL(ret, COIN*10);
     BOOST_CHECK(ParseMoney("1.00", ret));
     BOOST_CHECK_EQUAL(ret, COIN);
+<<<<<<< HEAD
     BOOST_CHECK(ParseMoney("1", ret));
     BOOST_CHECK_EQUAL(ret, COIN);
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BOOST_CHECK(ParseMoney("0.1", ret));
     BOOST_CHECK_EQUAL(ret, COIN/10);
     BOOST_CHECK(ParseMoney("0.01", ret));
@@ -217,9 +258,12 @@ BOOST_AUTO_TEST_CASE(util_ParseMoney)
 
     // Attempted 63 bit overflow should fail
     BOOST_CHECK(!ParseMoney("92233720368.54775808", ret));
+<<<<<<< HEAD
 
     // Parsing negative amounts must fail
     BOOST_CHECK(!ParseMoney("-1", ret));
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 BOOST_AUTO_TEST_CASE(util_IsHex)
@@ -325,6 +369,7 @@ BOOST_AUTO_TEST_CASE(test_ParseInt32)
     BOOST_CHECK(ParseInt32("-2147483648", &n) && n == -2147483648);
     BOOST_CHECK(ParseInt32("-1234", &n) && n == -1234);
     // Invalid values
+<<<<<<< HEAD
     BOOST_CHECK(!ParseInt32("", &n));
     BOOST_CHECK(!ParseInt32(" 1", &n)); // no padding inside
     BOOST_CHECK(!ParseInt32("1 ", &n));
@@ -335,6 +380,11 @@ BOOST_AUTO_TEST_CASE(test_ParseInt32)
     const char test_bytes[] = {'1', 0, '1'};
     std::string teststr(test_bytes, sizeof(test_bytes));
     BOOST_CHECK(!ParseInt32(teststr, &n)); // no embedded NULs
+=======
+    BOOST_CHECK(!ParseInt32("1a", &n));
+    BOOST_CHECK(!ParseInt32("aap", &n));
+    BOOST_CHECK(!ParseInt32("0x1", &n)); // no hex
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // Overflow and underflow
     BOOST_CHECK(!ParseInt32("-2147483649", NULL));
     BOOST_CHECK(!ParseInt32("2147483648", NULL));
@@ -342,6 +392,7 @@ BOOST_AUTO_TEST_CASE(test_ParseInt32)
     BOOST_CHECK(!ParseInt32("32482348723847471234", NULL));
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(test_ParseInt64)
 {
     int64_t n;
@@ -400,14 +451,23 @@ BOOST_AUTO_TEST_CASE(test_ParseDouble)
     BOOST_CHECK(!ParseDouble("1e10000", NULL));
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_CASE(test_FormatParagraph)
 {
     BOOST_CHECK_EQUAL(FormatParagraph("", 79, 0), "");
     BOOST_CHECK_EQUAL(FormatParagraph("test", 79, 0), "test");
+<<<<<<< HEAD
     BOOST_CHECK_EQUAL(FormatParagraph(" test", 79, 0), "test");
     BOOST_CHECK_EQUAL(FormatParagraph("test test", 79, 0), "test test");
     BOOST_CHECK_EQUAL(FormatParagraph("test test", 4, 0), "test\ntest");
     BOOST_CHECK_EQUAL(FormatParagraph("testerde test ", 4, 0), "testerde\ntest");
+=======
+    BOOST_CHECK_EQUAL(FormatParagraph(" test", 79, 0), " test");
+    BOOST_CHECK_EQUAL(FormatParagraph("test test", 79, 0), "test test");
+    BOOST_CHECK_EQUAL(FormatParagraph("test test", 4, 0), "test\ntest");
+    BOOST_CHECK_EQUAL(FormatParagraph("testerde test", 4, 0), "testerde\ntest");
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BOOST_CHECK_EQUAL(FormatParagraph("test test", 4, 4), "test\n    test");
     BOOST_CHECK_EQUAL(FormatParagraph("This is a very long test string. This is a second sentence in the very long test string."), "This is a very long test string. This is a second sentence in the very long\ntest string.");
 }
@@ -418,6 +478,7 @@ BOOST_AUTO_TEST_CASE(test_FormatSubVersion)
     comments.push_back(std::string("comment1"));
     std::vector<std::string> comments2;
     comments2.push_back(std::string("comment1"));
+<<<<<<< HEAD
     comments2.push_back(SanitizeString(std::string("Comment2; .,_?@-; !\"#$%&'()*+/<=>[]\\^`{|}~"), SAFE_CHARS_UA_COMMENT)); // Semicolon is discouraged but not forbidden by BIP-0014
     BOOST_CHECK_EQUAL(FormatSubVersion("Test", 99900, std::vector<std::string>()),std::string("/Test:0.9.99/"));
     BOOST_CHECK_EQUAL(FormatSubVersion("Test", 99900, comments),std::string("/Test:0.9.99(comment1)/"));
@@ -504,4 +565,11 @@ BOOST_AUTO_TEST_CASE(version_info_helper)
     BOOST_CHECK_THROW(IntVersionToString(0), bad_cast);
 }
 
+=======
+    comments2.push_back(std::string("comment2"));
+    BOOST_CHECK_EQUAL(FormatSubVersion("Test", 99900, std::vector<std::string>()),std::string("/Test:0.9.99/"));
+    BOOST_CHECK_EQUAL(FormatSubVersion("Test", 99900, comments),std::string("/Test:0.9.99(comment1)/"));
+    BOOST_CHECK_EQUAL(FormatSubVersion("Test", 99900, comments2),std::string("/Test:0.9.99(comment1; comment2)/"));
+}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_SUITE_END()

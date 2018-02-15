@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "compressor.h"
 #include "util.h"
+<<<<<<< HEAD
 #include "test/test_gelcoin.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <stdint.h>
 
@@ -22,7 +30,11 @@
 // amounts 50 .. 21000000
 #define NUM_MULTIPLES_50BTC 420000
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(compress_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(compress_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 bool static TestEncode(uint64_t in) {
     return in == CTxOutCompressor::DecompressAmount(CTxOutCompressor::CompressAmount(in));

@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 // Copyright (c) 2011-2013 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "guiutil.h"
 #include "transactiondescdialog.h"
+=======
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include "transactiondescdialog.h"
+#include "guiutil.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "ui_transactiondescdialog.h"
 
 #include "transactiontablemodel.h"
@@ -12,9 +21,14 @@
 #include <QSettings>
 #include <QString>
 
+<<<<<<< HEAD
 TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TransactionDescDialog)
+=======
+TransactionDescDialog::TransactionDescDialog(const QModelIndex& idx, QWidget* parent) : QDialog(parent),
+                                                                                        ui(new Ui::TransactionDescDialog)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 {
     ui->setupUi(this);
 

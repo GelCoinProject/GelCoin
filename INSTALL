@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Building GelCoin
 
 After you install the usual build tools and C++ development tools,
@@ -15,11 +16,17 @@ depending on your environment:
 
 After installing the needed dependencies,
 use the autogen script to prepare the build environment.
+=======
+Building LUX
+
+Use the autogen script to prepare the build environment.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     ./autogen.sh
     ./configure
     make
 
+<<<<<<< HEAD
 Precompiled binaries are available at github, see
 https://github.com/gelcoinpay/gelcoin-binaries
 
@@ -28,3 +35,10 @@ Always verify the signatures and checksums.
 See doc/build-*.md for instructions on building gelcoind,
 the intended-for-services, no-graphical-interface,
 reference implementation of GelCoin.
+=======
+Always verify the signatures and checksums.
+
+See doc/build-*.md for instructions on building luxd,
+the intended-for-services, no-graphical-interface, reference
+implementation of LUX.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

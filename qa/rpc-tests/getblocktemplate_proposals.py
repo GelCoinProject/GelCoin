@@ -1,15 +1,50 @@
 #!/usr/bin/env python2
+<<<<<<< HEAD
 # Copyright (c) 2014-2015 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
+=======
+# Copyright (c) 2014 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+from test_framework import BitcoinTestFramework
+from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+from util import *
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 from binascii import a2b_hex, b2a_hex
 from hashlib import sha256
 from struct import pack
 
+<<<<<<< HEAD
+=======
+
+def check_array_result(object_array, to_match, expected):
+    """
+    Pass in array of JSON objects, a dictionary with key/value pairs
+    to match against, and another dictionary with expected key/value
+    pairs.
+    """
+    num_matched = 0
+    for item in object_array:
+        all_match = True
+        for key,value in to_match.items():
+            if item[key] != value:
+                all_match = False
+        if not all_match:
+            continue
+        for key,value in expected.items():
+            if item[key] != value:
+                raise AssertionError("%s : expected %s=%s"%(str(item), str(key), str(value)))
+            num_matched = num_matched+1
+    if num_matched == 0:
+        raise AssertionError("No objects matched %s"%(str(to_match)))
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 def b2x(b):
     return b2a_hex(b).decode('ascii')
 
@@ -72,8 +107,11 @@ class GetBlockTemplateProposalTest(BitcoinTestFramework):
 
     def run_test(self):
         node = self.nodes[0]
+<<<<<<< HEAD
         wait_to_sync(node)
         node.generate(1) # Mine a block to leave initial block download
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         tmpl = node.getblocktemplate()
         if 'coinbasetxn' not in tmpl:
             rawcoinbase = encodeUNum(tmpl['height'])
@@ -99,7 +137,14 @@ class GetBlockTemplateProposalTest(BitcoinTestFramework):
 
         # Test 3: Truncated final tx
         lastbyte = txlist[-1].pop()
+<<<<<<< HEAD
         assert_raises(JSONRPCException, assert_template, node, tmpl, txlist, 'n/a')
+=======
+        try:
+            assert_template(node, tmpl, txlist, 'n/a')
+        except JSONRPCException:
+            pass  # Expected
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         txlist[-1].append(lastbyte)
 
         # Test 4: Add an invalid tx to the end (duplicate of gen tx)
@@ -109,7 +154,11 @@ class GetBlockTemplateProposalTest(BitcoinTestFramework):
 
         # Test 5: Add an invalid tx to the end (non-duplicate)
         txlist.append(bytearray(txlist[0]))
+<<<<<<< HEAD
         txlist[-1][4+1] = 0xff
+=======
+        txlist[-1][4+1] = b'\xff'
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         assert_template(node, tmpl, txlist, 'bad-txns-inputs-missingorspent')
         txlist.pop()
 
@@ -120,7 +169,14 @@ class GetBlockTemplateProposalTest(BitcoinTestFramework):
 
         # Test 7: Bad tx count
         txlist.append(b'')
+<<<<<<< HEAD
         assert_raises(JSONRPCException, assert_template, node, tmpl, txlist, 'n/a')
+=======
+        try:
+            assert_template(node, tmpl, txlist, 'n/a')
+        except JSONRPCException:
+            pass  # Expected
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         txlist.pop()
 
         # Test 8: Bad bits

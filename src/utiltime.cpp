@@ -1,10 +1,18 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/gelcoin-config.h"
+=======
+#include "config/lux-config.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif
 
 #include "tinyformat.h"
@@ -15,15 +23,23 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 static int64_t nMockTime = 0;  //! For unit testing
+=======
+static int64_t nMockTime = 0; //! For unit testing
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 int64_t GetTime()
 {
     if (nMockTime) return nMockTime;
 
+<<<<<<< HEAD
     time_t now = time(NULL);
     assert(now > 0);
     return now;
+=======
+    return time(NULL);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 void SetMockTime(int64_t nMockTimeIn)
@@ -33,14 +49,21 @@ void SetMockTime(int64_t nMockTimeIn)
 
 int64_t GetTimeMillis()
 {
+<<<<<<< HEAD
     int64_t now = (boost::posix_time::microsec_clock::universal_time() -
                    boost::posix_time::ptime(boost::gregorian::date(1970,1,1))).total_milliseconds();
     assert(now > 0);
     return now;
+=======
+    return (boost::posix_time::ptime(boost::posix_time::microsec_clock::universal_time()) -
+            boost::posix_time::ptime(boost::gregorian::date(1970, 1, 1)))
+        .total_milliseconds();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 int64_t GetTimeMicros()
 {
+<<<<<<< HEAD
     int64_t now = (boost::posix_time::microsec_clock::universal_time() -
                    boost::posix_time::ptime(boost::gregorian::date(1970,1,1))).total_microseconds();
     assert(now > 0);
@@ -58,11 +81,19 @@ int64_t GetLogTimeMicros()
     if (nMockTime) return nMockTime*1000000;
 
     return GetTimeMicros();
+=======
+    return (boost::posix_time::ptime(boost::posix_time::microsec_clock::universal_time()) -
+            boost::posix_time::ptime(boost::gregorian::date(1970, 1, 1)))
+        .total_microseconds();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 void MilliSleep(int64_t n)
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 /**
  * Boost's sleep_for was uninterruptable when backed by nanosleep from 1.50
  * until fixed in 1.52. Use the deprecated sleep method for the broken case.
@@ -96,9 +127,15 @@ std::string DurationToDHMS(int64_t nDurationTime)
     nDurationTime /= 60;
     int hours = nDurationTime % 24;
     int days = nDurationTime / 24;
+<<<<<<< HEAD
     if(days)
         return strprintf("%dd %02dh:%02dm:%02ds", days, hours, minutes, seconds);
     if(hours)
+=======
+    if (days)
+        return strprintf("%dd %02dh:%02dm:%02ds", days, hours, minutes, seconds);
+    if (hours)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         return strprintf("%02dh:%02dm:%02ds", hours, minutes, seconds);
     return strprintf("%02dm:%02ds", minutes, seconds);
 }

@@ -1,11 +1,19 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "random.h"
 
+<<<<<<< HEAD
 #include "support/cleanse.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #ifdef WIN32
 #include "compat.h" // for Windows API
 #endif
@@ -19,6 +27,10 @@
 #include <sys/time.h>
 #endif
 
+<<<<<<< HEAD
+=======
+#include <openssl/crypto.h>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include <openssl/err.h>
 #include <openssl/rand.h>
 
@@ -40,23 +52,36 @@ void RandAddSeed()
     // Seed with CPU performance counter
     int64_t nCounter = GetPerformanceCounter();
     RAND_add(&nCounter, sizeof(nCounter), 1.5);
+<<<<<<< HEAD
     memory_cleanse((void*)&nCounter, sizeof(nCounter));
+=======
+    OPENSSL_cleanse((void*)&nCounter, sizeof(nCounter));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 void RandAddSeedPerfmon()
 {
     RandAddSeed();
 
+<<<<<<< HEAD
 #ifdef WIN32
     // Don't need this on Linux, OpenSSL automatically uses /dev/urandom
     // Seed with the entire set of perfmon data
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     // This can take up to 2 seconds, so only do it every 10 minutes
     static int64_t nLastPerfmon;
     if (GetTime() < nLastPerfmon + 10 * 60)
         return;
     nLastPerfmon = GetTime();
 
+<<<<<<< HEAD
+=======
+#ifdef WIN32
+    // Don't need this on Linux, OpenSSL automatically uses /dev/urandom
+    // Seed with the entire set of perfmon data
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     std::vector<unsigned char> vData(250000, 0);
     long ret = 0;
     unsigned long nSize = 0;
@@ -71,7 +96,11 @@ void RandAddSeedPerfmon()
     RegCloseKey(HKEY_PERFORMANCE_DATA);
     if (ret == ERROR_SUCCESS) {
         RAND_add(begin_ptr(vData), nSize, nSize / 100.0);
+<<<<<<< HEAD
         memory_cleanse(begin_ptr(vData), nSize);
+=======
+        OPENSSL_cleanse(begin_ptr(vData), nSize);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         LogPrint("rand", "%s: %lu bytes\n", __func__, nSize);
     } else {
         static bool warned = false; // Warn only once
@@ -137,6 +166,7 @@ void seed_insecure_rand(bool fDeterministic)
         insecure_rand_Rw = tmp;
     }
 }
+<<<<<<< HEAD
 
 InsecureRand::InsecureRand(bool _fDeterministic)
     : nRz(11),
@@ -155,3 +185,5 @@ InsecureRand::InsecureRand(bool _fDeterministic)
     } while (nTmp == 0 || nTmp == 0x464fffffU);
     nRw = nTmp;
 }
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

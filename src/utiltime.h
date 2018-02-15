@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +14,7 @@
 #include <stdint.h>
 #include <string>
 
+<<<<<<< HEAD
 /**
  * GetTimeMicros() and GetTimeMillis() both return the system time, but in
  * different units. GetTime() returns the sytem time in seconds, but also
@@ -24,6 +30,11 @@ int64_t GetTimeMillis();
 int64_t GetTimeMicros();
 int64_t GetSystemTimeInSeconds(); // Like GetTime(), but not mockable
 int64_t GetLogTimeMicros();
+=======
+int64_t GetTime();
+int64_t GetTimeMillis();
+int64_t GetTimeMicros();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 void SetMockTime(int64_t nMockTimeIn);
 void MilliSleep(int64_t n);
 

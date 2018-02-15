@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -6,6 +7,14 @@
 #include "wallet/walletdb.h"
 
 #include "test/test_gelcoin.h"
+=======
+// Copyright (c) 2012-2014 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include "wallet.h"
+#include "walletdb.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <stdint.h>
 
@@ -14,7 +23,11 @@
 
 extern CWallet* pwalletMain;
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(accounting_tests, TestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(accounting_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 static void
 GetResults(CWalletDB& walletdb, std::map<CAmount, CAccountingEntry>& results)
@@ -45,17 +58,28 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333333;
     ae.strOtherAccount = "b";
     ae.strComment = "";
+<<<<<<< HEAD
     pwalletMain->AddAccountingEntry(ae, walletdb);
 
     wtx.mapValue["comment"] = "z";
     pwalletMain->AddToWallet(wtx, false, &walletdb);
+=======
+    walletdb.WriteAccountingEntry(ae);
+
+    wtx.mapValue["comment"] = "z";
+    pwalletMain->AddToWallet(wtx);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     vpwtx.push_back(&pwalletMain->mapWallet[wtx.GetHash()]);
     vpwtx[0]->nTimeReceived = (unsigned int)1333333335;
     vpwtx[0]->nOrderPos = -1;
 
     ae.nTime = 1333333336;
     ae.strOtherAccount = "c";
+<<<<<<< HEAD
     pwalletMain->AddAccountingEntry(ae, walletdb);
+=======
+    walletdb.WriteAccountingEntry(ae);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     GetResults(walletdb, results);
 
@@ -71,7 +95,11 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333330;
     ae.strOtherAccount = "d";
     ae.nOrderPos = pwalletMain->IncOrderPosNext();
+<<<<<<< HEAD
     pwalletMain->AddAccountingEntry(ae, walletdb);
+=======
+    walletdb.WriteAccountingEntry(ae);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     GetResults(walletdb, results);
 
@@ -90,7 +118,11 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
         --tx.nLockTime;  // Just to change the hash :)
         *static_cast<CTransaction*>(&wtx) = CTransaction(tx);
     }
+<<<<<<< HEAD
     pwalletMain->AddToWallet(wtx, false, &walletdb);
+=======
+    pwalletMain->AddToWallet(wtx);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     vpwtx.push_back(&pwalletMain->mapWallet[wtx.GetHash()]);
     vpwtx[1]->nTimeReceived = (unsigned int)1333333336;
 
@@ -100,7 +132,11 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
         --tx.nLockTime;  // Just to change the hash :)
         *static_cast<CTransaction*>(&wtx) = CTransaction(tx);
     }
+<<<<<<< HEAD
     pwalletMain->AddToWallet(wtx, false, &walletdb);
+=======
+    pwalletMain->AddToWallet(wtx);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     vpwtx.push_back(&pwalletMain->mapWallet[wtx.GetHash()]);
     vpwtx[2]->nTimeReceived = (unsigned int)1333333329;
     vpwtx[2]->nOrderPos = -1;
@@ -121,7 +157,11 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     ae.nTime = 1333333334;
     ae.strOtherAccount = "e";
     ae.nOrderPos = -1;
+<<<<<<< HEAD
     pwalletMain->AddAccountingEntry(ae, walletdb);
+=======
+    walletdb.WriteAccountingEntry(ae);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     GetResults(walletdb, results);
 

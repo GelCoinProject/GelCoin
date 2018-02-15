@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 // Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "hash.h"
 #include "utilstrencodings.h"
+<<<<<<< HEAD
 #include "test/test_gelcoin.h"
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <vector>
 
@@ -12,7 +20,11 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 BOOST_FIXTURE_TEST_SUITE(hash_tests, BasicTestingSetup)
+=======
+BOOST_AUTO_TEST_SUITE(hash_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 BOOST_AUTO_TEST_CASE(murmurhash3)
 {
@@ -47,6 +59,7 @@ BOOST_AUTO_TEST_CASE(murmurhash3)
 #undef T
 }
 
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE(siphash)
 {
     CSipHasher hasher(0x0706050403020100ULL, 0x0F0E0D0C0B0A0908ULL);
@@ -85,4 +98,6 @@ BOOST_AUTO_TEST_CASE(siphash)
     }*/
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 BOOST_AUTO_TEST_SUITE_END()

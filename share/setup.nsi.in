@@ -6,8 +6,13 @@ SetCompressor /SOLID lzma
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION @CLIENT_VERSION_MAJOR@.@CLIENT_VERSION_MINOR@.@CLIENT_VERSION_REVISION@
+<<<<<<< HEAD
 !define COMPANY "GelCoin project"
 !define URL https://www.gelcoin.org/
+=======
+!define COMPANY "Lux Core project"
+!define URL https://www.luxcore.io
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 # MUI Symbol Definitions
 !define MUI_ICON "@abs_top_srcdir@/share/pixmaps/bitcoin.ico"
@@ -20,7 +25,11 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "@PACKAGE_NAME@"
+<<<<<<< HEAD
 !define MUI_FINISHPAGE_RUN $INSTDIR\gelcoin-qt.exe
+=======
+!define MUI_FINISHPAGE_RUN $INSTDIR\lux-qt.exe
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "@abs_top_srcdir@/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
@@ -48,18 +57,30 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
+<<<<<<< HEAD
 OutFile @abs_top_srcdir@/gelcoincore-${VERSION}-win@WINDOWS_BITS@-setup.exe
 !if "@WINDOWS_BITS@" == "64"
 InstallDir $PROGRAMFILES64\GelCoinCore
 !else
 InstallDir $PROGRAMFILES\GelCoinCore
+=======
+OutFile @abs_top_srcdir@/lux-${VERSION}-win@WINDOWS_BITS@-setup.exe
+!if "@WINDOWS_BITS@" == "64"
+InstallDir $PROGRAMFILES64\Lux
+!else
+InstallDir $PROGRAMFILES\Lux
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 !endif
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
 VIProductVersion ${VERSION}.@CLIENT_VERSION_BUILD@
+<<<<<<< HEAD
 VIAddVersionKey ProductName "GelCoin"
+=======
+VIAddVersionKey ProductName "Lux Core"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -73,19 +94,33 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
+<<<<<<< HEAD
     File @abs_top_srcdir@/release/gelcoin-qt.exe
     File /oname=COPYING.txt @abs_top_srcdir@/COPYING
     File /oname=readme.txt @abs_top_srcdir@/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
     File @abs_top_srcdir@/release/gelcoind.exe
     File @abs_top_srcdir@/release/gelcoin-cli.exe
+=======
+    File @abs_top_srcdir@/release/lux-qt.exe
+    File /oname=COPYING.txt @abs_top_srcdir@/COPYING
+    File /oname=readme.txt @abs_top_srcdir@/doc/README_windows.txt
+    SetOutPath $INSTDIR\daemon
+    File @abs_top_srcdir@/release/luxd.exe
+    File @abs_top_srcdir@/release/lux-cli.exe
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     SetOutPath $INSTDIR\doc
     File /r @abs_top_srcdir@/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 
+<<<<<<< HEAD
     # Remove old wxwidgets-based-gelcoin executable and locales:
     Delete /REBOOTOK $INSTDIR\gelcoin.exe
+=======
+    # Remove old wxwidgets-based-lux executable and locales:
+    Delete /REBOOTOK $INSTDIR\lux.exe
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     RMDir /r /REBOOTOK $INSTDIR\locale
 SectionEnd
 
@@ -95,7 +130,11 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
+<<<<<<< HEAD
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\gelcoin-qt.exe
+=======
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\lux-qt.exe
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
@@ -106,10 +145,17 @@ Section -post SEC0001
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
+<<<<<<< HEAD
     WriteRegStr HKCR "gelcoin" "URL Protocol" ""
     WriteRegStr HKCR "gelcoin" "" "URL:GelCoin"
     WriteRegStr HKCR "gelcoin\DefaultIcon" "" $INSTDIR\gelcoin-qt.exe
     WriteRegStr HKCR "gelcoin\shell\open\command" "" '"$INSTDIR\gelcoin-qt.exe" "%1"'
+=======
+    WriteRegStr HKCR "lux" "URL Protocol" ""
+    WriteRegStr HKCR "lux" "" "URL:Lux"
+    WriteRegStr HKCR "lux\DefaultIcon" "" $INSTDIR\lux-qt.exe
+    WriteRegStr HKCR "lux\shell\open\command" "" '"$INSTDIR\lux-qt.exe" "%1"'
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -127,7 +173,11 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
+<<<<<<< HEAD
     Delete /REBOOTOK $INSTDIR\gelcoin-qt.exe
+=======
+    Delete /REBOOTOK $INSTDIR\lux-qt.exe
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     Delete /REBOOTOK $INSTDIR\COPYING.txt
     Delete /REBOOTOK $INSTDIR\readme.txt
     RMDir /r /REBOOTOK $INSTDIR\daemon
@@ -139,7 +189,11 @@ Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
+<<<<<<< HEAD
     Delete /REBOOTOK "$SMSTARTUP\GelCoin.lnk"
+=======
+    Delete /REBOOTOK "$SMSTARTUP\Lux.lnk"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
@@ -147,7 +201,11 @@ Section -un.post UNSEC0001
     DeleteRegValue HKCU "${REGKEY}" Path
     DeleteRegKey /IfEmpty HKCU "${REGKEY}\Components"
     DeleteRegKey /IfEmpty HKCU "${REGKEY}"
+<<<<<<< HEAD
     DeleteRegKey HKCR "gelcoin"
+=======
+    DeleteRegKey HKCR "lux"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     RmDir /REBOOTOK $INSTDIR
     Push $R0

@@ -132,7 +132,11 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string notr="true">0.00 GEL</string>
+=======
+          <string notr="true">0.00 LUX</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -140,10 +144,14 @@
         </widget>
        </item>
        <item row="1" column="0">
+<<<<<<< HEAD
         <widget class="QLabel" name="labelCoinControlLowOutputText">
          <property name="enabled">
           <bool>false</bool>
          </property>
+=======
+        <widget class="QLabel" name="labelCoinControlPriorityText">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          <property name="font">
           <font>
            <weight>75</weight>
@@ -151,15 +159,23 @@
           </font>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string>Dust:</string>
+=======
+          <string>Priority:</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
         </widget>
        </item>
        <item row="1" column="1">
+<<<<<<< HEAD
         <widget class="QLabel" name="labelCoinControlLowOutput">
          <property name="enabled">
           <bool>false</bool>
          </property>
+=======
+        <widget class="QLabel" name="labelCoinControlPriority">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -167,7 +183,11 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string notr="true">no</string>
+=======
+          <string>medium</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -212,7 +232,46 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string notr="true">0.00 GEL</string>
+=======
+          <string notr="true">0.00 LUX</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelCoinControlLowOutputText">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Dust:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="labelCoinControlLowOutput">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::ActionsContextMenu</enum>
+         </property>
+         <property name="text">
+          <string>no</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -257,7 +316,11 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string notr="true">0.00 GEL</string>
+=======
+          <string notr="true">0.00 LUX</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -292,7 +355,11 @@
           <enum>Qt::ActionsContextMenu</enum>
          </property>
          <property name="text">
+<<<<<<< HEAD
           <string notr="true">0.00 GEL</string>
+=======
+          <string notr="true">0.00 LUX</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -418,7 +485,11 @@
       <bool>false</bool>
      </property>
      <property name="columnCount">
+<<<<<<< HEAD
       <number>11</number>
+=======
+      <number>13</number>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
      </property>
      <attribute name="headerShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -448,7 +519,11 @@
      </column>
      <column>
       <property name="text">
+<<<<<<< HEAD
        <string>PS Rounds</string>
+=======
+       <string>DS Rounds</string>
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
       </property>
      </column>
      <column>
@@ -466,6 +541,19 @@
      </column>
      <column>
       <property name="text">
+<<<<<<< HEAD
+=======
+       <string>Priority</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
        <string/>
       </property>
      </column>

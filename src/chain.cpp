@@ -1,5 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2014 The Bitcoin Core developers
+=======
+// Copyright (c) 2009-2014 The Bitcoin developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +14,12 @@ using namespace std;
 /**
  * CChain implementation
  */
+<<<<<<< HEAD
 void CChain::SetTip(CBlockIndex *pindex) {
+=======
+void CChain::SetTip(CBlockIndex* pindex)
+{
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (pindex == NULL) {
         vChain.clear();
         return;
@@ -22,7 +31,12 @@ void CChain::SetTip(CBlockIndex *pindex) {
     }
 }
 
+<<<<<<< HEAD
 CBlockLocator CChain::GetLocator(const CBlockIndex *pindex) const {
+=======
+CBlockLocator CChain::GetLocator(const CBlockIndex* pindex) const
+{
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     int nStep = 1;
     std::vector<uint256> vHave;
     vHave.reserve(32);
@@ -50,10 +64,15 @@ CBlockLocator CChain::GetLocator(const CBlockIndex *pindex) const {
     return CBlockLocator(vHave);
 }
 
+<<<<<<< HEAD
 const CBlockIndex *CChain::FindFork(const CBlockIndex *pindex) const {
     if (pindex == NULL) {
         return NULL;
     }
+=======
+const CBlockIndex* CChain::FindFork(const CBlockIndex* pindex) const
+{
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     if (pindex->nHeight > Height())
         pindex = pindex->GetAncestor(Height());
     while (pindex && !Contains(pindex))
@@ -61,6 +80,7 @@ const CBlockIndex *CChain::FindFork(const CBlockIndex *pindex) const {
     return pindex;
 }
 
+<<<<<<< HEAD
 /** Turn the lowest '1' bit in the binary representation of a number into a '0'. */
 int static inline InvertLowestOne(int n) { return n & (n - 1); }
 
@@ -111,3 +131,21 @@ void CBlockIndex::BuildSkip()
     if (pprev)
         pskip = pprev->GetAncestor(GetSkipHeight(nHeight));
 }
+=======
+uint256 CBlockIndex::GetBlockTrust() const
+{
+    uint256 bnTarget;
+    bnTarget.SetCompact(nBits);
+    if (bnTarget <= 0)
+        return 0;
+
+    if (IsProofOfStake()) {
+        // Return trust score as usual
+        return (uint256(1) << 256) / (bnTarget + 1);
+    } else {
+        // Calculate work amount for block
+        uint256 bnPoWTrust = ((~uint256(0) >> 20) / (bnTarget + 1));
+        return bnPoWTrust > 1 ? bnPoWTrust : 1;
+    }
+}
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

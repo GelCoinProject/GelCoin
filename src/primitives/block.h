@@ -1,15 +1,30 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
+<<<<<<< HEAD
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
+=======
+// Copyright (c) 2009-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_PRIMITIVES_BLOCK_H
 #define BITCOIN_PRIMITIVES_BLOCK_H
 
 #include "primitives/transaction.h"
+<<<<<<< HEAD
 #include "serialize.h"
 #include "uint256.h"
 
+=======
+#include "keystore.h"
+#include "serialize.h"
+#include "uint256.h"
+
+/** The maximum allowed size for a serialized block, in bytes (network rule) */
+static const unsigned int MAX_BLOCK_SIZE = 6000000;
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
  * requirements.  When they solve the proof-of-work, they broadcast the block
@@ -21,6 +36,11 @@ class CBlockHeader
 {
 public:
     // header
+<<<<<<< HEAD
+=======
+    static const int32_t CURRENT_VERSION=7;
+    
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -48,9 +68,15 @@ public:
 
     void SetNull()
     {
+<<<<<<< HEAD
         nVersion = 0;
         hashPrevBlock.SetNull();
         hashMerkleRoot.SetNull();
+=======
+        nVersion = CBlockHeader::CURRENT_VERSION;
+        hashPrevBlock = 0;
+        hashMerkleRoot = 0;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
         nTime = 0;
         nBits = 0;
         nNonce = 0;
@@ -76,10 +102,19 @@ public:
     // network and disk
     std::vector<CTransaction> vtx;
 
+<<<<<<< HEAD
     // memory only
     mutable CTxOut txoutMasternode; // masternode payment
     mutable std::vector<CTxOut> voutSuperblock; // superblock payment
     mutable bool fChecked;
+=======
+    // ppcoin: block signature - signed by one of the coin base txout[N]'s owner
+    std::vector<unsigned char> vchBlockSig;
+
+    // memory only
+    mutable CScript payee;
+    mutable std::vector<uint256> vMerkleTree;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     CBlock()
     {
@@ -97,16 +132,38 @@ public:
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*(CBlockHeader*)this);
+<<<<<<< HEAD
         READWRITE(vtx);
+=======
+#       if 1
+        if (!(nType & SER_GETHASH)) {
+            READWRITE(vtx);
+            READWRITE(vchBlockSig);
+        } else if (ser_action.ForRead()) {
+            const_cast<CBlock*>(this)->vtx.clear();
+            const_cast<CBlock*>(this)->vchBlockSig.clear();
+        }
+#       else
+        READWRITE(vtx);
+	if(vtx.size() > 1 && vtx[1].IsCoinStake())
+            READWRITE(vchBlockSig);
+#       endif
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     void SetNull()
     {
         CBlockHeader::SetNull();
         vtx.clear();
+<<<<<<< HEAD
         txoutMasternode = CTxOut();
         voutSuperblock.clear();
         fChecked = false;
+=======
+        vMerkleTree.clear();
+        payee = CScript();
+        vchBlockSig.clear();
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     }
 
     CBlockHeader GetBlockHeader() const
@@ -121,7 +178,39 @@ public:
         return block;
     }
 
+<<<<<<< HEAD
     std::string ToString() const;
+=======
+    // ppcoin: two types of block: proof-of-work or proof-of-stake
+    bool IsProofOfStake() const
+    {
+        return (vtx.size() > 1 && vtx[1].IsCoinStake());
+    }
+
+    bool IsProofOfWork() const
+    {
+        return !IsProofOfStake();
+    }
+
+    bool SignBlock(const CKeyStore& keystore);
+    bool CheckBlockSignature() const;
+
+    std::pair<COutPoint, unsigned int> GetProofOfStake() const
+    {
+        return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
+    }
+
+    // Build the in-memory merkle tree for this block and return the merkle root.
+    // If non-NULL, *mutated is set to whether mutation was detected in the merkle
+    // tree (a duplication of transactions in the block leading to an identical
+    // merkle root).
+    uint256 BuildMerkleTree(bool* mutated = NULL) const;
+
+    std::vector<uint256> GetMerkleBranch(int nIndex) const;
+    static uint256 CheckMerkleBranch(uint256 hash, const std::vector<uint256>& vMerkleBranch, int nIndex);
+    std::string ToString() const;
+    void print() const;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 };
 
 
@@ -154,7 +243,11 @@ struct CBlockLocator
         vHave.clear();
     }
 
+<<<<<<< HEAD
     bool IsNull() const
+=======
+    bool IsNull()
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     {
         return vHave.empty();
     }

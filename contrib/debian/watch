@@ -1,5 +1,12 @@
 # Run the "uscan" command to check for upstream updates and more.
 version=3
 # use qa.debian.org redirector; see man uscan
+<<<<<<< HEAD
 opts=uversionmangle=s/(\d)(alpha|beta|rc)/$1~$2/,dversionmangle=s/~dfsg\d*// \
  http://githubredir.debian.net/github/gelcoinpay/gelcoin v(.*).tar.gz
+=======
+opts=uversionmangle=s/(\d)(alpha|beta|rc)/$1~$2/;s/\-src//,dversionmangle=s/~dfsg\d*// \
+ http://sf.net/bitcoin/bitcoin-(\d.*)-linux\.tar\.gz debian
+opts=uversionmangle=s/(\d)(alpha|beta|rc)/$1~$2/,dversionmangle=s/~dfsg\d*// \
+ http://githubredir.debian.net/github/bitcoin/bitcoin v(.*).tar.gz
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3

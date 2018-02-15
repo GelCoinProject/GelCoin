@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+<<<<<<< HEAD
 typedef struct {
     void (*fn)(const char *text, void* data);
     const void* data;
@@ -24,6 +25,8 @@ static SECP256K1_INLINE void secp256k1_callback_call(const secp256k1_callback * 
     cb->fn(text, (void*)cb->data);
 }
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #ifdef DETERMINISTIC
 #define TEST_FAILURE(msg) do { \
     fprintf(stderr, "%s\n", msg); \
@@ -36,7 +39,11 @@ static SECP256K1_INLINE void secp256k1_callback_call(const secp256k1_callback * 
 } while(0)
 #endif
 
+<<<<<<< HEAD
 #ifdef HAVE_BUILTIN_EXPECT
+=======
+#ifndef HAVE_BUILTIN_EXPECT
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #define EXPECT(x,c) __builtin_expect((x),(c))
 #else
 #define EXPECT(x,c) (x)
@@ -56,6 +63,7 @@ static SECP256K1_INLINE void secp256k1_callback_call(const secp256k1_callback * 
 } while(0)
 #endif
 
+<<<<<<< HEAD
 /* Like assert(), but when VERIFY is defined, and side-effect safe. */
 #ifdef VERIFY
 #define VERIFY_CHECK CHECK
@@ -73,6 +81,22 @@ static SECP256K1_INLINE void *checked_malloc(const secp256k1_callback* cb, size_
     return ret;
 }
 
+=======
+/* Like assert(), but safe to use on expressions with side effects. */
+#ifndef NDEBUG
+#define DEBUG_CHECK CHECK
+#else
+#define DEBUG_CHECK(cond) do { (void)(cond); } while(0)
+#endif
+
+/* Like DEBUG_CHECK(), but when VERIFY is defined instead of NDEBUG not defined. */
+#ifdef VERIFY
+#define VERIFY_CHECK CHECK
+#else
+#define VERIFY_CHECK(cond) do { (void)(cond); } while(0)
+#endif
+
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 /* Macro for restrict, when available and not in a VERIFY build. */
 #if defined(SECP256K1_BUILD) && defined(VERIFY)
 # define SECP256K1_RESTRICT
@@ -90,6 +114,7 @@ static SECP256K1_INLINE void *checked_malloc(const secp256k1_callback* cb, size_
 # endif
 #endif
 
+<<<<<<< HEAD
 #if defined(_WIN32)
 # define I64FORMAT "I64d"
 # define I64uFORMAT "I64u"
@@ -107,4 +132,6 @@ static SECP256K1_INLINE void *checked_malloc(const secp256k1_callback* cb, size_
 SECP256K1_GNUC_EXT typedef unsigned __int128 uint128_t;
 #endif
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #endif

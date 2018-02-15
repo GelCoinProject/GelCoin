@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 // Copyright (c) 2014-2015 The Bitcoin Core developers
+=======
+// Copyright (c) 2014 The Bitcoin Core developers
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "coins.h"
 #include "random.h"
+<<<<<<< HEAD
 #include "script/standard.h"
 #include "uint256.h"
 #include "undo.h"
@@ -11,12 +16,16 @@
 #include "test/test_gelcoin.h"
 #include "validation.h"
 #include "consensus/validation.h"
+=======
+#include "uint256.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #include <vector>
 #include <map>
 
 #include <boost/test/unit_test.hpp>
 
+<<<<<<< HEAD
 int ApplyTxInUndo(Coin&& undo, CCoinsViewCache& view, const COutPoint& out);
 void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCache& inputs, CTxUndo &txundo, int nHeight);
 
@@ -45,12 +54,31 @@ public:
         }
         coin = it->second;
         if (coin.IsSpent() && insecure_rand() % 2 == 0) {
+=======
+namespace
+{
+class CCoinsViewTest : public CCoinsView
+{
+    uint256 hashBestBlock_;
+    std::map<uint256, CCoins> map_;
+
+public:
+    bool GetCoins(const uint256& txid, CCoins& coins) const
+    {
+        std::map<uint256, CCoins>::const_iterator it = map_.find(txid);
+        if (it == map_.end()) {
+            return false;
+        }
+        coins = it->second;
+        if (coins.IsPruned() && insecure_rand() % 2 == 0) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
             // Randomly return false in case of an empty entry.
             return false;
         }
         return true;
     }
 
+<<<<<<< HEAD
     uint256 GetBestBlock() const override { return hashBestBlock_; }
 
     bool BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock) override
@@ -97,13 +125,47 @@ public:
 }
 
 BOOST_FIXTURE_TEST_SUITE(coins_tests, BasicTestingSetup)
+=======
+    bool HaveCoins(const uint256& txid) const
+    {
+        CCoins coins;
+        return GetCoins(txid, coins);
+    }
+
+    uint256 GetBestBlock() const { return hashBestBlock_; }
+
+    bool BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock)
+    {
+        for (CCoinsMap::iterator it = mapCoins.begin(); it != mapCoins.end(); ) {
+            map_[it->first] = it->second.coins;
+            if (it->second.coins.IsPruned() && insecure_rand() % 3 == 0) {
+                // Randomly delete empty entries on write.
+                map_.erase(it->first);
+            }
+            mapCoins.erase(it++);
+        }
+        mapCoins.clear();
+        hashBestBlock_ = hashBlock;
+        return true;
+    }
+
+    bool GetStats(CCoinsStats& stats) const { return false; }
+};
+}
+
+BOOST_AUTO_TEST_SUITE(coins_tests)
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 static const unsigned int NUM_SIMULATION_ITERATIONS = 40000;
 
 // This is a large randomized insert/remove simulation test on a variable-size
 // stack of caches on top of CCoinsViewTest.
 //
+<<<<<<< HEAD
 // It will randomly create/update/delete Coin entries to a tip of caches, with
+=======
+// It will randomly create/update/delete CCoins entries to a tip of caches, with
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 // txids picked from a limited list of random 256-bit hashes. Occasionally, a
 // new tip is added to the stack of caches, or the tip is flushed and removed.
 //
@@ -115,11 +177,15 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
     bool removed_all_caches = false;
     bool reached_4_caches = false;
     bool added_an_entry = false;
+<<<<<<< HEAD
     bool added_an_unspendable_entry = false;
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     bool removed_an_entry = false;
     bool updated_an_entry = false;
     bool found_an_entry = false;
     bool missed_an_entry = false;
+<<<<<<< HEAD
     bool uncached_an_entry = false;
 
     // A simple map to track what we expect the cache stack to represent.
@@ -129,6 +195,16 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
     CCoinsViewTest base; // A CCoinsViewTest at the bottom.
     std::vector<CCoinsViewCacheTest*> stack; // A stack of CCoinsViewCaches on top.
     stack.push_back(new CCoinsViewCacheTest(&base)); // Start with one cache.
+=======
+
+    // A simple map to track what we expect the cache stack to represent.
+    std::map<uint256, CCoins> result;
+
+    // The cache stack.
+    CCoinsViewTest base; // A CCoinsViewTest at the bottom.
+    std::vector<CCoinsViewCache*> stack; // A stack of CCoinsViewCaches on top.
+    stack.push_back(new CCoinsViewCache(&base)); // Start with one cache.
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
     // Use a limited set of random transaction ids, so we do test overwriting entries.
     std::vector<uint256> txids;
@@ -141,6 +217,7 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
         // Do a random modification.
         {
             uint256 txid = txids[insecure_rand() % txids.size()]; // txid we're going to modify in this iteration.
+<<<<<<< HEAD
             Coin& coin = result[COutPoint(txid, 0)];
 
             // Determine whether to test HaveCoin before or after Access* (or both). As these functions
@@ -219,19 +296,65 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
             // Every 100 iterations, change the cache stack.
             if (stack.size() > 0 && insecure_rand() % 2 == 0) {
                 //Remove the top cache
+=======
+            CCoins& coins = result[txid];
+            CCoinsModifier entry = stack.back()->ModifyCoins(txid);
+            BOOST_CHECK(coins == *entry);
+            if (insecure_rand() % 5 == 0 || coins.IsPruned()) {
+                if (coins.IsPruned()) {
+                    added_an_entry = true;
+                } else {
+                    updated_an_entry = true;
+                }
+                coins.nVersion = insecure_rand();
+                coins.vout.resize(1);
+                coins.vout[0].nValue = insecure_rand();
+                *entry = coins;
+            } else {
+                coins.Clear();
+                entry->Clear();
+                removed_an_entry = true;
+            }
+        }
+
+        // Once every 1000 iterations and at the end, verify the full cache.
+        if (insecure_rand() % 1000 == 1 || i == NUM_SIMULATION_ITERATIONS - 1) {
+            for (std::map<uint256, CCoins>::iterator it = result.begin(); it != result.end(); it++) {
+                const CCoins* coins = stack.back()->AccessCoins(it->first);
+                if (coins) {
+                    BOOST_CHECK(*coins == it->second);
+                    found_an_entry = true;
+                } else {
+                    BOOST_CHECK(it->second.IsPruned());
+                    missed_an_entry = true;
+                }
+            }
+        }
+
+        if (insecure_rand() % 100 == 0) {
+            // Every 100 iterations, change the cache stack.
+            if (stack.size() > 0 && insecure_rand() % 2 == 0) {
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 stack.back()->Flush();
                 delete stack.back();
                 stack.pop_back();
             }
             if (stack.size() == 0 || (stack.size() < 4 && insecure_rand() % 2)) {
+<<<<<<< HEAD
                 //Add a new cache
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 CCoinsView* tip = &base;
                 if (stack.size() > 0) {
                     tip = stack.back();
                 } else {
                     removed_all_caches = true;
                 }
+<<<<<<< HEAD
                 stack.push_back(new CCoinsViewCacheTest(tip));
+=======
+                stack.push_back(new CCoinsViewCache(tip));
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
                 if (stack.size() == 4) {
                     reached_4_caches = true;
                 }
@@ -249,11 +372,15 @@ BOOST_AUTO_TEST_CASE(coins_cache_simulation_test)
     BOOST_CHECK(removed_all_caches);
     BOOST_CHECK(reached_4_caches);
     BOOST_CHECK(added_an_entry);
+<<<<<<< HEAD
     BOOST_CHECK(added_an_unspendable_entry);
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
     BOOST_CHECK(removed_an_entry);
     BOOST_CHECK(updated_an_entry);
     BOOST_CHECK(found_an_entry);
     BOOST_CHECK(missed_an_entry);
+<<<<<<< HEAD
     BOOST_CHECK(uncached_an_entry);
 }
 
@@ -858,6 +985,8 @@ BOOST_AUTO_TEST_CASE(ccoins_write)
             for (char parent_flags : parent_value == ABSENT ? ABSENT_FLAGS : FLAGS)
                 for (char child_flags : child_value == ABSENT ? ABSENT_FLAGS : CLEAN_FLAGS)
                     CheckWriteCoins(parent_value, child_value, parent_value, parent_flags, child_flags, parent_flags);
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 BOOST_AUTO_TEST_SUITE_END()

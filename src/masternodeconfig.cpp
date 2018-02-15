@@ -1,12 +1,19 @@
+<<<<<<< HEAD
 
 #include "netbase.h"
+=======
+#include "net.h"
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 #include "masternodeconfig.h"
 #include "util.h"
 #include "chainparams.h"
 
+<<<<<<< HEAD
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 
+=======
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 CMasternodeConfig masternodeConfig;
 
 void CMasternodeConfig::add(std::string alias, std::string ip, std::string privKey, std::string txHash, std::string outputIndex) {
@@ -14,6 +21,7 @@ void CMasternodeConfig::add(std::string alias, std::string ip, std::string privK
     entries.push_back(cme);
 }
 
+<<<<<<< HEAD
 bool CMasternodeConfig::read(std::string& strErr) {
     int linenumber = 1;
     boost::filesystem::path pathMasternodeConfigFile = GetMasternodeConfigFile();
@@ -78,14 +86,56 @@ bool CMasternodeConfig::read(std::string& strErr) {
             strErr = _("Invalid port detected in masternode.conf") + "\n" +
                     strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
                     strprintf(_("(%d could be used only on mainnet)"), mainnetDefaultPort);
+=======
+bool CMasternodeConfig::read(boost::filesystem::path path) {
+    boost::filesystem::ifstream streamConfig(GetMasternodeConfigFile());
+    if (!streamConfig.good()) {
+        return true; // No masternode.conf file is OK
+    }
+
+    for (std::string line; std::getline(streamConfig, line); ) {
+        if (line.empty()) {
+            continue;
+        }
+
+        std::istringstream iss(line);
+        std::string alias, ip, privKey, txHash, outputIndex;
+        if (!(iss >> alias >> ip >> privKey >> txHash >> outputIndex)) {
+            if (alias.substr(0,1) == "#") continue;
+            LogPrintf("CMasternodeConfig::read - Could not parse masternode.conf. Line: %s\n", line);
             streamConfig.close();
             return false;
         }
 
+        if (Params().NetworkID() == CBaseChainParams::MAIN) {
+            if(CService(ip).GetPort() != 28666) {
+                LogPrintf("Invalid port detected in masternode.conf: %s (must be 17170 for mainnet)\n", line.c_str());
+                streamConfig.close();
+                return false;
+            }
+        } else if(CService(ip).GetPort() == 28666) {
+            LogPrintf("Invalid port detected in masternode.conf: %s (17170 must be only on mainnet)\n", line.c_str());
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
+            streamConfig.close();
+            return false;
+        }
+
+<<<<<<< HEAD
+=======
+        if (!(CService(ip).IsIPv4() && CService(ip).IsRoutable())) {
+            LogPrintf("Invalid Address detected in masternode.conf: %s (IPV4 ONLY) \n", line.c_str());
+            streamConfig.close();
+            return false;
+        }
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
         add(alias, ip, privKey, txHash, outputIndex);
     }
 
+<<<<<<< HEAD
     streamConfig.close();
     return true;
+=======
+    return false;
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }

@@ -1,9 +1,14 @@
 /**********************************************************************
+<<<<<<< HEAD
  * Copyright (c) 2013-2014 Diederik Huys, Pieter Wuille               *
+=======
+ * Copyright (c) 2013 Pieter Wuille                                   *
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
  * Distributed under the MIT software license, see the accompanying   *
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
+<<<<<<< HEAD
 /**
  * Changelog:
  * - March 2013, Diederik Huys:    original version
@@ -498,5 +503,12 @@ __asm__ __volatile__(
 : "%rax", "%rbx", "%rcx", "%rdx", "%r8", "%r9", "%r10", "%r11", "%r12", "%r13", "%r14", "%r15", "cc", "memory"
 );
 }
+=======
+#ifndef _SECP256K1_FIELD_INNER5X52_IMPL_H_
+#define _SECP256K1_FIELD_INNER5X52_IMPL_H_
+
+void __attribute__ ((sysv_abi)) secp256k1_fe_mul_inner(const uint64_t *a, const uint64_t *b, uint64_t *r);
+void __attribute__ ((sysv_abi)) secp256k1_fe_sqr_inner(const uint64_t *a, uint64_t *r);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 
 #endif

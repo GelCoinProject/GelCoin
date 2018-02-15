@@ -267,7 +267,11 @@ TEST(CorruptionTest, TableFileIndexData) {
 
   Corrupt(kTableFile, -2000, 500);
   Reopen();
+<<<<<<< HEAD
   Check(5000, 9599);
+=======
+  Check(5000, 9999);
+>>>>>>> 3131a6d88548d8b42d26bcadc35b0cb4ab1441a3
 }
 
 TEST(CorruptionTest, MissingDescriptor) {
